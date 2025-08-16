@@ -4,7 +4,7 @@ import React from "react";
 
 const CashierPage = () => {
   return (
-    <div className="bg-white flex flex-col items-center lg:min-h-5/6 max-md:h-screen lg:p-10 p-5 rounded-xl max-md:mb-10 lg:w-11/12">
+    <div className="bg-white flex flex-col items-center lg:min-h-5/6 max-md:min-h-screen lg:p-10 p-5 rounded-xl max-md:mb-10 lg:w-11/12">
       <h1 className="lg:text-2xl text-2xl font-bold text-zinc-800 mb-5">
         Cashier
       </h1>
