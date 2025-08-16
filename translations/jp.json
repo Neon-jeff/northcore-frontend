@@ -1,0 +1,84 @@
+{
+  "auth": {
+    "form": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "confirmPassword": "パスワードの確認",
+      "firstName": "名",
+      "lastName": "姓",
+      "phone": "電話番号",
+      "country": "国",
+      "terms": "利用規約に同意する必要があります",
+      "validation": {
+        "emailInvalid": "メールアドレスが無効です",
+        "passwordMinLength": "パスワードは8文字以上である必要があります",
+        "passwordMaxLength": "パスワードは64文字を超えてはなりません",
+        "passwordLowercase": "パスワードには少なくとも1つの小文字が含まれている必要があります",
+        "passwordNumber": "パスワードには少なくとも1つの数字が含まれている必要があります",
+        "passwordSpecial": "パスワードには少なくとも1つの特殊文字が含まれている必要があります",
+        "phoneInvalid": "電話番号の形式が無効です",
+        "firstNameRequired": "名を入力してください",
+        "firstNameMaxLength": "名は50文字を超えてはなりません",
+        "lastNameRequired": "姓を入力してください",
+        "lastNameMaxLength": "姓は50文字を超えてはなりません",
+        "countryRequired": "国を入力してください",
+        "countryMaxLength": "国名は50文字を超えてはなりません"
+      }
+    },
+    "pages": {
+      "login": "ログインページ"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "野心的な稼ぎ手を収益オプションへと導きます",
+      "description": "トレーダーのコミュニティに参加して、高度なツールと洞察力であなたのトレードゲームを向上させましょう。",
+      "ctaPrimary": "始めましょう",
+      "ctaSecondary": "詳細はこちら"
+    },
+    "about": {
+      "title": "ニューラルトレードネットワークとは",
+      "description": "ニューラルトレードネットワークは、トレーダーに高度なツールと洞察力を提供するよう設計された最先端のプラットフォームです。私たちの使命は、リアルタイムデータ、市場分析、サポートコミュニティなどの包括的なリソースを提供することにより、野心的なトレーダーが収益性の高いオプショントレードを実現できるよう導くことです。"
+    },
+    "experiences": {
+      "title": "たくさんの素晴らしい経験があなたを待っています",
+      "description": "ニューラルトレードネットワークでは、会員の皆様にトレード体験を向上させる卓越した体験を提供することを信念としています。"
+    },
+    "attributes": {
+      "assetGrowth": {
+        "title": "資産成長",
+        "description": "高度な取引戦略でポートフォリオを最大化します。"
+      },
+      "realTimeData": {
+        "title": "リアルタイムデータ",
+        "description": "最新の市場データにアクセスして、先を行くことができます。"
+      },
+      "communitySupport": {
+        "title": "コミュニティサポート",
+        "description": "共有された洞察と戦略のためのトレーダーのコミュニティに参加しましょう。"
+      },
+      "securedProcess": {
+        "title": "安全なプロセス",
+        "description": "堅牢なプラットフォームでトレードの安全性を確保します。"
+      }
+    },
+    "bentoGrid": {
+      "advancedTools": {
+        "title": "高度な取引ツール",
+        "description": "情報に基づいた取引決定のために最先端のツールを活用します。"
+      },
+      "demoTrading": {
+        "title": "デモトレード",
+        "description": "デモアカウントで取引戦略を練習しましょう。"
+      },
+      "communitySupport": {
+        "title": "コミュニティサポート",
+        "description": "共有された洞察と戦略のためのトレーダーのコミュニティに参加しましょう。"
+      },
+      "realTimeData": {
+        "title": "リアルタイムデータ",
+        "description": "最新の市場データにアクセスして、先を行くことができます。"
+      }
+    }
+  }
+}

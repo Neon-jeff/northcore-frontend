@@ -1,0 +1,84 @@
+{
+  "auth": {
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "phone": "Phone",
+      "country": "Country",
+      "terms": "You must accept the terms and conditions",
+      "validation": {
+        "emailInvalid": "Invalid email address",
+        "passwordMinLength": "Password must be at least 8 characters long",
+        "passwordMaxLength": "Password must not exceed 64 characters",
+        "passwordLowercase": "Password must contain at least one lowercase letter",
+        "passwordNumber": "Password must contain at least one number",
+        "passwordSpecial": "Password must contain at least one special character",
+        "phoneInvalid": "Invalid phone number format",
+        "firstNameRequired": "First name is required",
+        "firstNameMaxLength": "First name must not exceed 50 characters",
+        "lastNameRequired": "Last name is required",
+        "lastNameMaxLength": "Last name must not exceed 50 characters",
+        "countryRequired": "Country is required",
+        "countryMaxLength": "Country must not exceed 50 characters"
+      }
+    },
+    "pages": {
+      "login": "LoginPage"
+    }
+  },
+  "home": {
+    "hero": {
+      "title": "Guiding ambitious earners to profits options",
+      "description": "Join our community of traders and elevate your trading game with advanced tools and insights.",
+      "ctaPrimary": "Get started",
+      "ctaSecondary": "Learn more"
+    },
+    "about": {
+      "title": "What is the Neural Trades Network",
+      "description": "Neural Trades Network is a cutting-edge platform designed to empower traders with advanced tools and insights. Our mission is to guide ambitious traders towards profitable options trading by providing a comprehensive suite of resources, including real-time data, market analysis, and a supportive community."
+    },
+    "experiences": {
+      "title": "Alot of amazing experiences await you",
+      "description": "At Neural Trades Network, we believe in providing our members with exceptional experiences that enhance their trading journey."
+    },
+    "attributes": {
+      "assetGrowth": {
+        "title": "Asset Growth",
+        "description": "Maximize your portfolio with our advanced trading strategies."
+      },
+      "realTimeData": {
+        "title": "Real-Time Data",
+        "description": "Access up-to-date market data to stay ahead of the curve."
+      },
+      "communitySupport": {
+        "title": "Community Support",
+        "description": "Join a community of traders for shared insights and strategies."
+      },
+      "securedProcess": {
+        "title": "Secured Process",
+        "description": "Ensure your trades are secure with our robust platform."
+      }
+    },
+    "bentoGrid": {
+      "advancedTools": {
+        "title": "Advanced Trading Tools",
+        "description": "Utilize cutting-edge tools for informed trading decisions."
+      },
+      "demoTrading": {
+        "title": "Demo Trading",
+        "description": "Practice trading strategies with our demo accounts."
+      },
+      "communitySupport": {
+        "title": "Community Support",
+        "description": "Join a community of traders for shared insights and strategies."
+      },
+      "realTimeData": {
+        "title": "Real-Time Data",
+        "description": "Access up-to-date market data to stay ahead of the curve."
+      }
+    }
+  }
+}
