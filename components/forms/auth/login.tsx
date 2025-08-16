@@ -84,7 +84,7 @@ const LoginForm = () => {
           >
             Forgot your password?
           </Link>
-          <Button className="w-full mt-5 block" type="submit">
+          <Button loading={loginUser.isPending} disabled={loginUser.isPending} className="w-full mt-5 block" type="submit">
             Log in
           </Button>
         </FormContainer>
