@@ -13,10 +13,10 @@ import gsap from "gsap";
 const Nav = () => {
   const links = [
     { name: "Home", href: "/" },
-    { name: "Company", href: "/about" },
-    { name: "Markets", href: "/services" },
-    { name: "Learn", href: "/contact" },
-    { name: "Reach Us", href: "/blog" },
+    { name: "Company", href: "/company" },
+    { name: "Markets", href: "/market-data" },
+    { name: "Learn", href: "/learn" },
+    { name: "Reach Us", href: "/reach-us" },
   ];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
