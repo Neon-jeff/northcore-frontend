@@ -40,10 +40,12 @@ export function useUserExperts() {
         (subscription) => subscription.expert_id === expert.id
       )
     ) || [];
+
   return experts.map((expert) => ({
     ...expert,
     isActive: data?.subscriptions?.some(
-      (subscription) => (subscription.expert_id === expert.id && subscription.is_active)
+      (subscription) =>
+        subscription.expert_id === expert.id && subscription.is_active
     ),
   }));
 }

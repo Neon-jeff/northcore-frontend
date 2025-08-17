@@ -12,7 +12,7 @@ const SubScriptionPage = () => {
         <p className='text-sm text-gray-600'>Manage your expert subscriptions</p>
       <div className='grid lg:grid-cols-3'>
         {experts.map(expert => (
-          <ExpertCard key={expert.id} {...expert} />
+          <ExpertCard key={expert.id} {...expert} showProfitGained />
         ))}
       </div>
     </div>

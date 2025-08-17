@@ -22,7 +22,7 @@ const SideBar = () => {
       path: "/user/cashier",
       icon: IconReceiptDollarFilled,
     },
-    { name: "My Wallets", path: "/user/account", icon: IconWallet },
+    { name: "My Wallets", path: "/user/wallet", icon: IconWallet },
     { name: "Copy Trading", path: "/user/copy-trading", icon: IconWorldUpload },
     { name: "Market Data", path: "/user/market-data", icon:IconGraph },
     { name: "Premium Signals", path: "/user/signals", icon: IconBroadcast },

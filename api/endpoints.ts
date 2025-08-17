@@ -30,6 +30,7 @@ export const endpoints = {
     experts : {
         getAll: 'api/experts',
         getById: (id: number) => `api/experts/${id}`,
+        trades:'api/experts/trades'
     },
     subscription:{
         create: 'api/accounts/subscriptions',

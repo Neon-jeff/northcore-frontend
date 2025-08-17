@@ -17,3 +17,18 @@ export interface Experts {
   preferred_currency: string
   market_domain: string
 }
+
+export interface ExpertTradesResponse {
+  trades: Trade[]
+}
+
+export interface Trade {
+  id: number
+  expert_id: number
+  entry_price: number
+  exit_price: number
+  profit_loss: number
+  date: string
+  currency: string
+  market_domain: string
+}

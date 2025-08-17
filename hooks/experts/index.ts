@@ -12,3 +12,13 @@ export function useExperts(){
         refetchOnWindowFocus: true
     });
 }
+
+export function useExpertTrades(expertId: number) {
+    return useQuery({
+        queryKey: ["expertTrades", expertId],
+        queryFn: async () => expertService().getExpertTrades({ expertId }),
+        staleTime: 1000 * 60 * 30,
+        refetchOnMount: true,
+        refetchOnWindowFocus: true
+    });
+}

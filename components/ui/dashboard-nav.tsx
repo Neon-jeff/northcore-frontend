@@ -36,7 +36,7 @@ const DashboardNav = () => {
       path: "/user/cashier",
       icon: IconReceiptDollarFilled,
     },
-    { name: "My Wallet", path: "/user/account", icon: IconLibraryFilled },
+    { name: "My Wallet", path: "/user/wallet", icon: IconLibraryFilled },
     { name: "Copy Trading", path: "/user/copy-trading", icon: IconWorldUpload },
     {
       name: "Market Data",
