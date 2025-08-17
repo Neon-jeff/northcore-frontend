@@ -32,7 +32,7 @@ export function useIsExpertSubscribed(expert_id: number) {
 }
 
 export function useUserExperts() {
-  const { data } = useGetUserSubscription({ active_only: true });
+  const { data } = useGetUserSubscription();
   const { data: expertsData } = useExperts();
   const experts =
     expertsData?.experts?.filter((expert) =>

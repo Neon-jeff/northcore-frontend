@@ -10,7 +10,6 @@ export const http = ky.extend({
 		beforeRequest: [
 			request => {
 				const store = JSON.parse(localStorage.getItem('user-storage') || 'null') as {state:UserData}
-				console.log("User Store:", store);
 				if (store.state && store.state.token) {
 					request.headers.set('Authorization', `Bearer ${store.state.token}`);
 				}
