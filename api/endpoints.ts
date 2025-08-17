@@ -30,5 +30,8 @@ export const endpoints = {
     experts : {
         getAll: 'api/experts',
         getById: (id: number) => `api/experts/${id}`,
+    },
+    subscription:{
+        create: 'api/accounts/subscriptions',
     }
 }

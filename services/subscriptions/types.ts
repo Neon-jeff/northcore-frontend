@@ -10,3 +10,8 @@ export interface Subscriptions {
   end_date: string
   is_active: boolean
 }
+
+export interface CreatSubscriptionBody {
+  expert_id: number
+  is_active: boolean
+}

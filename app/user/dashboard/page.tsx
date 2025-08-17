@@ -21,9 +21,7 @@ const DashboardPage = () => {
   return (
     <div className="lg:grid lg:grid-cols-[3fr_1.5fr]  gap-5 min-h-screen ">
       <div className="flex flex-col gap-5 h-full ">
-        {/* <p className="text-base text-zinc-700 font-bold">
-          Hi Gausa Kid, welcome back
-        </p> */}
+ 
         <div className="flex max-md:flex-col gap-5">
           <AccountBalance />
           <AccountInfo />

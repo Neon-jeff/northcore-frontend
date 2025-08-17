@@ -5,6 +5,9 @@ import { formatCurrency } from "@/utils/currency/format-currency";
 import { Users } from "lucide-react";
 import React from "react";
 import { Button } from "../ui";
+import { useCreateSubscription, useIsExpertSubscribed } from "@/hooks/subscriptions";
+import { toast } from "sonner";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ExpertCard = ({
   name,
@@ -16,7 +19,35 @@ const ExpertCard = ({
   market_domain,
   preferred_currency,
   minimum_investment,
+  id: expert_id,
 }: Experts) => {
+  const createSubscription = useCreateSubscription();
+    const { isSubscribed } = useIsExpertSubscribed(expert_id);
+  const queryClient = useQueryClient();
+  const handleSubscription = () => {
+    if (isSubscribed) {
+      toast.error("You are already subscribed to this expert");
+      return;
+    }
+    createSubscription.mutate(
+      {
+        expert_id,
+        is_active: false,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Subscription created successfully");
+          queryClient.invalidateQueries({
+            queryKey: ["userSubscription"],
+          });
+        },
+        onError: () => {
+          toast.error("Failed to create subscription");
+        },
+      }
+    );
+  };
+
   return (
     <div className="overflow-clip rounded-xl pb-4 border border-gray-100 font-bold">
       <div className="bg-black h-24 " />
@@ -39,7 +70,9 @@ const ExpertCard = ({
           <p className="text-2xl font-bold text-green-600 pb-1">
             {formatCurrency(all_time_profit)}
           </p>
-          <p className="pb-1 text-gray-500 text-[.65rem]">{win_rate}% Win rate all time</p>
+          <p className="pb-1 text-gray-500 text-[.65rem]">
+            {win_rate}% Win rate all time
+          </p>
 
           {/* <span className="text-xs text-gray-400">All time profit</span> */}
         </div>
@@ -61,11 +94,17 @@ const ExpertCard = ({
             {preferred_currency}
           </p>
         </div>
-        <Button className="w-full mt-5">Subscribe to expert</Button>
+        <Button
+          loading={createSubscription.isPending}
+          disabled={createSubscription.isPending}
+          onClick={handleSubscription}
+          className="w-full mt-5"
+        >
+         { isSubscribed ? "Already Subscribed" : "Subscribe to expert"}
+        </Button>
       </div>
     </div>
   );
 };
-
 
 export default ExpertCard;
