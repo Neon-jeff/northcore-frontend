@@ -164,7 +164,7 @@ function CustomerActivity() {
             <p>Get started with your first deposit, win up to $200 in bonus funds</p>
           </div>
         </div>
-        <Link href={'/dashboard/cashier'} className=" text-[.7rem] h-10 self-end px-5 lg:w-1/3 bg-primary/5 text-primary font-bold rounded-full flex items-center gap-1">Claim Now <IconArrowRight size={16} className="text-primary" strokeWidth={1.2} /></Link>
+        <Link href={'/user/cashier'} className=" text-[.7rem] h-10 self-end px-5 lg:w-1/3 bg-primary/5 text-primary font-bold rounded-full flex items-center gap-1">Claim Now <IconArrowRight size={16} className="text-primary" strokeWidth={1.2} /></Link>
       </div>
     </div>
   );

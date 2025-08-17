@@ -8,6 +8,7 @@ import {
   IconGraph,
   IconIconsFilled,
   IconLibraryFilled,
+  IconLogout,
   IconMenu,
   IconMessage,
   IconReceiptDollarFilled,
@@ -27,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "./dropdown-menu";
 import { ScrollArea } from "./scroll-area";
+import { Button } from "./button";
 
 const DashboardNav = () => {
   const routes = [
@@ -48,8 +50,8 @@ const DashboardNav = () => {
   ];
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
-  const { data } = useUserStore();
-  const { data: notifications,isLoading } = useGetNotifications();
+  const { data,logout } = useUserStore();
+  const { data: notifications, isLoading } = useGetNotifications();
   return (
     <nav className="flex fixed items-center justify-between bg-white lg:px-20 p-4 left-0 right-0   top-0 z-10">
       <div className="flex justify-between w-full items-center">
@@ -64,7 +66,9 @@ const DashboardNav = () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="relative">
               <IconBell className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
-              <p className="absolute size-4 flex items-center justify-center rounded-full -top-1 -right-1 bg-primary text-white text-[.55rem]">{notifications?.notifications.length ?? 0}</p>
+              <p className="absolute size-4 flex items-center justify-center rounded-full -top-1 -right-1 bg-primary text-white text-[.55rem]">
+                {notifications?.notifications.length ?? 0}
+              </p>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="space-y-2 ">
               <p className="text-base font-bold">Notifications</p>
@@ -91,16 +95,33 @@ const DashboardNav = () => {
                   ))}
                 </ScrollArea>
               )}
-              {
-                isLoading && <div className="w-full h-10 bg-zinc-200 animate-pulse rounded-lg"/>
-              }
+              {isLoading && (
+                <div className="w-full h-10 bg-zinc-200 animate-pulse rounded-lg" />
+              )}
               {notifications?.notifications?.length === 0 && (
                 <p className="text-center text-gray-500">No notifications</p>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
           <IconMessage className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
-          <IconUserCircle className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-2">
+              <IconUserCircle className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-white rounded-lg shadow-md p-4 text-xs space-y-4">
+              <p className="text-sm font-bold">{data?.first_name} {data?.last_name}</p>
+              <Link href="/user/wallet" className="block text-gray-500 hover:text-gray-800">
+                View Wallet
+              </Link>
+              <Link href="/user/copy-trading" className="block text-gray-500 hover:text-gray-800">
+                Copy Trading
+              </Link>
+              <Button className="flex items-center gap-2" variant={'ghost'} onClick={logout}>
+                <IconLogout />
+                Logout
+              </Button>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       {/* mobile side bar */}
@@ -120,9 +141,9 @@ const DashboardNav = () => {
                   {data?.first_name} {data?.last_name}
                 </span>
               </div>
-              <span className=" bg-gray-100 text-black p-1.5 px-3 text-xs rounded-full  w-fit font-bold">
+              {/* <span className=" bg-gray-100 text-black p-1.5 px-3 text-xs rounded-full  w-fit font-bold">
                 View Profile
-              </span>
+              </span> */}
             </div>
             <div className="mt-5">
               {routes.map((route) => (

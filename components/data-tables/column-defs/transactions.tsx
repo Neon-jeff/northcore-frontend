@@ -29,7 +29,7 @@ export const transactionsColumns: ColumnDef<Transaction>[] = [
             const type = row.getValue('transaction_type')
             return (
                 <span className={cn('flex text-[.65rem] gap-1 p-2 bg-blue-50 text-blue-600  w-fit px-3 rounded-full',type=='deposit'&&'bg-purple-50 text-purple-600')}>
-                    {type === 'deposit' ? <ArrowDownCircle size={15}/> : <ArrowUpCircle size={15}/>} {type === 'deposit' ? 'Credit' : 'Debit'}
+                    {type === 'credit' ? <ArrowDownCircle size={15}/> : <ArrowUpCircle size={15}/>} {type === 'credit' ? 'Credit' : 'Debit'}
                 </span>
             )
         }

@@ -20,7 +20,7 @@ import {
 import { useCopyToClipboard } from "@/hooks/ui";
 import { toast } from "sonner";
 import { Loader } from "../icons";
-import { useCreateTransaction } from "@/hooks/transactions";
+import { useCreateTransaction, useGetTransactions } from "@/hooks/transactions";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useQueryClient } from "@tanstack/react-query";
@@ -40,6 +40,7 @@ const DepositForm = () => {
   const copyToClipBoard = useCopyToClipboard();
   const makePayment = useCreateTransaction();
   const queryClient = useQueryClient();
+  const { data: transactions } = useGetTransactions();
 
   const handleCopyToClipBoard = () => {
     copyToClipBoard.mutate(
@@ -202,17 +203,19 @@ const DepositForm = () => {
                       />
                     </div>
                     <div>
-                      <div className="bg-green-50 p-4 text-gray-600 rounded-md space-y-2">
-                        <div className="flex gap-2 items-center text-green-700">
-                          <IconGiftFilled className="text-green-500" />
-                          <p className="text-sm font-bold">Bonus Available</p>
+                      {transactions?.transactions.length === 0 && (
+                        <div className="bg-green-50 p-4 text-gray-600 rounded-md space-y-2">
+                          <div className="flex gap-2 items-center text-green-700">
+                            <IconGiftFilled className="text-green-500" />
+                            <p className="text-sm font-bold">Bonus Available</p>
+                          </div>
+                          <p>
+                            You have a 20% bonus on your first deposit, this
+                            will enable you to maximize your trading potential.
+                          </p>
                         </div>
-                        <p>
-                          You have a 20% bonus on your first deposit, this will
-                          enable you to maximize your trading potential.
-                        </p>
-                      </div>
-                      <div className="mt-5 w-2/3 space-y-2 text-sm mx-auto">
+                      )}
+                      <div className="mt-5 lg:w-2/3 w-full space-y-2 text-sm mx-auto">
                         <div className="flex justify-between">
                           <span>Amount</span>
                           <span className="font-bold text-sm ">
@@ -345,7 +348,9 @@ function PaymentCompleted() {
       </p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
-          <Button variant={'secondary'} className="">Go to Dashboard</Button>
+          <Button variant={"secondary"} className="">
+            Go to Dashboard
+          </Button>
         </Link>
         <Button className="" onClick={handleDepositAgain}>
           Deposit Again
