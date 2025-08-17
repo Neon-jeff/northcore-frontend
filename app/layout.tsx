@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     "social trading",
     "investment"
   ],
-  authors: [{ name: "Northcore Markets", url: "https://northcoremarkets.com" }],
+  authors: [{ name: "Northcore Markets", url: "https://www.northcoremarket.com" }],
   robots: { index: true, follow: true },
   openGraph: {
     title: "Northcore Markets",
     description: "Copy trading, market data, and advanced trading tools for modern investors.",
-    url: "https://northcoremarkets.com",
+    url: "https://www.northcoremarket.com",
     siteName: "Northcore Markets",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico"
   },
-  metadataBase: new URL("https://northcoremarkets.com")
+  metadataBase: new URL("https://www.northcoremarket.com")
 };
 
 const fkGrotesk = localFont({
