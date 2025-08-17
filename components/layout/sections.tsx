@@ -1,19 +1,23 @@
+'use client'
 import { cn } from "@/lib/utils";
 import React from "react";
+import {motion} from 'motion/react'
 
-interface SectionsProps extends React.HTMLAttributes<HTMLElement> {
+interface SectionsProps  {
   className?: string;
   children?: React.ReactNode;
 }
 
-const Section = ({ className, children, ...props }: SectionsProps) => {
+const Section = ({ className, children }: SectionsProps) => {
   return (
-    <section
+    <motion.section
       className={cn("lg:w-4/5 mx-auto pl-0  px-4 py-8", className)}
-      {...props}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {children}
-    </section>
+    </motion.section>
   );
 };
 
@@ -22,18 +26,19 @@ Section.displayName = "Section";
 const Description = ({
   className,
   children,
-  ...props
-}: React.HTMLAttributes<HTMLHeadElement>) => {
+}: { children: React.ReactNode; className?: string }) => {
   return (
-    <h1
+    <motion.h1
       className={cn(
         "text-sm text-gray-700  ",
         className
       )}
-      {...props}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
       {children}
-    </h1>
+    </motion.h1>
   );
 };
 
@@ -43,9 +48,9 @@ const Title = ({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLParagraphElement>) => {
+}: { children: React.ReactNode; className?: string }) => {
   return (
-    <p
+    <motion.p
       className={cn(
         "lg:text-5xl lg:w-1/2 text-2xl font-bold text-zinc-700",
         className
@@ -53,7 +58,7 @@ const Title = ({
       {...props}
     >
       {children}
-    </p>
+    </motion.p>
   );
 };
 Title.displayName = "Section.Title";
@@ -62,7 +67,7 @@ const Content = ({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) => {
+}: { children: React.ReactNode; className?: string }) => {
   return (
     <div
       className={cn(
@@ -81,7 +86,7 @@ const DescriptionContainer = ({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>) => {
+}: { children: React.ReactNode; className?: string }) => {
   return (
     <div
       className={cn(

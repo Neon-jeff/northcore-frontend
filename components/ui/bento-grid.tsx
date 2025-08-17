@@ -51,15 +51,15 @@ const BentoGridItem = ({
         alt={title}
         className="absolute top-0 right-0 left-0 bottom-0 h-full w-full  object-cover rounded-md"
       />
-      <div className="absolute lg:p-10 p-2 top-0 left-0 right-0 bottom-0 bg-black/50 text-white space-y-1 z-40">
+      <div className="absolute lg:p-5 p-5 flex flex-col justify-end pb-10 top-0 left-0 right-0 bottom-0 bg-black/40 text-white space-y-1 z-40">
         {Icon && (
-          <div className="w-fit rounded-full p-2 h-fit">
+          <div className="w-fit rounded-full hidden p-2 h-fit">
             <Icon size={28} color="#fff" />
           </div>
         )}
         <h3 className="lg:text-4xl text-2xl font-bold lg:w-1/2 ">{title}</h3>
         <p className="text-sm ">{description}</p>
-        <Button className="absolute bottom-5 right-5 w-fit border bg-white/10 text-white backdrop-filter backdrop-blur-xl flex flex-col border-gray-50/90 font-bold rounded-lg"> Get Started Now
+        <Button className=" w-fit border bg-white/10 text-white backdrop-filter backdrop-blur-xl mt-5 flex flex-col border-gray-50/90 font-bold rounded-lg"> Get Started Now
           <IconArrowRight className=" size-6"/>
         </Button>
       </div>

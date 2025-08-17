@@ -1,12 +1,16 @@
+"use client";
 import { Attributes, FundingOptions } from "@/components/home";
 import { Hero, Section } from "@/components/layout";
-import { BentoGrid } from "@/components/ui";
+import { Button } from "@/components/ui";
 import Footer from "@/components/ui/footer";
 import Globe from "@/components/ui/globe";
-import { IconDevicesCog, IconGraph } from "@tabler/icons-react";
+import StatsCount from "@/components/ui/statscount";
+import { IconGraph } from "@tabler/icons-react";
 import { Globe2 } from "lucide-react";
 import Image from "next/image";
-
+import KineticTestimonial from "@/components/ui/kinetic-testimonials";
+import { testimonials } from "@/mock";
+import { motion } from "motion/react";
 export default function Home() {
   return (
     <main className="font-sans lg:space-y-20  space-y-10 relative bg-white text-gray-500 lg:text-gray-300">
@@ -37,6 +41,10 @@ export default function Home() {
           </Hero.SecondaryContent>
         </Hero.Root>
         <div className="absolute max-md:hidden hidden left-0 right-0 h-[100px] rounded-full lg:h-1/3 blur-[200px]  bg-gray-300/50 lg:left-1/10 lg:right-1/10 lg:-bottom-10 -bottom-10 max-lg:z-[-1]  "></div>
+
+        <div className="text-black">
+          <StatsCount />
+        </div>
       </Section>
 
       <Section className=" flex-col gap-10 ">
@@ -50,7 +58,12 @@ export default function Home() {
           <Attributes />
         </Section.DescriptionContainer>
         <Section.Content className="space-y-5 mt-20 w-full ">
-          <div className="home-banner lg:min-h-[600px]  items-center max-md:flex-col gap-5 rounded-3xl flex justify-between lg:p-10 py-10 p-5">
+          <motion.div
+            className="home-banner lg:min-h-[600px]  items-center max-md:flex-col gap-5 rounded-3xl flex justify-between lg:p-10 py-10 p-5"
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
             <div>
               <h1 className="text-4xl text-white">
                 Trade Anywhere, <br /> Win Anytime
@@ -70,7 +83,7 @@ export default function Home() {
               </div>
             </div>
             <Globe />
-          </div>
+          </motion.div>
         </Section.Content>
       </Section>
 
@@ -84,53 +97,58 @@ export default function Home() {
           <FundingOptions />
         </Section.DescriptionContainer>
         <Section.Content className="space-y-5 mt-20 w-full ">
-          <div className="home-banner2 min-h-[400px] h-full rounded-3xl"></div>
+          <motion.div
+            className="home-banner2 min-h-[400px] h-full rounded-3xl"
+            initial={{ scale: 0.8 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex flex-col lg:flex-row items-center justify-between lg:p-10 p-5 h-full">
+              <div className="space-y-5">
+                <h1 className="text-4xl text-white">
+                  Our wealth creation trading signals are hidden gems
+                </h1>
+                <p className="text-white/80 max-w-md">
+                  Discover the potential of our exclusive trading signals and
+                  unlock new opportunities for wealth creation.
+                </p>
+                <Button className="mt-10">Start Trading Now</Button>
+              </div>
+              <Image
+                src={"/images/hero-new2.webp"}
+                alt="Neural trades image hero background"
+                className="w-full h-full max-md:h-[400px]  object-cover rounded-lg"
+                width={200}
+                height={200}
+              />
+            </div>
+          </motion.div>
         </Section.Content>
       </Section>
 
       <Section className="lg:w-3/4">
         <Section.DescriptionContainer>
-          <Section.Title>
-            Market centered solutions found nowhere else
-          </Section.Title>
+          <Section.Title>We let our users do the talking for us</Section.Title>
+          <Section.Description>
+            Our users love our platform and the results they achieve.
+          </Section.Description>
         </Section.DescriptionContainer>
         <Section.Content className="mt-10">
-          <BentoGrid>
-            <BentoGrid.Item
-              title="Advanced Trading Tools"
-              description="Utilize cutting-edge tools for informed trading decisions."
-              Icon={IconDevicesCog}
-              className="h-96 lg:col-span-2"
-              image="https://images.pexels.com/photos/7172830/pexels-photo-7172830.jpeg"
-            ></BentoGrid.Item>
-
-            <BentoGrid.Item
-              title="Demo Trading"
-              description="Practice trading strategies with our demo accounts."
-              Icon={IconDevicesCog}
-              className="h-96"
-              image="https://images.pexels.com/photos/6802042/pexels-photo-6802042.jpeg"
-            ></BentoGrid.Item>
-
-            <BentoGrid.Item
-              title="Community Support"
-              description="Join a community of traders for shared insights and strategies."
-              Icon={IconDevicesCog}
-              className="h-96"
-              image="/images/what-is-neural.jpeg"
-            ></BentoGrid.Item>
-
-            <BentoGrid.Item
-              title="Trade Anywhere"
-              description="Trade on the go with our mobile-friendly platform."
-              Icon={IconDevicesCog}
-              className="h-96 lg:col-span-2"
-              image="https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg"
-            ></BentoGrid.Item>
-          </BentoGrid>
+          <KineticTestimonial
+            testimonials={testimonials}
+            className="bg-white not-prose"
+            cardClassName="hover:scale-105 shadow-lg"
+            avatarClassName="ring-2 ring-purple-500"
+            desktopColumns={3}
+            tabletColumns={3}
+            mobileColumns={2}
+            speed={1.5}
+            title="Customer Reviews"
+            subtitle="What our users think about our product"
+          />
         </Section.Content>
       </Section>
-      <Footer/>
+      <Footer />
     </main>
   );
 }
