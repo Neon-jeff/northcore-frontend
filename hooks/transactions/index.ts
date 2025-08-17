@@ -20,3 +20,13 @@ export function useGetTransactions() {
     refetchOnWindowFocus: true
   });
 }
+
+export function useGetNotifications(){
+  return useQuery({
+    queryKey: ["notifications"],
+    queryFn: async () => transactionService.getUserNotifications(),
+    staleTime: 1000 * 60 * 30,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true
+  });
+}

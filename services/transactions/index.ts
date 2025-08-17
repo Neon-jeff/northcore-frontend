@@ -1,6 +1,6 @@
 import { http } from "@/api/http";
 import { endpoints } from "@/api/endpoints";
-import { CreateTransactionBody, Transaction } from "./types";
+import { CreateTransactionBody, NotificationResponse, Transaction } from "./types";
 
 export class TransactionService {
   public async create_transaction(data: CreateTransactionBody) {
@@ -20,6 +20,17 @@ export class TransactionService {
       const response = http
         .get(endpoints.accounts.transactions)
         .json<{transactions: Transaction[]}>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+   public async getUserNotifications(){
+    try {
+      const response = http
+        .get(endpoints.accounts.notification)
+        .json<NotificationResponse>();
       return response;
     } catch (error) {
       throw error;

@@ -24,7 +24,8 @@ export const endpoints = {
         getAllMarketData: 'api/markets/all',
     },
     accounts: {
-        transactions: 'api/accounts/transactions'
+        transactions: 'api/accounts/transactions',
+        notification:'api/accounts/notifications'
     },
     experts : {
         getAll: 'api/experts',
