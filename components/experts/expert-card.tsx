@@ -8,6 +8,7 @@ import { Button } from "../ui";
 import { useCreateSubscription, useIsExpertSubscribed } from "@/hooks/subscriptions";
 import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
+import { cn } from "@/lib/utils";
 
 const ExpertCard = ({
   name,
@@ -20,7 +21,9 @@ const ExpertCard = ({
   preferred_currency,
   minimum_investment,
   id: expert_id,
-}: Experts) => {
+  isActive,
+  variant = 'large'
+}: Experts & { isActive?: boolean, variant?: 'large' | 'small'}) => {
   const createSubscription = useCreateSubscription();
     const { isSubscribed } = useIsExpertSubscribed(expert_id);
   const queryClient = useQueryClient();
@@ -49,24 +52,24 @@ const ExpertCard = ({
   };
 
   return (
-    <div className="overflow-clip rounded-xl pb-4 border border-gray-100 font-bold">
-      <div className="bg-black h-24 " />
-      <div className="px-3">
-        <div className="flex justify-between items-center flex-col   -translate-y-5  ">
+    <div className={cn("overflow-clip rounded-xl pb-4 border border-gray-100 relative font-bold",)}>
+     {variant !== 'small' && <div className="bg-black h-24 " />}
+      <div className={cn("px-3",variant=='small' && 'fle')}>
+        <div className={cn("flex justify-between items-center flex-col  -translate-y-5 ",variant=='small' && ' translate-y-4 pb-4 items-start')}>
           <img
             loading="lazy"
             src={`${env.API_BASE_URL}${avatar}`}
             alt={name}
-            className="w-20 h-20 object-cover object-top rounded-full"
+            className={cn("w-20 h-20 object-cover object-top rounded-full", variant === 'small' && 'w-12 h-12')}
           />
-          <div className="text-center">
-            <p className="mt-2 text-base text-black">{name}</p>
-            <p className=" flex items-center gap-1 text-xs  text-gray-400">
+          <div className={cn("text-center text-xs ", variant === 'small' && 'text-left text-[.65rem] space-y-1')}>
+            <p className={cn("mt-2 text-base text-black", variant === 'small' && 'text-sm')}>{name}</p>
+            <p className=" flex items-center gap-1  text-gray-400">
               <Users size={16} /> {followers} Followers
             </p>
           </div>
         </div>
-        <div className="-translate-y-2.5 text-center">
+     { variant !=="small" &&  <div className="-translate-y-2.5 text-center">
           <p className="text-2xl font-bold text-green-600 pb-1">
             {formatCurrency(all_time_profit)}
           </p>
@@ -75,8 +78,8 @@ const ExpertCard = ({
           </p>
 
           {/* <span className="text-xs text-gray-400">All time profit</span> */}
-        </div>
-        <div className=" space-y-1 text-[.65rem] text-black">
+        </div>}
+  {  variant !=="small" &&    <div className=" space-y-1 text-[.65rem] text-black">
           <p className="flex justify-between">
             <span className="text-gray-400">Average follower profit: </span>
             {formatCurrency(followers_profit_average)}
@@ -93,15 +96,18 @@ const ExpertCard = ({
             <span className="text-gray-400">Preferred Currency: </span>
             {preferred_currency}
           </p>
-        </div>
-        <Button
+        </div>}
+      { isActive !==undefined && <p className={cn("mx-auto w-fit px-5 py-2 absolute bg-orange-50 text-orange-600 text-xs rounded-full top-2 right-2",isActive &&'bg-green-50 text-green-600')}>{
+          isActive ? "Active" : "Pending confirmation"
+        }</p>}
+      { variant !=="small" &&  <Button
           loading={createSubscription.isPending}
           disabled={createSubscription.isPending}
           onClick={handleSubscription}
           className="w-full mt-5"
         >
          { isSubscribed ? "Already Subscribed" : "Subscribe to expert"}
-        </Button>
+        </Button>}
       </div>
     </div>
   );

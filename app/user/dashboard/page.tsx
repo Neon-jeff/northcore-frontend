@@ -7,6 +7,7 @@ import ExpertCard from "@/components/experts/expert-card";
 import { Button } from "@/components/ui";
 import { useExperts } from "@/hooks/experts";
 import { useCryptocurrencyData } from "@/hooks/markets/indext";
+import {  useUserExperts } from "@/hooks/subscriptions";
 import { useGetTransactions } from "@/hooks/transactions";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/store/user";
@@ -21,7 +22,6 @@ const DashboardPage = () => {
   return (
     <div className="lg:grid lg:grid-cols-[3fr_1.5fr]  gap-5 min-h-screen ">
       <div className="flex flex-col gap-5 h-full ">
- 
         <div className="flex max-md:flex-col gap-5">
           <AccountBalance />
           <AccountInfo />
@@ -38,7 +38,7 @@ const DashboardPage = () => {
 };
 
 function AccountBalance() {
-    const {data} = useUserStore()
+  const { data } = useUserStore();
   return (
     <div className="lg:w-2/3 rounded-2xl bg-white lg:py-10 p-5 min-h-64 space-y-6">
       <div>
@@ -47,7 +47,8 @@ function AccountBalance() {
         </p>
         <div className="flex max-lg:flex-col max-lg:gap-2 lg:items-center justify-between">
           <p className="lg:text-6xl text-4xl  font-bold text-zinc-800">
-            {formatCurrency(data?.balance || 0).replace('.00', '')}<span className="text-zinc-300">.00</span>
+            {formatCurrency(data?.balance || 0).replace(".00", "")}
+            <span className="text-zinc-300">.00</span>
           </p>
           <Button className="bg-primary/5 text-primary rounded-full flex items-center gap-2 p-2 px-10">
             Fund Wallet
@@ -63,23 +64,31 @@ function AccountBalance() {
 }
 
 function AccountInfo() {
+  const experts = useUserExperts();
   return (
-    <div className="lg:w-1/3 rounded-2xl relative bg-white lg:py-10 p-5 min-h-64">
-      <p className="text-black text-center text-base font-bold">
-        My Subscriptions
+    <div className="lg:w-1/3 rounded-2xl relative bg-white lg:py-5 p-5 min-h-64">
+      <p className="text-black  text-base font-bold mb-2">
+        Recent Subscriptions
       </p>
-      <div className="space-y-2 h-full flex flex-col lg:justify-center items-center mt-4">
-        <Image
-          src={"/icons/no-expert.svg"}
-          width={100}
-          height={100}
-          alt="No Active Subscription"
-        />
-        <p className="text-sm ">No Active Subscription</p>
-        <button className=" rounded-full bg-primary/5 lg:mt-5 text-primary text-sm p-3 w-full px-5">
-          Subscribe to an expert
-        </button>
-      </div>
+      {experts.length === 0 && (
+        <div className="space-y-2 h-full flex flex-col lg:justify-center items-center mt-4">
+          <Image
+            src={"/icons/no-expert.svg"}
+            width={100}
+            height={100}
+            alt="No Active Subscription"
+          />
+          <p className="text-sm ">No Active Subscription</p>
+          <button className=" rounded-full bg-primary/5 lg:mt-5 text-primary text-sm p-3 w-full px-5">
+            Subscribe to an expert
+          </button>
+        </div>
+      )}
+      {
+        experts.slice(0,3).map((expert) => (
+          <ExpertCard key={expert.id} {...expert} variant="small" />
+        ))
+      }
     </div>
   );
 }
@@ -89,8 +98,8 @@ function Banner() {
   return (
     <div className="w-full z-0 rounded-2xl relative  bg-white  lg:p-5  p-5  space-y-8">
       <div className="flex max-md:flex-col justify-between gap-5 items-center ">
-        <p className=" text-2xl  text-zinc-800 flex items-center gap-2 font-bold">
-          Trending experts
+        <p className=" text-xl  text-zinc-800 flex items-center gap-2 font-bold">
+          Top experts
         </p>
         <Link
           href={"/user/copy-trading"}
