@@ -114,8 +114,8 @@ const Nav = () => {
               })}
             </ul>
             <div className="flex flex-col gap-5 justify-between mt-10">
-              <Button className="bg-black" onClick={()=>{router.push('/user/signup')}}>Create Account</Button>
-              <Button variant="secondary" onClick={()=>{router.push('/user/login')}}>Login to account</Button>
+              <Button className="bg-black" onClick={()=>{router.push('/auth/signup')}}>Create Account</Button>
+              <Button variant="secondary" onClick={()=>{router.push('/auth/login')}}>Login to account</Button>
             </div>
           </div>
         </div>
