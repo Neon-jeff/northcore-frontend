@@ -59,10 +59,14 @@ const Nav = () => {
             })}
           </ul>
           <div>
-            <Button>Create Account</Button>
-            <Button variant="secondary" className="ml-2">
-              Login to account
-            </Button>
+            <Link href="/auth/signup">
+              <Button>Create Account</Button>
+            </Link>
+            <Link href="/auth/login">
+              <Button variant="secondary" className="ml-2">
+                Login to account
+              </Button>
+            </Link>
           </div>
         </div>
         <button className="md:hidden" onClick={handleMobileMenuToggle}>
@@ -101,6 +105,7 @@ const Nav = () => {
                         isActive &&
                           "text-black text-xl pb-1 border-b-2 border-black font-semibold"
                       )}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {link.name}
                     </Link>
@@ -109,8 +114,8 @@ const Nav = () => {
               })}
             </ul>
             <div className="flex flex-col gap-5 justify-between mt-10">
-              <Button className="bg-black" onClick={()=>{router.push('/user/dashboard')}}>Create Account</Button>
-              <Button variant="secondary">Login to account</Button>
+              <Button className="bg-black" onClick={()=>{router.push('/user/signup')}}>Create Account</Button>
+              <Button variant="secondary" onClick={()=>{router.push('/user/login')}}>Login to account</Button>
             </div>
           </div>
         </div>

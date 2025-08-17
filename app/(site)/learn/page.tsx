@@ -3,7 +3,6 @@ import Section from "@/components/layout/sections";
 import React from "react";
 import Footer from "@/components/ui/footer";
 import { FundingOptions } from "@/components/home";
-import { Button } from "@/components/ui";
 
 const CompanyPage = () => {
   return (
@@ -35,7 +34,6 @@ const CompanyPage = () => {
             How to start copy trading with Northcore
           </Section.Title>
          <FundingOptions />
-         <Button className="mt-20">Start Copy Trading</Button>
       </Section>
       <Footer />
     </main>

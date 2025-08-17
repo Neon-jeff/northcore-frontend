@@ -51,26 +51,29 @@ const VerifyOTPForm = () => {
   }, [showTimer, timer]);
 
   function handleSubmit() {
-    verifyOTP.mutate({
-      email: data?.email || "",
-      otp
-    },
-{
-    onSuccess: () => {
-        toast.success("OTP Verified Successfully");
-        router.push("/user/dashboard");
-    },
-    onError: (error) => {
-        console.error(error);
-        toast.error(error?.message || "Invalid OTP");
-    }
-});
-
+    verifyOTP.mutate(
+      {
+        email: data?.email || "",
+        otp,
+      },
+      {
+        onSuccess: () => {
+          toast.success("OTP Verified Successfully");
+          router.push("/user/dashboard");
+        },
+        onError: (error) => {
+          console.error(error);
+          toast.error(error?.message || "Invalid OTP");
+        },
+      }
+    );
   }
 
   function handleResendOTP() {
     requestOTP.mutate(data?.email || "", {
       onSuccess: (data) => {
+        setTimer(59);
+        setShowTimer(true);
         toast.success(data?.message || "OTP sent successfully");
       },
       onError: (error) => {
@@ -134,7 +137,11 @@ const VerifyOTPForm = () => {
           disabled={otp.length < 5 || verifyOTP.isPending}
           onClick={handleSubmit}
         >
-         {!verifyOTP.isPending ? "Verify Email" : <Loader2Icon className="text-white animate-spin" />}
+          {!verifyOTP.isPending ? (
+            "Verify Email"
+          ) : (
+            <Loader2Icon className="text-white animate-spin" />
+          )}
         </Button>
         <div>
           <p className=" text-sm pb-2  lg:text-body-base text-center">
@@ -149,9 +156,11 @@ const VerifyOTPForm = () => {
             <button
               className="text-primary cursor-pointer text-xs px-5  p-2 bg-primary/5 rounded-sm font-bold disabled:opacity-60"
               onClick={handleResendOTP}
-              disabled={showTimer}
+              disabled={showTimer || requestOTP.isPending}
             >
-              Resend OTP
+              {
+                requestOTP.isPending ? 'Sending...' : 'Resend OTP'
+              }
             </button>
           </div>
         </div>

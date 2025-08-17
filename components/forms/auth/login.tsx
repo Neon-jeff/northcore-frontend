@@ -78,12 +78,12 @@ const LoginForm = () => {
               </FormItem>
             )}
           />
-          <Link
+          {/* <Link
             href="/auth/forgot-password"
             className="text-xs w-full block text-right text-primary"
           >
             Forgot your password?
-          </Link>
+          </Link> */}
           <Button loading={loginUser.isPending} disabled={loginUser.isPending} className="w-full mt-5 block" type="submit">
             Log in
           </Button>

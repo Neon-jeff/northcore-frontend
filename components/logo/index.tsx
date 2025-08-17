@@ -1,11 +1,45 @@
-import { cn } from '@/lib/utils'
-import React from 'react'
+import { cn } from "@/lib/utils";
+import React from "react";
 
-export const LogoSmall = ({className}:{className?:string}) => {
+export const LogoSmall = ({ className }: { className?: string }) => {
   return (
     <div className={cn(className)}>
-        <svg fill="none" height="38" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><filter id="a" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="54" width="48" x="0" y="-3"><feFlood floodOpacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" mode="normal" result="shape"/><feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="-3"/><feGaussianBlur stdDeviation="1.5"/><feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/><feBlend in2="shape" mode="normal" result="effect1_innerShadow_3051_46933"/><feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feOffset dy="3"/><feGaussianBlur stdDeviation="1.5"/><feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.1 0"/><feBlend in2="effect1_innerShadow_3051_46933" mode="normal" result="effect2_innerShadow_3051_46933"/><feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feMorphology in="SourceAlpha" operator="erode" radius="1" result="effect3_innerShadow_3051_46933"/><feOffset/><feComposite in2="hardAlpha" k2="-1" k3="1" operator="arithmetic"/><feColorMatrix type="matrix" values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.24 0"/><feBlend in2="effect2_innerShadow_3051_46933" mode="normal" result="effect3_innerShadow_3051_46933"/></filter><filter id="b" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse" height="42" width="39" x="4.5" y="5.25"><feFlood floodOpacity="0" result="BackgroundImageFix"/><feColorMatrix in="SourceAlpha" result="hardAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/><feMorphology in="SourceAlpha" operator="erode" radius="1.5" result="effect1_dropShadow_3051_46933"/><feOffset dy="2.25"/><feGaussianBlur stdDeviation="2.25"/><feComposite in2="hardAlpha" operator="out"/><feColorMatrix type="matrix" values="0 0 0 0 0.141176 0 0 0 0 0.141176 0 0 0 0 0.141176 0 0 0 0.1 0"/><feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_3051_46933"/><feBlend in="SourceGraphic" in2="effect1_dropShadow_3051_46933" mode="normal" result="shape"/></filter><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="24" x2="26" y1=".000001" y2="48"><stop offset="0" stopColor="#fff" stopOpacity="0"/><stop offset="1" stopColor="#fff" stopOpacity=".12"/></linearGradient><linearGradient id="d" gradientUnits="userSpaceOnUse" x1="24" x2="24" y1="15.75" y2="32.25"><stop offset="0" stopColor="#fff" stopOpacity=".8"/><stop offset="1" stopColor="#fff" stopOpacity=".5"/></linearGradient><linearGradient id="e" gradientUnits="userSpaceOnUse" x1="24" x2="24" y1="0" y2="48"><stop offset="0" stopColor="#fff" stopOpacity=".12"/><stop offset="1" stopColor="#fff" stopOpacity="0"/></linearGradient><clipPath id="f"><rect height="48" rx="12" width="48"/></clipPath><g filter="url(#a)"><g clipPath="url(#f)"><rect fill="#22262F" height="48" rx="12" width="48"/><path d="m0 0h48v48h-48z" fill="url(#c)"/><g filter="url(#b)"><rect height="12.75" rx="6.375" stroke="url(#d)" strokeWidth="3.75" width="29.25" x="9.375" y="17.625"/></g></g><rect height="46" rx="11" stroke="url(#e)" strokeWidth="2" width="46" x="1" y="1"/></g></svg>
+      <svg
+        width="40"
+        height="40"
+        viewBox="0 0 40 40"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M16.6584 40H15.3817C12.0653 40 10.07 39.9994 8.54581 39.7159L17.3668 28.0344L16.6584 40Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M31.2482 39.7514C29.7502 39.9988 27.7875 40 24.6183 40H23.109L22.397 28.0309L31.2482 39.7514Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M39.6715 31.6708C39.6071 31.9773 39.5313 32.2655 39.4389 32.5426C38.8337 34.3567 37.7712 35.9522 36.3867 37.1982L26.44 26.044L39.6715 31.6708Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M3.48544 37.0792C2.16397 35.8511 1.14739 34.3 0.56108 32.5426C0.459551 32.2382 0.375253 31.921 0.307173 31.5803L13.3239 26.0458L3.48544 37.0792Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M40 24.6183C40 25.7428 39.9968 26.7154 39.9858 27.5692L28.1729 23.006H40V24.6183Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M11.5962 23.006L0.0106534 27.4805C0.000706106 26.6481 0 25.704 0 24.6183V23.006H11.5962Z"
+          fill="#1379e7"
+        ></path>
+        <path
+          d="M24.6183 0C28.7807 0 30.862 0.000553673 32.5426 0.56108C35.7979 1.64713 38.3529 4.20208 39.4389 7.45739C39.9994 9.13798 40 11.2193 40 15.3817V20.016H27.5089L36.5181 16.1861L33.8459 14.4123L25.1048 17.7876L29.2081 12.358L26.2571 11.5501L21.7259 16.6282L21.3885 10.9091H18.3825L18.0398 16.6282L13.5121 11.5501L10.5629 12.358L14.6609 17.7859L5.92507 14.4123L3.25284 16.1861L12.2603 20.016H0V15.3817C0 11.2193 0.000553673 9.13798 0.56108 7.45739C1.64713 4.20208 4.20208 1.64713 7.45739 0.56108C9.13798 0.000553673 11.2193 0 15.3817 0H24.6183Z"
+          fill="#1379e7"
+        ></path>
+      </svg>
     </div>
-  )
-}
-
+  );
+};
