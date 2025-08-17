@@ -12,7 +12,7 @@ import { useGetTransactions } from "@/hooks/transactions";
 import { cn } from "@/lib/utils";
 import { useUserStore } from "@/store/user";
 import { formatCurrency } from "@/utils/currency/format-currency";
-import { IconArrowRight } from "@tabler/icons-react";
+import { IconArrowRight, IconGiftFilled } from "@tabler/icons-react";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -154,9 +154,18 @@ function RecentActivity() {
 
 function CustomerActivity() {
   return (
-    <div className=" rounded-2xl bg-white lg:p-10 p-5 h-[30vh]">
+    <div className=" rounded-2xl bg-white lg:p-5 p-3 h-[30vh]">
       <h1 className="text-black text-lg font-bold">Customer Activity</h1>
-      <div>{}</div>
+      <div className="flex flex-col items-start w-full justify-between gap-2 border p-4 rounded-xl border-gray-100 mt-4">
+        <div className="flex gap-2">
+          <IconGiftFilled size={38} color="violet"/>
+          <div>
+            <p className="text-sm text-gray-600">20% Deposit Bonus</p>
+            <p>Get started with your first deposit, win up to $200 in bonus funds</p>
+          </div>
+        </div>
+        <Link href={'/dashboard/cashier'} className=" text-[.7rem] h-10 self-end px-5 lg:w-1/3 bg-primary/5 text-primary font-bold rounded-full flex items-center gap-1">Claim Now <IconArrowRight size={16} className="text-primary" strokeWidth={1.2} /></Link>
+      </div>
     </div>
   );
 }
