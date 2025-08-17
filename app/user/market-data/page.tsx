@@ -56,7 +56,7 @@ const MarketDataPage = () => {
   );
 };
 
-function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
+export function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
   return (
     <div
       key={crypto.symbol}
@@ -86,7 +86,7 @@ function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
   );
 }
 
-function ForexCard({ forex }: { forex: Forexpairs }) {
+export function ForexCard({ forex }: { forex: Forexpairs }) {
   return (
     <div
       key={forex.currency}
@@ -108,7 +108,7 @@ function ForexCard({ forex }: { forex: Forexpairs }) {
   );
 }
 
-function StocksCard({ stock }: { stock: Stocks }) {
+export function StocksCard({ stock }: { stock: Stocks }) {
   return (
     <div
       key={stock.image}

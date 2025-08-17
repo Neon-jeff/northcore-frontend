@@ -52,7 +52,7 @@ const Title = ({
   return (
     <motion.p
       className={cn(
-        "lg:text-5xl lg:w-1/2 text-2xl font-bold text-zinc-700",
+        "lg:text-4xl lg:w-1/2 text-3xl font-bold text-zinc-700",
         className
       )}
       {...props}
