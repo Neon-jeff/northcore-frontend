@@ -26,12 +26,8 @@ export const metadata: Metadata = {
     url: "https://www.northcoremarket.com",
     siteName: "Northcore Markets",
     images: [
-      {
-        url: "/images/hero.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Northcore Markets Open Graph Image"
-      }
+    "/images/hero.jpg"
+
     ],
     type: "website"
   },
@@ -39,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Northcore Markets",
     description: "Copy trading, market data, and advanced trading tools for modern investors.",
-    images: ["/opengraph-image.png"]
+    images: ["/images/hero.jpg"]
   },
   icons: {
     icon: "/favicon.ico"
