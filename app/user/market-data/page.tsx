@@ -11,18 +11,35 @@ import {
   Stocks,
 } from "@/services/market-data/types";
 import { Loader2Icon } from "lucide-react";
+import dynamic from "next/dynamic";
 import React from "react";
+
+
+const SymbolOverviewNoSSR = dynamic(
+    () => import("react-ts-tradingview-widgets").then((w) => w.AdvancedRealTimeChart),
+    {
+        ssr: false,
+    }
+);
 
 const MarketDataPage = () => {
   const { data, isLoading } = useMarketData();
   return (
     <div className="lg:w-11/12 w-full py-10 p-2 space-y-5 lg:min-h-5/6 max-md:min-h-screen rounded-2xl bg-white lg:p-10 ">
-      <Tabs defaultValue="crypto" className="lg:w-2/3 w-full mx-auto    ">
+      <Tabs defaultValue="chart" className="lg:w-2/3 w-full mx-auto    ">
         <TabsList className="w-full">
+           <TabsTrigger value="chart">Chart</TabsTrigger>
           <TabsTrigger value="crypto">Crypto</TabsTrigger>
           <TabsTrigger value="forex">Forex</TabsTrigger>
           <TabsTrigger value="stocks">Stocks</TabsTrigger>
         </TabsList>
+        <TabsContent value="chart" className="w-full mt-4 rounded-xl">
+            <SymbolOverviewNoSSR width={'100%'}  copyrightStyles={{
+              parent:{
+                display: 'none'
+              }
+            }} style='3' />
+        </TabsContent>
         {
             isLoading && <Loader2Icon className="animate-spin h-5 w-5 text-gray-500 mx-auto mt-10" />
         }
