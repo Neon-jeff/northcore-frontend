@@ -13,6 +13,7 @@ export interface UserData {
 interface UserActions {
   login: (token: string, user: User) => void;
   logout: () => void;
+  setUser: (user: User) => void;
 }
 
 const initialState: UserData = {
@@ -30,6 +31,7 @@ export const useUserStore = create<UserData & UserActions>()(
       data: null,
       login: (token, user) => set({ token, isAuthenticated: true, data: user }),
       logout: () => set({ token: "", isAuthenticated: false, data: null }),
+      setUser: (user) => set({ data: user }),
       setRehydrated: () => set({ rehydrated: true }),
     }),
     {

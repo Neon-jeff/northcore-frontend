@@ -9,6 +9,8 @@ import { useExperts } from "@/hooks/experts";
 import { useCryptocurrencyData } from "@/hooks/markets/indext";
 import { useGetTransactions } from "@/hooks/transactions";
 import { cn } from "@/lib/utils";
+import { useUserStore } from "@/store/user";
+import { formatCurrency } from "@/utils/currency/format-currency";
 import { IconArrowRight } from "@tabler/icons-react";
 import { LoaderCircle } from "lucide-react";
 import Image from "next/image";
@@ -38,6 +40,7 @@ const DashboardPage = () => {
 };
 
 function AccountBalance() {
+    const {data} = useUserStore()
   return (
     <div className="lg:w-2/3 rounded-2xl bg-white lg:py-10 p-5 min-h-64 space-y-6">
       <div>
@@ -46,7 +49,7 @@ function AccountBalance() {
         </p>
         <div className="flex max-lg:flex-col max-lg:gap-2 lg:items-center justify-between">
           <p className="lg:text-6xl text-4xl  font-bold text-zinc-800">
-            $2000.<span className="text-zinc-300">00</span>
+            {formatCurrency(data?.balance || 0).replace('.00', '')}<span className="text-zinc-300">.00</span>
           </p>
           <Button className="bg-primary/5 text-primary rounded-full flex items-center gap-2 p-2 px-10">
             Fund Wallet

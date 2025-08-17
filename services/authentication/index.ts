@@ -3,6 +3,7 @@ import {
   AuthSuccessResponse,
   LoginRequestBody,
   RegisterRequestBody,
+  User,
 } from "./types";
 import { endpoints } from "@/api/endpoints";
 import { HTTPError } from "ky";
@@ -58,6 +59,16 @@ export class AuthService {
           json: data,
         })
         .json<AuthSuccessResponse>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+  public async getProfileData() {
+    try {
+      const response = http
+        .get(endpoints.auth.profile)
+        .json<User>();
       return response;
     } catch (error) {
       throw error;

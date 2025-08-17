@@ -1,6 +1,6 @@
 import { AuthService } from "@/services/authentication";
 import { LoginRequestBody, RegisterRequestBody } from "@/services/authentication/types";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const authService = () => new AuthService();
 
@@ -32,5 +32,15 @@ export function useVerifyOTP(){
             email:string;
             otp:string;
         })=>authService().verifyOTP(data)
+    })
+}
+
+export function useGetUser(){
+    return useQuery({
+        queryKey: ['getUser'],
+        queryFn: async()=>authService().getProfileData(),
+        refetchInterval: 1000 * 60 * 60,
+        retryOnMount:false,
+        retry: false,
     })
 }

@@ -14,6 +14,7 @@ export const endpoints = {
         updateUser: 'api/auth/update-user',
         deleteUser: 'api/auth/delete-user',
         requestOTP: 'api/auth/request-email-otp',
+        profile: 'api/auth/user',
     },
     server:{
         status:'api/server',
