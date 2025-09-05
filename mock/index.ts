@@ -169,3 +169,90 @@ export const testimonials = [
       "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=100&auto=format&fit=crop&ixlib=rb-4.0.3",
   },
 ];
+
+export const homeSymbols = [
+  "AAPL",
+  "GOOGL",
+  "MSFT",
+  "AMZN",
+  "TSLA",
+  "FB",
+  "NFLX",
+  "NVDA",
+  "BABA",
+  "CRM",
+  "BTC",
+  "EURAUD",
+  "EURUSD",
+  "USDT",
+  "ETH"
+];
+
+export const strategies = [
+  {
+    title:"Trade with modern commodities",
+    description:"Northcore Trading specializes in modern financial instruments, including cryptocurrencies, stocks, ETFs, and bonds. By leveraging advanced technology and market insights, the company empowers clients to trade efficiently, manage risk, and diversify their investment portfolios in today’s fast-evolving financial landscape.",
+    image:'/images/what-is-neural.jpeg'
+  },
+  {
+    title:"Signals with copy trading",
+    description:"Northcore Trading provides signal options with integrated copy trading, enabling clients to replicate the trades of seasoned professionals across crypto, stocks, ETFs, and bonds. This service is ideal for both beginners and busy investors, offering a hands-free way to engage with the markets. With expert insights and real-time strategies, users can optimize returns while minimizing effort and risk.",
+    image:'/images/steps-to-win2.webp'
+  },
+  {
+    title:"Advanced risk management",
+    description:"Northcore Trading offers advanced risk management tools designed to help clients protect their investments in volatile markets. Features such as stop-loss orders, take-profit levels, and portfolio diversification options allow traders to set predefined risk parameters. By utilizing these tools, clients can effectively manage potential losses while maximizing their profit potential across various asset classes including cryptocurrencies, stocks, ETFs, and bonds.",
+    image:'/images/steps-to-win3.webp'
+  }
+]
+
+
+export const faqs = [
+  {
+    question: "What is copy trading and how does it work?",
+    answer:
+      "Copy trading is a strategy that allows you to automatically replicate the trades of experienced investors. By following top traders on our platform, you can benefit from their expertise and potentially improve your own trading results.",
+  },
+  {
+    question: "Is copy trading suitable for beginners?",
+    answer:
+      "Absolutely! Copy trading is designed to be user-friendly and accessible for traders of all experience levels. It allows beginners to learn from seasoned professionals while minimizing the learning curve associated with traditional trading.",  
+  },
+  {
+    question: "What types of assets can I trade on Northcore?",
+    answer:
+      "Northcore offers a wide range of assets including cryptocurrencies, stocks, ETFs, and bonds. This diversity allows you to build a well-rounded portfolio and take advantage of various market opportunities.",
+  },
+  {
+    question: "How do I choose which traders to follow?",
+    answer:
+      "Our platform provides detailed performance metrics and trading histories for each trader. You can review their past performance, risk levels, and trading styles to find traders that align with your investment goals and risk tolerance.",
+  },
+  {
+    question: "What are the fees associated with copy trading?",
+    answer:
+      "Northcore operates on a transparent fee structure. While there may be fees associated with certain trades or account activities, we strive to keep costs low and provide value through our copy trading services. Please refer to our fee schedule for specific details.",
+  }
+]
+
+export const market_domains = [
+  {
+    name: "Cryptocurrencies",
+    description:
+      "Trade a variety of digital assets including Bitcoin, Ethereum, and more on our secure and user-friendly platform.",
+    image:'/images/crypto.webp'
+  },
+  {
+    name: "Stocks & Equities",
+    description:
+      "Access a wide range of global stocks and take advantage of market opportunities with our advanced trading tools.",
+    image:'/images/stocks.webp'
+  },
+  {
+    name: "Metals",
+    description:
+      "Diversify your portfolio with Exchange-Traded Funds (ETFs) that track various indices and sectors.",
+    image:'/images/metals.webp'
+  }
+
+]

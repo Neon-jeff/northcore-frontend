@@ -16,7 +16,7 @@ const Nav = () => {
     { name: "Company", href: "/company" },
     { name: "Markets", href: "/market-data" },
     { name: "Learn", href: "/learn" },
-    { name: "Reach Us", href: "/reach-us" },
+    // { name: "Reach Us", href: "/" },
   ];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
@@ -36,7 +36,7 @@ const Nav = () => {
   const router = useRouter()
   return (
     <>
-      <nav className=" fixed bg-white/70  backdrop-blur-3xl backdrop-filter  left-0 right-0 top-0 lg:p-10 lg:py-5 p-3 px-4 z-50 flex  justify-between  items-center ">
+      <nav className=" fixed bg-black/10  backdrop-blur-3xl backdrop-filter  left-0 right-0 top-0 lg:p-10 lg:py-5 p-3 px-4 z-50 flex  justify-between  items-center ">
         <LogoSmall />
         <div className="flex items-center justify-between gap-16 max-md:hidden">
           <ul className="flex items-center gap-8 text-sm">
@@ -47,9 +47,9 @@ const Nav = () => {
                   <Link
                     href={link.href}
                     className={cn(
-                      "text-gray-700 hover:text-black",
+                      "text-gray-400 hover:text-black",
                       isActive &&
-                        "text-zinc-700  hover:text-black p-2 px-5 rounded-full bg-black/2 font-semibold"
+                        "text-primary font-jakarta  hover:text-primary p-2 px-5 rounded-full bg-black/2 font-semibold"
                     )}
                   >
                     {link.name}
@@ -63,8 +63,8 @@ const Nav = () => {
               <Button>Create Account</Button>
             </Link>
             <Link href="/auth/login">
-              <Button variant="secondary" className="ml-2">
-                Login to account
+              <Button variant="secondary" className="ml-2 text-black">
+                Login
               </Button>
             </Link>
           </div>
