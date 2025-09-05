@@ -26,7 +26,7 @@ export default function Home() {
             ctaPrimaryTitle="Begin your journey"
             ctaPrimaryLink="/auth/signup"
             ctaSecondaryTitle={"Learn here"}
-            ctaSecondaryLink="/learn-more"
+            ctaSecondaryLink="/learn"
           >
             <div className="text-gray-200"></div>
           </Hero.TextContent>
