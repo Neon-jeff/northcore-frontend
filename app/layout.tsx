@@ -96,13 +96,19 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
       >
         <ReactQueryProvider>{children}</ReactQueryProvider>
         <Toaster />
-
-        <Script
-          id="zohosalesiq"
-          dangerouslySetInnerHTML={{
-            __html: `window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siq0e7a4c7669e9a5b2c89003d86813686da8739f24f86187cd1d45cda894dcff95" defer>`
-          }}
-        ></Script>
+        <Script id="smartsupp-chat" strategy="afterInteractive">
+          {`
+            var _smartsupp = _smartsupp || {};
+            _smartsupp.key = '5881a49d91019d77ed8a3e76e6ed22b4a4d0f2a4';
+            window.smartsupp||(function(d) {
+              var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+              s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+              c.type='text/javascript';c.charset='utf-8';c.async=true;
+              c.src='https://www.smartsuppchat.com/loader.js?';
+              s.parentNode.insertBefore(c,s);
+            })(document);
+          `}
+        </Script>
       </body>
     </html>
   );
