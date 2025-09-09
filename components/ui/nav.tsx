@@ -16,7 +16,7 @@ const Nav = () => {
     { name: "Company", href: "/company" },
     { name: "Markets", href: "/market-data" },
     { name: "Learn", href: "/learn" },
-    // { name: "Reach Us", href: "/" },
+    { name: "Mail Us", href: "mailto:customer-success@northcoremarket.com" },
   ];
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const pathname = usePathname();
