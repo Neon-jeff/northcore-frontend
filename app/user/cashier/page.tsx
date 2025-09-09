@@ -1,5 +1,5 @@
 'use client'
-import DepositForm from "@/components/cashier/deposit";
+import {DepositForm,WithdrawalForm} from "@/components/cashier";
 import { Button } from "@/components/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useGSAP } from "@gsap/react";
@@ -24,7 +24,7 @@ const CashierPage = () => {
           <DepositForm/>
         </TabsContent>
         <TabsContent value="withdraw" className="w-full">
-          <NotQualified/>
+          <WithdrawalForm/>
         </TabsContent>
         <TabsContent value="transfer" className="w-full">
           <NotQualified/>

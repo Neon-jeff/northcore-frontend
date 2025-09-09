@@ -17,7 +17,7 @@ function Input({
         type={(securedEntry && isSecured)? "password" : isSecured ? "text" : type }
         data-slot="input"
         className={cn(
-          "file:text-foreground placeholder:text-xs placeholder:text-gray-400 selection:bg-green-700 selection:text-primary-foreground  border-gray-200 flex lg:h-12 h-10 w-full min-w-0 rounded-lg border bg-transparent px-3 py-1 text-base transition-[color,border-color] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm text-zinc-600 file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          "file:text-foreground placeholder:text-xs placeholder:text-gray-400 selection:bg-green-700 selection:text-primary-foreground  border-gray-200 flex lg:h-12 h-10 w-full min-w-0 rounded-lg border bg-transparent px-3 py-1 text-xs focus:text-base transition-[color,border-color] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm text-zinc-600 file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
           "  focus-visible:border-primary focus:border-[1.2]",
           "aria-invalid:ring-destructive/20 aria-invalid:border-destructive",
           className

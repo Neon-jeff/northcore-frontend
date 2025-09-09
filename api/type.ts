@@ -4,5 +4,5 @@ export interface APIResponse<T> {
     data?: T;
     error?: string;
     status?: number;
-    details?: string;
+    detail?: string;
 }

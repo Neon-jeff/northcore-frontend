@@ -16,8 +16,10 @@ export class AuthService {
           json: data,
         })
         .json<AuthSuccessResponse>();
+        if(!response) throw new Error("No response from server");
       return response;
     } catch (error) {
+      console.error("Login error:", error);
       throw error;
     }
   }

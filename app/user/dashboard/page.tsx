@@ -115,7 +115,7 @@ function Banner() {
         </Link>
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 gap-5">
-        {(data?.experts || []).map((item) => (
+        {(data?.experts.slice(0,5) || []).map((item) => (
           <ExpertCard key={item.id} {...item} />
         ))}
       </div>
@@ -160,8 +160,8 @@ function CustomerActivity() {
         <div className="flex gap-2">
           <IconGiftFilled size={38} color="violet"/>
           <div>
-            <p className="text-sm text-gray-600">20% Deposit Bonus</p>
-            <p>Get started with your first deposit, win up to $200 in bonus funds</p>
+            <p className="text-sm text-black font-bold">20% Deposit Bonus</p>
+            <p className="text-gray-700">Get started with your first deposit, win up to $200 in bonus funds</p>
           </div>
         </div>
         <Link href={'/user/cashier'} className=" text-[.7rem] h-10 self-end px-5 lg:w-1/3 bg-primary/5 text-primary font-bold rounded-full flex items-center gap-1">Claim Now <IconArrowRight size={16} className="text-primary" strokeWidth={1.2} /></Link>

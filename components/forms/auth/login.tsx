@@ -17,6 +17,7 @@ import { LoginFormValues, LoginSchema } from "@/utils/validators/login";
 import { useLogin } from "@/hooks/authentication";
 import { useUserStore } from "@/store/user";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const LoginForm = () => {
   const form = useForm<LoginFormValues>({
@@ -35,6 +36,10 @@ const LoginForm = () => {
         login(data.token, data.user);
         router.push("/user/dashboard");
       },
+      onError:async(error) => {
+        const errorRes = await error?.response?.json<{detail:string}>();
+        toast.error(errorRes?.detail || "An error occurred. Please try again.");
+      }
     });
   }
   return (

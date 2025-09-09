@@ -34,8 +34,8 @@ const SignUpForm = () => {
     resolver: zodResolver(SignupSchema),
   });
   const router = useRouter();
-  const {login} = useUserStore()
-  const register = useRegister()
+  const { login } = useUserStore();
+  const register = useRegister();
   function onSubmit(data: SignupFormValues) {
     const body = {
       email: data.email || "",
@@ -43,24 +43,24 @@ const SignUpForm = () => {
       first_name: data.first_name || "",
       last_name: data.last_name || "",
       phone_number: data.phone_number || "",
-    }
+    };
     register.mutate(body, {
       onSuccess: (data) => {
         if (data?.token) {
-          login(data.token,data.user)
+          login(data.token, data.user);
           toast.success(data.details || "Account created successfully");
           router.push("/auth/verify-otp");
         } else {
           router.push("/auth/login");
         }
       },
-      onError: (error) => {
-        console.error(error);
-        toast.error(error?.message || "An error occurred while creating your account");
+      onError: async (error) => {
+        const errorRes = await error?.response?.json<{ detail: string }>();
+        toast.error(errorRes?.detail || "An error occurred. Please try again.");
       },
     });
   }
- 
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full ">
@@ -160,34 +160,39 @@ const SignUpForm = () => {
             name="terms"
             render={({ field }) => (
               <FormItem className="">
-               <div className="flex items-center gap-2">
-                 <Checkbox
-                  id="terms"
-                  defaultChecked={field.value}
-                  onCheckedChange={(check) => field.onChange(check)}
-                />
-                <label htmlFor="terms" className="text-sm text-zinc-600">
-                  I agree to the{" "}
-                  <Link
-                    href="/terms-of-service"
-                    className="text-primary font-bold"
-                  >
-                    Terms of Service
-                  </Link>{" "}
-                  and{" "}
-                  <Link
-                    href="/privacy-policy"
-                    className="text-primary font-bold"
-                  >
-                    Privacy Policy
-                  </Link>
-                </label>
-               </div>
+                <div className="flex items-center gap-2">
+                  <Checkbox
+                    id="terms"
+                    defaultChecked={field.value}
+                    onCheckedChange={(check) => field.onChange(check)}
+                  />
+                  <label htmlFor="terms" className="text-sm text-zinc-600">
+                    I agree to the{" "}
+                    <Link
+                      href="/terms-of-service"
+                      className="text-primary font-bold"
+                    >
+                      Terms of Service
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="/privacy-policy"
+                      className="text-primary font-bold"
+                    >
+                      Privacy Policy
+                    </Link>
+                  </label>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button className="w-full mt-5 block" type="submit" loading={register.isPending} disabled={register.isPending}>
+          <Button
+            className="w-full mt-5 block"
+            type="submit"
+            loading={register.isPending}
+            disabled={register.isPending}
+          >
             Create an account
           </Button>
         </FormContainer>

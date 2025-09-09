@@ -1,6 +1,6 @@
 import { env } from '@/env';
 import { UserData, useUserStore } from '@/store/user';
-import ky from 'ky';
+import ky, { HTTPError } from 'ky';
 import { toast } from 'sonner';
 
 
@@ -16,20 +16,24 @@ export const http = ky.extend({
 			}
 		],
 		afterResponse: [
-			(_input,_option,response) => {
+			async (_input,_option,response) => {
 				if (response.status == 401) {
 					useUserStore.getState().logout()
 					location.replace("/auth/login");
 					toast.error("Session expired, please log in again");
+					return
+				}
+				if(!response.ok){
+					throw new HTTPError(response, _input, _option)
 				}
 				return response;
 			}
 		],
-		beforeError:[
-			(error) =>{
-				return Promise.reject(error.message)
-			}
-		]
+		// beforeError:[
+		// 	(error:HTTPError<{ detail: string }>) =>{
+		// 		return Promise.reject(error)
+		// 	}
+		// ]
 	}
 });
 

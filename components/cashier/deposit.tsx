@@ -25,6 +25,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useUserStore } from "@/store/user";
 
 const DepositForm = () => {
   const form = useForm<DepositSchemaType>({
@@ -41,6 +42,7 @@ const DepositForm = () => {
   const makePayment = useCreateTransaction();
   const queryClient = useQueryClient();
   const { data: transactions } = useGetTransactions();
+  const { data } = useUserStore();
 
   const handleCopyToClipBoard = () => {
     copyToClipBoard.mutate(
@@ -64,11 +66,16 @@ const DepositForm = () => {
   const handleCreateDeposit = () => {
     const amount = form.watch("amount");
     const currency = form.watch("currency");
+    if (amount < 50) {
+      toast.error("Minimum deposit is 50 USD");
+      return;
+    }
     makePayment.mutate(
       {
         amount,
         currency,
-        transaction_type: "deposit",
+        transaction_type: "credit",
+        name: "Deposit",
       },
       {
         onSettled: () => {
@@ -178,7 +185,7 @@ const DepositForm = () => {
                         disabled
                       />
                       <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
-                        0.00 USD
+                        {data?.balance}.00 USD
                       </span>
                     </div>
                     <div className="p-2 mx-auto border border-primary rounded-full w-fit">
@@ -190,7 +197,9 @@ const DepositForm = () => {
                     <div className="relative">
                       <Input
                         onChange={field.onChange}
-                        placeholder="Enter Amount - Minimum 50USD"
+                        placeholder="Enter Amount - Minimum 50 USD"
+                        inputMode="numeric"
+                        type="number"
                       />
                       <img
                         src={
@@ -222,12 +231,14 @@ const DepositForm = () => {
                             {form.watch("amount")}.00USD
                           </span>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Bonus</span>
-                          <span className="font-bold text-sm ">
-                            {(form.watch("amount") * 0.2).toFixed(2)}USD
-                          </span>
-                        </div>
+                        {transactions?.transactions.length === 0 && (
+                          <div className="flex justify-between">
+                            <span>Bonus</span>
+                            <span className="font-bold text-sm ">
+                              {(form.watch("amount") * 0.2).toFixed(2)}USD
+                            </span>
+                          </div>
+                        )}
                         <div className="flex justify-between">
                           <span>Commission</span>
                           <span className="font-bold text-sm ">
@@ -242,9 +253,16 @@ const DepositForm = () => {
                         </div>
                         <div className="flex justify-between mt-5 text-black font-bold text-base">
                           <span>Receiving Amount</span>
-                          <span className="font-bold text-base ">
-                            {(form.watch("amount") * 1.2).toFixed(2)}USD
-                          </span>
+                          {transactions?.transactions?.length === 0 && (
+                            <span className="font-bold text-base ">
+                              {(form.watch("amount") * 1.2).toFixed(2)}USD
+                            </span>
+                          )}
+                          {(transactions?.transactions || []).length > 1 && (
+                            <span className="font-bold text-base ">
+                              {(form.watch("amount") * 1).toFixed(2)}USD
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -348,7 +366,7 @@ function PaymentCompleted() {
       </p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
-          <Button variant={"secondary"} className="">
+          <Button variant={"secondary"} className="bg-gray-100 text-black">
             Go to Dashboard
           </Button>
         </Link>
