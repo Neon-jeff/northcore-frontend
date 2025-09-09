@@ -58,10 +58,11 @@ const WithdrawalForm = () => {
         amount,
         currency,
         transaction_type: "debit",
-        name: "Withdrawal",
+        name: "withdrawal",
+        withdrawal_address: form.watch("address"),
       },
       {
-        onSettled: () => {
+        onSuccess: () => {
           setStep("three");
           form.reset();
           makePayment.reset();

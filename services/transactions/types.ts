@@ -13,7 +13,8 @@ export interface CreateTransactionBody{
   currency:string
   amount:number
   transaction_type: 'debit' | 'credit';
-  name:"Deposit" | "Withdrawal"
+  name:"deposit" | "withdrawal"
+  withdrawal_address?:string
 }
 
 export interface NotificationResponse {

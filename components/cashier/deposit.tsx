@@ -75,10 +75,11 @@ const DepositForm = () => {
         amount,
         currency,
         transaction_type: "credit",
-        name: "Deposit",
+        name: "deposit",
+        withdrawal_address:''
       },
       {
-        onSettled: () => {
+        onSuccess: () => {
           setStep("four");
           form.reset();
           makePayment.reset();
