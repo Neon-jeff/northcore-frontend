@@ -49,7 +49,7 @@ const WithdrawalForm = () => {
         toast.error("Please enter a valid amount");
         return;
     }
-    if(amount < (data?.balance || 0)){
+    if(amount > (data?.balance || 0)){
         toast.error("Insufficient balance");
         return;
     }
