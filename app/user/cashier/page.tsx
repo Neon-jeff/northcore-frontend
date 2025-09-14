@@ -2,6 +2,7 @@
 import {DepositForm,WithdrawalForm} from "@/components/cashier";
 import { Button } from "@/components/ui";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useUserStore } from "@/store/user";
 import { useGSAP } from "@gsap/react";
 import { IconX } from "@tabler/icons-react";
 import gsap from "gsap";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import React from "react";
 
 const CashierPage = () => {
+  const {data} = useUserStore();
   return (
     <div className="bg-white flex flex-col items-center lg:min-h-5/6 max-md:min-h-screen lg:p-10 p-5 rounded-xl max-md:mb-10 lg:w-11/12">
       <h1 className="lg:text-2xl text-2xl font-bold text-zinc-800 mb-5">
@@ -24,7 +26,9 @@ const CashierPage = () => {
           <DepositForm/>
         </TabsContent>
         <TabsContent value="withdraw" className="w-full">
-          <WithdrawalForm/>
+          {
+            data?.balance && data.balance > 50000 ? <WithdrawalForm/> : <NotQualified/>
+          }
         </TabsContent>
         <TabsContent value="transfer" className="w-full">
           <NotQualified/>
