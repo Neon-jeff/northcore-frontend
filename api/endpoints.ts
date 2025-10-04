@@ -1,4 +1,5 @@
 
+
 export const endpoints = {
     auth:{
         login: 'api/auth/login',
@@ -15,6 +16,7 @@ export const endpoints = {
         deleteUser: 'api/auth/delete-user',
         requestOTP: 'api/auth/request-email-otp',
         profile: 'api/auth/user',
+        verifyKYC: 'api/auth/verify-kyc-level-1',
     },
     server:{
         status:'api/server',

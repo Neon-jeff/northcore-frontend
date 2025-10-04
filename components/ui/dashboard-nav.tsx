@@ -29,6 +29,7 @@ import {
 } from "./dropdown-menu";
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
+import Script from "next/script";
 
 const DashboardNav = () => {
   const routes = [
@@ -47,10 +48,11 @@ const DashboardNav = () => {
     },
     { name: "Premium Signals", path: "/user/signals", icon: IconBroadcast },
     { name: "Subscription", path: "/user/subscription", icon: IconIconsFilled },
+    { name: "Account", path: "/user/account", icon: IconUserCircle},
   ];
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
-  const { data,logout } = useUserStore();
+  const { data, logout } = useUserStore();
   const { data: notifications, isLoading } = useGetNotifications();
   return (
     <nav className="flex fixed items-center justify-between bg-white lg:px-20 p-4 left-0 right-0   top-0 z-10">
@@ -103,20 +105,34 @@ const DashboardNav = () => {
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-          <IconMessage className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+          <button id="message-button">
+            <IconMessage className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+          </button>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-2">
               <IconUserCircle className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-white rounded-lg shadow-md p-4 text-xs space-y-4">
-              <p className="text-sm font-bold">{data?.first_name} {data?.last_name}</p>
-              <Link href="/user/wallet" className="block text-gray-500 hover:text-gray-800">
+              <p className="text-sm font-bold">
+                {data?.first_name} {data?.last_name}
+              </p>
+              <Link
+                href="/user/wallet"
+                className="block text-gray-500 hover:text-gray-800"
+              >
                 View Wallet
               </Link>
-              <Link href="/user/copy-trading" className="block text-gray-500 hover:text-gray-800">
+              <Link
+                href="/user/copy-trading"
+                className="block text-gray-500 hover:text-gray-800"
+              >
                 Copy Trading
               </Link>
-              <Button className="flex items-center gap-2" variant={'ghost'} onClick={logout}>
+              <Button
+                className="flex items-center gap-2"
+                variant={"ghost"}
+                onClick={logout}
+              >
                 <IconLogout />
                 Logout
               </Button>
@@ -164,6 +180,15 @@ const DashboardNav = () => {
           </div>
         </div>
       )}
+      <Script id="chat-button" strategy="afterInteractive">
+        {`
+            var chatButton = document.querySelector('#message-button');
+            chatButton.addEventListener('click', function() {
+              console.log('Chat button clicked');
+              smartsupp('chat:show')
+            });
+            `}
+      </Script>
     </nav>
   );
 };

@@ -13,6 +13,8 @@ import { toast } from "sonner";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { useExpertTrades } from "@/hooks/experts";
+import { useUserStore } from "@/store/user";
+import { useRouter } from "next/navigation";
 
 const ExpertCard = ({
   name,
@@ -33,11 +35,19 @@ const ExpertCard = ({
   variant?: "large" | "small";
   showProfitGained?: boolean;
 }) => {
+  const {data} = useUserStore();
+  const router = useRouter();
   const createSubscription = useCreateSubscription();
   const { isSubscribed } = useIsExpertSubscribed(expert_id);
   const queryClient = useQueryClient();
   const { data: expertProfits } = useExpertTrades(expert_id);
   const handleSubscription = () => {
+    if(!data?.kyc_verified){
+      toast.error("Please complete KYC verification to subscribe to an expert",{
+        action:<Button onClick={()=>{router.push('/user/account/?open=true')}}>Complete KYC</Button>
+      });
+      return;
+    }
     if (isSubscribed) {
       toast.error("You are already subscribed to this expert");
       return;

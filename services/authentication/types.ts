@@ -18,6 +18,7 @@ export interface User {
   country: string
   address: string
   kyc_verified: boolean
+  kyc_level_2_verified: boolean
   referral_code: string
   referral_count: number
   referral_bonus: number

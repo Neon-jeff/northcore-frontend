@@ -7,6 +7,7 @@ import {
   IconGraph,
   IconIconsFilled,
   IconReceiptDollarFilled,
+  IconUserCircle,
   IconWallet,
   IconWorldUpload,
 } from "@tabler/icons-react";
@@ -27,6 +28,7 @@ const SideBar = () => {
     { name: "Market Data", path: "/user/market-data", icon:IconGraph },
     { name: "Premium Signals", path: "/user/signals", icon: IconBroadcast },
     { name: "Subscription", path: "/user/subscription", icon: IconIconsFilled },
+      { name: "Account", path: "/user/account", icon: IconUserCircle},
   ];
   const pathname = usePathname()
   return (

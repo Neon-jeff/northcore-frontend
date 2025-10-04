@@ -44,3 +44,10 @@ export function useGetUser(){
         retry: false,
     })
 }
+
+export function useVerifyKYCLevelOne(){
+    return useMutation({
+        mutationKey: ['verifyKYCLevel1'],
+        mutationFn: async(data:FormData)=>authService().verifyKYCLevelOne(data)
+    })
+}

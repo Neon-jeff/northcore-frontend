@@ -76,4 +76,16 @@ export class AuthService {
       throw error;
     }
   }
+  public async verifyKYCLevelOne(formData: FormData) {
+    try {
+      const response = http
+        .post(endpoints.auth.verifyKYC, {
+          body: formData,
+        })
+        .json<User>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
