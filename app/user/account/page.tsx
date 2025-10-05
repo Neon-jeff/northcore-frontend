@@ -144,8 +144,8 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
       return;
     }
     const formData = new FormData();
-    formData.append("files", idFile);
-    formData.append("files", addressFile);
+    formData.append("idDocument", idFile);
+    formData.append("addressDocument", addressFile);
     verifyKYCLevelOne.mutate(formData, {
       onSuccess: (data) => {
         toast.success("KYC Level One verification successful");
@@ -199,6 +199,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
           type="file"
           className="mt-2 hidden"
           onChange={handleUploadIdFile}
+          accept=".png, .jpg, .jpeg, .pdf"
         />
       </div>
       <div>
@@ -240,6 +241,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
           type="file"
           className="mt-2 hidden"
           onChange={handleUploadAddressFile}
+          accept=".png, .jpg, .jpeg, .pdf"
         />
       </div>
       <Button
