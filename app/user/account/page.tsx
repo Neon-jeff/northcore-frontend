@@ -75,7 +75,7 @@ function NameBlock({ value, label }: { value: string; label: string }) {
   return (
     <div>
       <p className="text-sm w-full pb-2 text-gray-500 font-semibold">{label}</p>
-      <div className="border border-gray-100 p-5 rounded-full w-full">
+      <div className="border border-gray-100 p-5 rounded-2xl w-full">
         <p className="text-black font-bold text-sm">{value}</p>
       </div>
     </div>
