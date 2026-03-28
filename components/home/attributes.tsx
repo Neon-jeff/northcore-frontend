@@ -57,7 +57,6 @@ interface AttributeProps {
   Icon: Icon;
 }
 const AttributeItem = ({ title, description, Icon }: AttributeProps) => {
-    const { t } = useTranslation();
   return (
     <div className="flex max-md:flex-col gap-4  lg:items-center bg-white pb-5 ">
       <div className="bg-black/4 w-fit rounded-xl lg:p-6 p-4 h-fit">

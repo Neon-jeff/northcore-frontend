@@ -190,7 +190,6 @@ export default function Component() {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="hover:bg-transparent">
                 {headerGroup.headers.map((header) => {
-                    const { t } = useTranslation();
                   return (
                     <TableHead
                       key={header.id}
@@ -320,7 +319,6 @@ export default function Component() {
 
               {/* Page number buttons */}
               {pages.map((page) => {
-                  const { t } = useTranslation();
                 const isActive =
                   page === table.getState().pagination.pageIndex + 1
                 return (

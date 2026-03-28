@@ -75,7 +75,6 @@ const MarketDataPage = () => {
 };
 
 function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
-    const { t } = useTranslation();
   return (
     <div
       key={crypto.symbol}
@@ -106,7 +105,6 @@ function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
 }
 
 function ForexCard({ forex }: { forex: Forexpairs }) {
-    const { t } = useTranslation();
   return (
     <div
       key={forex.currency}
@@ -129,7 +127,6 @@ function ForexCard({ forex }: { forex: Forexpairs }) {
 }
 
 function StocksCard({ stock }: { stock: Stocks }) {
-    const { t } = useTranslation();
   return (
     <div
       key={stock.image}

@@ -73,7 +73,6 @@ const AccountsPage = () => {
 };
 
 function NameBlock({ value, label }: { value: string; label: string }) {
-    const { t } = useTranslation();
   return (
     <div>
       <p className="text-sm w-full pb-2 text-gray-500 font-semibold">{label}</p>

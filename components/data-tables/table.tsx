@@ -42,7 +42,6 @@ export default function DataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
-                    const { t } = useTranslation();
                   return (
                     <TableHead key={header.id} className='max-md:text-xs b'>
                       {header.isPlaceholder

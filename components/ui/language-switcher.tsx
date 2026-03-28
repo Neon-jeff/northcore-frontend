@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Globe, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { CircleFlag } from "react-circle-flags";
 import { motion } from "framer-motion";
 import {

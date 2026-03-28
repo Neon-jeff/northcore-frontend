@@ -20,7 +20,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 const DashboardPage = () => {
-    const { t } = useTranslation();
   return (
     <div className="lg:grid lg:grid-cols-[3fr_1.5fr]  gap-5 min-h-screen ">
       <div className="flex flex-col gap-5 h-full ">

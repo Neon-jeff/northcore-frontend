@@ -33,7 +33,7 @@ const VerifyOTPForm = () => {
     }
     toast.success(t('components.otpSentSuccessfully'));
     inputRef.current?.focus();
-  }, [rehydrated]);
+  }, [rehydrated, data, router, t]);
 
   useEffect(() => {
     if (timer === 0) {

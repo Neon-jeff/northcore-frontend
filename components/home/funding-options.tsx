@@ -40,7 +40,6 @@ interface FundingOptionProps {
   Icon: Icon;
 }
 const FundingOption = ({ title, description, Icon }: FundingOptionProps) => {
-    const { t } = useTranslation();
   return (
     <div className="flex max-md:flex-col lg:gap-4 border-b lg:items-center justify-between bg-white pb-5 border-gray-100">
       <div className="flex max-md:flex-col gap-5 lg:items-center lg:w-1/2">

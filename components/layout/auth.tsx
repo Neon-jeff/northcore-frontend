@@ -23,7 +23,7 @@ const AuthLayout = ({ children, className }: AuthLayoutProps) => {
     if (data && rehydrated && !data?.email_verified) {
       router.push("/auth/verify-otp");
     }
-  }, [token, rehydrated]);
+  }, [token, rehydrated, data, router]);
   return (
     <div
       className={cn(

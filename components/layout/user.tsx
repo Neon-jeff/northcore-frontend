@@ -15,7 +15,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
     if(!isLoading && data){
       setUser(data)
     }
-  },[isLoading,data])
+  }, [isLoading, data, setUser]);
   if(isLoading || isError){
     return null
   }

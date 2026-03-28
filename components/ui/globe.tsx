@@ -236,6 +236,7 @@ export default function Globe({
     r,
     autoRotate,
     isVisible,
+    t,
   ]);
 
   return (
