@@ -7,6 +7,7 @@ import { z } from "zod";
 import { cn } from "@/lib/utils";
 
 import { GlobeIcon } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const phoneSchema = z.string().refine((value) => {
   try {
@@ -53,6 +54,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
     },
     ref
   ) => {
+        const { t } = useTranslation();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [countryData, setCountryData] = useState<CountryData | undefined>();
     const [displayFlag, setDisplayFlag] = useState<string>("");
@@ -143,7 +145,7 @@ export const PhoneInput = forwardRef<HTMLInputElement, PhoneInputProps>(
           onCountryChange?.(undefined);
         }
       } catch (error) {
-        console.error("Error parsing phone number:", error);
+        console.error(t('components.errorParsingPhoneNumber'), error);
         onChange?.(e);
         setDisplayFlag("");
         setCountryData(undefined);

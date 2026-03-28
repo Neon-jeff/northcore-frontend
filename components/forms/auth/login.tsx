@@ -18,8 +18,10 @@ import { useLogin } from "@/hooks/authentication";
 import { useUserStore } from "@/store/user";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const LoginForm = () => {
+    const { t } = useTranslation();
   const form = useForm<LoginFormValues>({
     defaultValues: {
       email: "",
@@ -46,20 +48,20 @@ const LoginForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full ">
         <FormContainer
-          title="Welcome back"
-          description="Login to your account to continue"
+          title={t('components.welcomeBack')}
+          description={t('components.loginToYourAccountTo')}
         >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>{t('components.email')}</FormLabel>
                 <Input
                   {...field}
                   className="w-full"
                   type="email"
-                  placeholder="james.mason@mail.com"
+                  placeholder={t('components.jamesmasonmailcom')}
                 />
                 <FormMessage />
               </FormItem>
@@ -71,7 +73,7 @@ const LoginForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('components.password')}</FormLabel>
                 <Input
                   {...field}
                   className="w-full"
@@ -90,15 +92,13 @@ const LoginForm = () => {
             Forgot your password?
           </Link> */}
           <Button loading={loginUser.isPending} disabled={loginUser.isPending} className="w-full mt-5 block" type="submit">
-            Log in
-          </Button>
+            {t('components.logIn')}</Button>
         </FormContainer>
         <div className="text-center mt-5">
           <p className="text-sm text-zinc-500">
-            Don&apos;t have an account?{" "}
+            {t('components.donapostHaveAnAccount')}{" "}
             <Link href="/auth/signup" className=" font-bold text-primary">
-              Create an account
-            </Link>
+              {t('components.createAnAccount')}</Link>
           </p>
         </div>
       </form>

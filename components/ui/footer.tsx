@@ -1,3 +1,6 @@
+"use client";
+import { useTranslation } from "react-i18next";
+
 const navigation = {
   main: [
     { name: 'Home', href: '#' },
@@ -47,6 +50,7 @@ const navigation = {
 }
 
 export default function Footer() {
+    const { t } = useTranslation();
   return (
     <footer className="bg-black">
       <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
@@ -65,7 +69,7 @@ export default function Footer() {
             </a>
           ))}
         </div>
-        <p className="mt-10 text-center text-sm/6 text-gray-200">&copy; 2025 Northcore Markets, Inc. All rights reserved.</p>
+        <p className="mt-10 text-center text-sm/6 text-gray-200">{t('components.copy2025NorthcoreMarketsInc')}</p>
       </div>
     </footer>
   )

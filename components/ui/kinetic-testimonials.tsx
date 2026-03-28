@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useTranslation } from "react-i18next";
 
 interface Testimonial {
   name: string;
@@ -36,6 +37,7 @@ interface TestimonialWithId extends Testimonial {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = React.memo(
   ({ testimonial, index, cardClassName = "", avatarClassName = "" }) => {
+        const { t } = useTranslation();
     const [isHovered, setIsHovered] = useState<boolean>(false);
 
     const gradients = [
@@ -74,8 +76,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = React.memo(
 
           <CardContent className="p-4 md:p-6 relative z-10">
             <p className="text-sm md:text-base mb-4 leading-relaxed  transition-colors duration-300 text-neutral-800 dark:text-neutral-200">
-              &ldquo;{testimonial.review}&quot;
-            </p>
+              {t('components.ldquo')}{testimonial.review}{t('components.quot')}</p>
 
             <div className="flex items-center space-x-3">
               <Avatar className={`w-8 md:w-10 h-8 md:h-10 ${avatarClassName}`}>

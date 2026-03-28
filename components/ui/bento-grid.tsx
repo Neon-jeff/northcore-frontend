@@ -1,8 +1,10 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { cn } from "@/lib/utils";
 import { Icon, IconArrowRight } from "@tabler/icons-react";
 import React from "react";
 import { Button } from "./button";
+import { useTranslation } from "react-i18next";
 
 interface BentoGridProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -39,6 +41,7 @@ const BentoGridItem = ({
   children,
   image,
 }: BentoGridItemProps) => {
+    const { t } = useTranslation();
   return (
     <div
       className={cn(
@@ -59,8 +62,7 @@ const BentoGridItem = ({
         )}
         <h3 className="lg:text-4xl text-2xl font-bold lg:w-1/2 ">{title}</h3>
         <p className="text-sm ">{description}</p>
-        <Button className=" w-fit border bg-white/10 text-white backdrop-filter backdrop-blur-xl mt-5 flex flex-col border-gray-50/90 font-bold rounded-lg"> Get Started Now
-          <IconArrowRight className=" size-6"/>
+        <Button className=" w-fit border bg-white/10 text-white backdrop-filter backdrop-blur-xl mt-5 flex flex-col border-gray-50/90 font-bold rounded-lg"> {t('components.getStartedNow')}<IconArrowRight className=" size-6"/>
         </Button>
       </div>
       {children}

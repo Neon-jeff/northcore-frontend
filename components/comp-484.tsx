@@ -44,6 +44,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useTranslation } from "react-i18next";
 
 type Item = {
   id: string
@@ -133,6 +134,7 @@ const columns: ColumnDef<Item>[] = [
 ]
 
 export default function Component() {
+    const { t } = useTranslation();
   const pageSize = 5
 
   const [pagination, setPagination] = useState<PaginationState>({
@@ -188,6 +190,7 @@ export default function Component() {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="hover:bg-transparent">
                 {headerGroup.headers.map((header) => {
+                    const { t } = useTranslation();
                   return (
                     <TableHead
                       key={header.id}
@@ -269,8 +272,7 @@ export default function Component() {
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
-                </TableCell>
+                  {t('components.noResults')}</TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -284,11 +286,11 @@ export default function Component() {
           className="text-muted-foreground flex-1 text-sm whitespace-nowrap"
           aria-live="polite"
         >
-          Page{" "}
+          {t('components.page1')}{" "}
           <span className="text-foreground">
             {table.getState().pagination.pageIndex + 1}
           </span>{" "}
-          of <span className="text-foreground">{table.getPageCount()}</span>
+          {t('components.of')}<span className="text-foreground">{table.getPageCount()}</span>
         </p>
 
         {/* Pagination buttons */}
@@ -318,6 +320,7 @@ export default function Component() {
 
               {/* Page number buttons */}
               {pages.map((page) => {
+                  const { t } = useTranslation();
                 const isActive =
                   page === table.getState().pagination.pageIndex + 1
                 return (
@@ -371,28 +374,26 @@ export default function Component() {
               id="results-per-page"
               className="w-fit whitespace-nowrap"
             >
-              <SelectValue placeholder="Select number of results" />
+              <SelectValue placeholder={t('components.selectNumberOfResults')} />
             </SelectTrigger>
             <SelectContent>
               {[5, 10, 25, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={pageSize.toString()}>
-                  {pageSize} / page
-                </SelectItem>
+                  {pageSize} {t('components.page')}</SelectItem>
               ))}
             </SelectContent>
           </Select>
         </div>
       </div>
       <p className="text-muted-foreground mt-4 text-center text-sm">
-        Numeric pagination made with{" "}
+        {t('components.numericPaginationMadeWith')}{" "}
         <a
           className="hover:text-foreground underline"
           href="https://tanstack.com/table"
           target="_blank"
           rel="noopener noreferrer"
         >
-          TanStack Table
-        </a>
+          {t('components.tanstackTable')}</a>
       </p>
     </div>
   )

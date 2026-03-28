@@ -9,6 +9,7 @@ import {
   useInView,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface StatItem {
   value: number;
@@ -28,19 +29,19 @@ const defaultStats: StatItem[] = [
   {
     value: 500,
     suffix: "+",
-    label: "Verified Experts",
+    label: "components.verifiedExperts",
     duration: 5,
   },
   {
     value: 12,
-    suffix: "K+",
-    label: "Gaining Users",
+    suffix: "components.k",
+    label: "components.gainingUsers",
     duration: 6,
   },
   {
     value: 99,
     suffix: "%",
-    label: "Winning Rate on first trial",
+    label: "components.winningRateOnFirstTrial",
     duration: 5.5,
   },
 ];
@@ -59,6 +60,7 @@ function AnimatedCounter({
   delay?: number;
   label: string;
 }) {
+    const { t } = useTranslation();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { margin: "-50px" });
 
@@ -124,7 +126,7 @@ function AnimatedCounter({
         }}
       >
         {displayValue}
-        {suffix}
+        {t(suffix)}
       </motion.div>
       <motion.p
         className={cn(
@@ -135,7 +137,7 @@ function AnimatedCounter({
         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
         transition={{ delay: delay * 0.2 + 0.6, duration: 0.6 }}
       >
-        {label}
+        {t(label)}
       </motion.p>
     </motion.div>
   );
@@ -147,6 +149,7 @@ export default function StatsCount({
   showDividers = true,
   className = "",
 }: StatsCountProps) {
+    const { t } = useTranslation();
   const containerRef = useRef<HTMLElement>(null);
   const isInView = useInView(containerRef, { margin: "-100px" });
 
@@ -175,7 +178,7 @@ export default function StatsCount({
           <span className="hidden sm:inline">
             {title.includes("WITH") ? (
               <>
-                {title.split("WITH")[0]}WITH{" "}
+                {title.split("WITH")[0]}{t('components.with')}{" "}
                 <span
                   className={cn(
                     "text-blue-600 dark:text-blue-400 font-semibold"
@@ -185,7 +188,7 @@ export default function StatsCount({
                 </span>
               </>
             ) : (
-              title
+              t(title)
             )}
           </span>
           <div
@@ -194,7 +197,7 @@ export default function StatsCount({
             {title.includes("WITH") ? (
               <>
                 <span>{title.split("WITH")[0].trim()}</span>
-                <span className={cn("text-center")}>WITH</span>
+                <span className={cn("text-center")}>{t('components.with')}</span>
                 <span
                   className={cn(
                     "text-blue-600 dark:text-blue-400 font-semibold"
@@ -204,7 +207,7 @@ export default function StatsCount({
                 </span>
               </>
             ) : (
-              <span>{title}</span>
+              <span>{t(title)}</span>
             )}
           </div>
         </h2>

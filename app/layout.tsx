@@ -1,4 +1,5 @@
 import ReactQueryProvider from "@/components/providers/query-client";
+import { I18nProvider } from "@/components/providers/i18n-provider";
 import localFont from "next/font/local";
 import { Toaster } from "sonner";
 import "./globals.css";
@@ -94,8 +95,10 @@ const BaseLayout = ({ children }: { children: React.ReactNode }) => {
       <body
         className={`${fkGrotesk.variable} ${willwaw.variable} ${jarkaTa.variable}  antialiased text-gray-400 bg-gray-100/60 font-sans`}
       >
-        <ReactQueryProvider>{children}</ReactQueryProvider>
-        <Toaster />
+        <I18nProvider>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <Toaster />
+        </I18nProvider>
         <Script id="smartsupp-chat" strategy="afterInteractive">
           {`
             var _smartsupp = _smartsupp || {};

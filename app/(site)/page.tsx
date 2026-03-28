@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { Attributes } from "@/components/home";
 import { Hero, Section } from "@/components/layout";
 import Footer from "@/components/ui/footer";
@@ -11,7 +11,10 @@ import StatsCount from "@/components/ui/statscount";
 import { faqs, market_domains, strategies } from "@/mock";
 import { cn } from "@/lib/utils";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useTranslation } from "react-i18next";
+
 export default function Home() {
+    const { t } = useTranslation();
   return (
     <main className="font-sans lg:space-y-20  space-y-10 relative bg-white text-gray-500 lg:text-gray-300">
       <Section className="  max-md:w-full bg-black lg:w-full mx-auto pt-28 px-2 max-md:translate-y-5 max-md:rounded-2xl  min-h-screen   relative overflow-clip z-0">
@@ -21,11 +24,11 @@ export default function Home() {
         <Hero.Root className="flex max-lg:flex-col items-center  gap-5 w-full h-full  lg:gap-10 ">
           <Hero.TextContent
             className=" text-gray-200 font-bold lg:p-10 py-16 lg:pt-40 lg:w-2/3 lg:ml-32  rounded-3xl capitalize px-2 max-md:mt-10 h-full  z-50 relative"
-            title="Industry leading broker, for real winners"
-            description=" Leading platform, No time limits, Expert options and seamless finance operations"
-            ctaPrimaryTitle="Begin your journey"
+            title={t('components.industryLeadingBrokerForReal')}
+            description={t('components.leadingPlatformNoTimeLimits')}
+            ctaPrimaryTitle={t('components.beginYourJourney')}
             ctaPrimaryLink="/auth/signup"
-            ctaSecondaryTitle={"Learn here"}
+            ctaSecondaryTitle={t('components.learnHere')}
             ctaSecondaryLink="/learn"
           >
             <div className="text-gray-200"></div>
@@ -34,7 +37,7 @@ export default function Home() {
             <div className="text-sm relative  w-full  rounded-2xl ">
               <Image
                 src={"/images/home-desktop.webp"}
-                alt="Neural trades image hero background"
+                alt={t('components.neuralTradesImageHeroBackground')}
                 className="w-full  h-full object-contain max-md:object-cover "
                 width={400}
                 height={400}
@@ -47,11 +50,8 @@ export default function Home() {
 
       <Section className="lg:mt-20">
         <Section.Title className="lg:w-2/3 ">
-          Award Winning Platform
-          <span className="text-sm lg:w-1/2  text-gray-700 block pt-3">
-            Recognized for excellence in innovation, user experience, and
-            customer satisfaction.
-          </span>
+          {t('components.awardWinningPlatform')}<span className="text-sm lg:w-1/2  text-gray-700 block pt-3">
+            {t('components.recognizedForExcellenceInInnovation')}</span>
         </Section.Title>
         <Section.Content className="mt-10">
           <Awards />
@@ -67,12 +67,9 @@ export default function Home() {
           <div className="space-y-5">
             <Section.Title className="lg:w-2/3 ">
               <span className="text-sm text-gray-400 block pb-2">
-                Northcore Market Suite
-              </span>
-              Upgrade your trading experience
-              <span className="text-sm lg:w-1/2 text-gray-700 block pt-3">
-                Explore our comprehensive suite of trading tools and features designed to enhance your market strategies.
-                </span>
+                {t('components.northcoreMarketSuite')}</span>
+              {t('components.upgradeYourTradingExperience')}<span className="text-sm lg:w-1/2 text-gray-700 block pt-3">
+                {t('components.exploreOurComprehensiveSuiteOf')}</span>
             </Section.Title>
           </div>
           <Attributes />
@@ -85,12 +82,9 @@ export default function Home() {
           <div className="space-y-5">
             <Section.Title className="lg:w-2/3 ">
               <span className="text-sm text-gray-400 block pb-2">
-                Unlimited market domains
-              </span>
-              Win in multiple markets platforms
-              <span className="text-sm lg:w-1/2 text-gray-700 block pt-3">
-                Trade a diverse range of assets including cryptocurrencies, stocks, ETFs, and bonds all in one place.
-              </span>
+                {t('components.unlimitedMarketDomains')}</span>
+              {t('components.winInMultipleMarketsPlatforms')}<span className="text-sm lg:w-1/2 text-gray-700 block pt-3">
+                {t('components.tradeADiverseRangeOf')}</span>
             </Section.Title>
           </div>
         </Section.DescriptionContainer>
@@ -107,14 +101,14 @@ export default function Home() {
               >
              <Image
                src={item.image}
-               alt="Neural trades image hero background"
+               alt={t('components.neuralTradesImageHeroBackground')}
                className=" w-full h-full max-md:mt-5 max-md:object-contain  object-cover rounded-lg"
                width={200}
                height={200}
              />
              <div className=" space-y-5 ">
-               <h1 className="text-2xl font-bold text-black">{item.name}</h1>
-               <p className="text-sm text-gray-600">{item.description}</p>
+               <h1 className="text-2xl font-bold text-black">{t(item.name)}</h1>
+               <p className="text-sm text-gray-600">{t(item.description)}</p>
              </div>
            </motion.div>
             ))
@@ -126,11 +120,9 @@ export default function Home() {
         <Section.DescriptionContainer className="space-y-10">
           <div className="space-y-5">
             <Section.Title className="lg:w-1/2 text-center mx-auto text-white">
-              Learn our winning strategies
-            </Section.Title>
+              {t('components.learnOurWinningStrategies')}</Section.Title>
             <Section.Description className="lg:w-1/2 text-center mx-auto text-gray-300">
-              Discover the proven techniques and insights that can elevate your trading game.
-            </Section.Description>
+              {t('components.discoverTheProvenTechniquesAnd')}</Section.Description>
           </div>
 
         </Section.DescriptionContainer>
@@ -147,14 +139,14 @@ export default function Home() {
                >
               <img
                 src={item.image}
-                alt="Neural trades image hero background"
+                alt={t('components.neuralTradesImageHeroBackground')}
                 className="lg:w-1/2 w-full h-full max-md:mt-5 max-md:h-[400px]  object-cover rounded-lg"
                 width={200}
                 height={200}
               />
-              <div className="lg:w-1/2 space-y-5 mt-20">
-                <h1 className="text-2xl font-bold text-white">{item.title}</h1>
-                <p className="text-sm">{item.description}</p>
+               <div className="lg:w-1/2 space-y-5 mt-20">
+                <h1 className="text-2xl font-bold text-white">{t(item.title)}</h1>
+                <p className="text-sm">{t(item.description)}</p>
               </div>
             </motion.div>
           ))
@@ -167,14 +159,14 @@ export default function Home() {
           <Reviews />
           <div className="text-black space-y-8 mt-20">
             <div className="text-center space-y-3">
-              <h1 className="text-4xl font-bold">Frequently Asked Questions</h1>
-            <p>If you have any other questions, feel free to reach out to our support team.</p>
+              <h1 className="text-4xl font-bold">{t('components.frequentlyAskedQuestions')}</h1>
+            <p>{t('components.ifYouHaveAnyOther')}</p>
             </div>
             <Accordion type="single" collapsible className="w-full lg:w-2/3 mx-auto">
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`}>
-                  <AccordionTrigger>{faq.question}</AccordionTrigger>
-                  <AccordionContent>{faq.answer}</AccordionContent>
+                  <AccordionTrigger>{t(faq.question)}</AccordionTrigger>
+                  <AccordionContent>{t(faq.answer)}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>

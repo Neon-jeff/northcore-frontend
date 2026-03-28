@@ -5,15 +5,16 @@ import { IconX } from "@tabler/icons-react";
 import gsap from "gsap";
 import Link from "next/link";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const SignalsPage = () => {
+    const { t } = useTranslation();
   return (
     <div className="lg:w-11/12 w-full py-10 p-2 space-y-5 lg:min-h-5/6 max-md:min-h-screen rounded-2xl bg-white lg:p-10 ">
       <div className="space-y-2 text-center lg:w-1/3 mx-auto">
-        <h1 className="text-2xl font-bold text-black">Your Signals</h1>
+        <h1 className="text-2xl font-bold text-black">{t('components.yourSignals')}</h1>
         <p className="text-sm text-gray-600">
-          Subscribe to Premium signals for advanced trading customers
-        </p>
+          {t('components.subscribeToPremiumSignalsFor')}</p>
       </div>
         <NotQualified/>
     </div>
@@ -21,6 +22,7 @@ const SignalsPage = () => {
 };
 
 function NotQualified() {
+    const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -33,14 +35,12 @@ function NotQualified() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        Feature not available
-      </h2>
+        {t('components.featureNotAvailable1')}</h2>
       <p>
-        This feature is not available for your account type. Please contact support to upgrade to a premium account to access advanced trading signals.
-      </p>
+        {t('components.thisFeatureIsNotAvailable')}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
-          <Button variant={'secondary'} className="">Go to Dashboard</Button>
+          <Button variant={'secondary'} className="">{t('components.goToDashboard')}</Button>
         </Link>
       </div>
     </div>

@@ -9,8 +9,10 @@ import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const VerifyOTPForm = () => {
+    const { t } = useTranslation();
   const [otp, setOTP] = useState("");
   const inputRef = React.useRef<HTMLInputElement>(null);
   const [timer, setTimer] = React.useState(59);
@@ -25,11 +27,11 @@ const VerifyOTPForm = () => {
     }
     if (rehydrated && !data) {
       console.log("You must be logged in to verify your email");
-      toast.error("You must be logged in to verify your email");
+      toast.error(t('components.youMustBeLoggedIn'));
       router.push("/auth/login");
       return;
     }
-    toast.success("OTP sent successfully");
+    toast.success(t('components.otpSentSuccessfully'));
     inputRef.current?.focus();
   }, [rehydrated]);
 
@@ -58,7 +60,7 @@ const VerifyOTPForm = () => {
       },
       {
         onSuccess: () => {
-          toast.success("OTP Verified Successfully");
+          toast.success(t('components.otpVerifiedSuccessfully'));
           router.push("/user/dashboard");
         },
         onError: (error) => {
@@ -78,7 +80,7 @@ const VerifyOTPForm = () => {
       },
       onError: (error) => {
         console.error(error);
-        toast.error("An error occurred while sending OTP");
+        toast.error(t('components.anErrorOccurredWhileSending'));
       },
     });
   }
@@ -89,7 +91,7 @@ const VerifyOTPForm = () => {
   };
   return (
     <FormContainer
-      title="Verify your email"
+      title={t('components.verifyYourEmail')}
       description={`Please enter the OTP sent to ${data?.email}`}
       className="lg:w-1/4 w-11/12"
     >
@@ -146,11 +148,10 @@ const VerifyOTPForm = () => {
         <div>
           <p className=" text-sm pb-2  lg:text-body-base text-center">
             {" "}
-            Haven&apos;t gotten your code? Try again after
-          </p>
+            {t('components.havenapostGottenYourCodeTry')}</p>
           <div className="flex flex-col text-black gap-2 font-bold items-center">
             <p>
-              00m : {timer < 10 && 0}
+              {t('components.00m')}{timer < 10 && 0}
               {timer}s
             </p>
             <button

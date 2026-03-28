@@ -9,8 +9,12 @@ import { checkActiveRoute } from "@/utils/route";
 import { usePathname, useRouter } from "next/navigation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./language-switcher";
+
 
 const Nav = () => {
+    const { t } = useTranslation();
   const links = [
     { name: "Home", href: "/" },
     { name: "Company", href: "/company" },
@@ -58,26 +62,30 @@ const Nav = () => {
               );
             })}
           </ul>
-          <div>
+          <div className="flex items-center gap-4">
             <Link href="/auth/signup">
-              <Button>Create Account</Button>
+              <Button>{t('components.createAccount')}</Button>
             </Link>
             <Link href="/auth/login">
-              <Button variant="secondary" className="ml-2 text-black">
-                Login
-              </Button>
+              <Button variant="secondary" className="text-black">
+                {t('components.login')}</Button>
             </Link>
+            <LanguageSwitcher />
           </div>
         </div>
-        <button className="md:hidden" onClick={handleMobileMenuToggle}>
-          <IconMenu
-            size={34}
-            color="#000"
-            strokeWidth={1.2}
-            className="md:hidden"
-          />
-        </button>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button onClick={handleMobileMenuToggle}>
+            <IconMenu
+              size={34}
+              color="#000"
+              strokeWidth={1.2}
+            />
+          </button>
+        </div>
       </nav>
+
       {isMobileMenuOpen && (
         <div className="fixed lg:hidden top-0 bottom-0 left-0 right-0 bg-black/50 backdrop-blur-sm backdrop-filter z-50 flex flex-col justify-end ">
           <div
@@ -114,8 +122,8 @@ const Nav = () => {
               })}
             </ul>
             <div className="flex flex-col gap-5 justify-between mt-10">
-              <Button className="bg-black" onClick={()=>{router.push('/auth/signup')}}>Create Account</Button>
-              <Button variant="secondary" onClick={()=>{router.push('/auth/login')}}>Login to account</Button>
+              <Button className="bg-black" onClick={()=>{router.push('/auth/signup')}}>{t('components.createAccount')}</Button>
+              <Button variant="secondary" onClick={()=>{router.push('/auth/login')}}>{t('components.loginToAccount')}</Button>
             </div>
           </div>
         </div>

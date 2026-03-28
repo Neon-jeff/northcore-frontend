@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useLayoutEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface AuthLayoutProps {
   children?: React.ReactNode;
@@ -12,6 +13,7 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout = ({ children, className }: AuthLayoutProps) => {
+    const { t } = useTranslation();
   const { token, rehydrated, data } = useUserStore();
   const router = useRouter();
   useLayoutEffect(() => {
@@ -33,7 +35,7 @@ const AuthLayout = ({ children, className }: AuthLayoutProps) => {
       <div className="h-screen relative  bg-black w-5/12 hidden lg:block">
         <Image
           src={"/images/auth.jpg"}
-          alt="Neural trades auth"
+          alt={t('components.neuralTradesAuth')}
           height={500}
           width={500}
           className="h-full w-full object-cover object-left-top"
@@ -42,24 +44,18 @@ const AuthLayout = ({ children, className }: AuthLayoutProps) => {
         <div className="absolute bottom-0 top-0 left-0 right-0 bg-gradient-to-b from-black/70 to-black/95 text-white p-16 pb-20 flex flex-col justify-end">
           <div className="space-y-5">
             <h2 className="text-6xl ">
-              Break market boundaries in your trading journey
-            </h2>
+              {t('components.breakMarketBoundariesInYour')}</h2>
             <p className="text-xs text-gray-200 mt-4 bg-white/20 border border-white/20 p-4 rounded-lg backdrop-blur-sm backdrop-filter">
-              Trading involves risk. Past performance doesn&apos;t guarantee
-              future results. Review our Terms and Privacy Policy before
-              investing. Consider potential losses and consult a financial
-              advisor for investment decisions.
-            </p>
+              {t('components.tradingInvolvesRiskPastPerformance')}</p>
           </div>
         </div>
         <p className="absolute top-4 right-4 flex items-center gap-2 text-sm text-gray-100">
-          Want to know more about us?{" "}
+          {t('components.wantToKnowMoreAbout')}{" "}
           <Link
             href="/learn-more"
             className="border p-3 bg-white text-xs text-gray-600 rounded-sm"
           >
-            Book a call with us
-          </Link>
+            {t('components.bookACallWithUs')}</Link>
         </p>
       </div>
     </div>

@@ -1,8 +1,11 @@
+"use client";
 import React from 'react'
+import { useTranslation } from "react-i18next";
 
 const ReachUsPage = () => {
+    const { t } = useTranslation();
   return (
-    <div>ReachUsPage</div>
+    <div>{t('components.reachuspage')}</div>
   )
 }
 

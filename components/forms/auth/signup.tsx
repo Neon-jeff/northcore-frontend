@@ -20,8 +20,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useRegister } from "@/hooks/authentication";
 import { useUserStore } from "@/store/user";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const SignUpForm = () => {
+    const { t } = useTranslation();
   const form = useForm<SignupFormValues>({
     defaultValues: {
       email: "",
@@ -65,8 +67,8 @@ const SignUpForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full ">
         <FormContainer
-          title="Create your free account"
-          description="Join us to start your trading journey"
+          title={t('components.createYourFreeAccount')}
+          description={t('components.joinUsToStartYour')}
         >
           <div className="flex w-full max-lg:flex-col lg:justify-between gap-5 lg:gap-2 ">
             <FormField
@@ -74,12 +76,12 @@ const SignUpForm = () => {
               name="first_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>First Name</FormLabel>
+                  <FormLabel>{t('components.firstName')}</FormLabel>
                   <Input
                     {...field}
                     className="w-full"
                     type="text"
-                    placeholder="James"
+                    placeholder={t('components.james')}
                   />
                   <FormMessage />
                 </FormItem>
@@ -90,12 +92,12 @@ const SignUpForm = () => {
               name="last_name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Last Name</FormLabel>
+                  <FormLabel>{t('components.lastName')}</FormLabel>
                   <Input
                     {...field}
                     className="w-full"
                     type="text"
-                    placeholder="Mason"
+                    placeholder={t('components.mason')}
                   />
                   <FormMessage />
                 </FormItem>
@@ -108,12 +110,12 @@ const SignUpForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('components.email')}</FormLabel>
                   <Input
                     {...field}
                     className="w-full"
                     type="email"
-                    placeholder="james.mason@mail.com"
+                    placeholder={t('components.jamesmasonmailcom')}
                   />
                   <FormMessage />
                 </FormItem>
@@ -125,7 +127,7 @@ const SignUpForm = () => {
               name="phone_number"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Phone Number</FormLabel>
+                  <FormLabel>{t('components.phoneNumber')}</FormLabel>
                   <PhoneInput
                     {...field}
                     className="w-full"
@@ -142,7 +144,7 @@ const SignUpForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel>{t('components.password')}</FormLabel>
                 <Input
                   {...field}
                   className="w-full"
@@ -167,20 +169,18 @@ const SignUpForm = () => {
                     onCheckedChange={(check) => field.onChange(check)}
                   />
                   <label htmlFor="terms" className="text-sm text-zinc-600">
-                    I agree to the{" "}
+                    {t('components.iAgreeToThe')}{" "}
                     <Link
                       href="/terms-of-service"
                       className="text-primary font-bold"
                     >
-                      Terms of Service
-                    </Link>{" "}
-                    and{" "}
+                      {t('components.termsOfService')}</Link>{" "}
+                    {t('components.and')}{" "}
                     <Link
                       href="/privacy-policy"
                       className="text-primary font-bold"
                     >
-                      Privacy Policy
-                    </Link>
+                      {t('components.privacyPolicy')}</Link>
                   </label>
                 </div>
                 <FormMessage />
@@ -193,15 +193,13 @@ const SignUpForm = () => {
             loading={register.isPending}
             disabled={register.isPending}
           >
-            Create an account
-          </Button>
+            {t('components.createAnAccount')}</Button>
         </FormContainer>
         <div className="text-center mt-5">
           <p className="text-sm text-zinc-500">
-            Already have an account?{" "}
+            {t('components.alreadyHaveAnAccount')}{" "}
             <Link href="/auth/login" className="text-primary font-bold">
-              Log in
-            </Link>
+              {t('components.logIn')}</Link>
           </p>
         </div>
       </form>

@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   IconSeedling,
@@ -5,24 +6,26 @@ import {
   IconUserBitcoin,
   Icon
 } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 const FundingOptions = () => {
+    const { t } = useTranslation();
   return (
     <div className="h-full">
       <div className="grid grid-cols-1 h-full  lg:gap-10 gap-5 ">
         <FundingOption
-          title="Create an Account"
-          description="Sign up and start trading in minutes."
+          title={t('components.createAnAccount1')}
+          description={t('components.signUpAndStartTrading')}
           Icon={IconSeedling}
         />
         <FundingOption
-          title="Subscribe to our trusted experts"
-          description="Access exclusive insights and strategies from top traders."
+          title={t('components.subscribeToOurTrustedExperts')}
+          description={t('components.accessExclusiveInsightsAndStrategies')}
           Icon={IconGraph}
         />
         <FundingOption
-          title="Start Winning"
-          description="Leverage our tools and insights to maximize your trading potential."
+          title={t('components.startWinning')}
+          description={t('components.leverageOurToolsAndInsights')}
           Icon={IconUserBitcoin}
         />
    
@@ -37,6 +40,7 @@ interface FundingOptionProps {
   Icon: Icon;
 }
 const FundingOption = ({ title, description, Icon }: FundingOptionProps) => {
+    const { t } = useTranslation();
   return (
     <div className="flex max-md:flex-col lg:gap-4 border-b lg:items-center justify-between bg-white pb-5 border-gray-100">
       <div className="flex max-md:flex-col gap-5 lg:items-center lg:w-1/2">

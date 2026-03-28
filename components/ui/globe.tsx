@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSpring } from "@react-spring/web";
 import createGlobe from "cobe";
+import { useTranslation } from "react-i18next";
 
 interface Marker {
   location: [number, number];
@@ -56,6 +57,7 @@ export default function Globe({
   rotateCities = [],
   rotationSpeed = 3000,
 }: GlobeProps) {
+    const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const pointerInteracting = useRef<number | null>(null);
@@ -212,7 +214,7 @@ export default function Globe({
         }, 100);
       }
     } catch (error) {
-      console.error("Error creating globe:", error);
+      console.error(t('components.errorCreatingGlobe'), error);
     }
 
     return () => {

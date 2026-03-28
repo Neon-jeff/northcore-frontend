@@ -4,29 +4,22 @@ import React from "react";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui";
 import Footer from "@/components/ui/footer";
+import { useTranslation } from "react-i18next";
 
 const CompanyPage = () => {
+    const { t } = useTranslation();
   return (
     <main className="bg-white">
       <Section className="lg:pt-40 max-md:w-11/12 mt-20 flex  min-h-[70vh] rounded-2xl lg:p-10 max-md:flex-col-reverse">
         <div className="space-y-2 gap-4 flex w-full flex-col justify-center">
-          <Section.Title className="">Our Operation</Section.Title>
+          <Section.Title className="">{t('components.ourOperation')}</Section.Title>
           <Section.Description className=" lg:w-4/5">
-            We leverage cutting-edge technology and expert insights to optimize
-            trading strategies and maximize returns for our clients. Our team of
-            experienced traders and analysts work around the clock to identify
-            market opportunities and trends. With a focus on risk management and
-            sustainable growth, we&apos;ve developed proprietary algorithms that
-            provide an edge in today&apos;s competitive markets. We believe in
-            transparency and education, empowering our clients with the
-            knowledge they need to make informed decisions about their
-            investments.
-          </Section.Description>
-          <Button className="w-fit">Start Trading Now</Button>
+            {t('components.weLeverageCuttingedgeTechnologyAnd')}</Section.Description>
+          <Button className="w-fit">{t('components.startTradingNow')}</Button>
         </div>
         <motion.img
           src="/images/what-is-neural.jpeg"
-          alt="Company Image"
+          alt={t('components.companyImage')}
           className="lg:w-1/2 max-md:mb-10 w-full object-cover rounded-xl"
           width={600}
           height={400}
@@ -40,19 +33,16 @@ const CompanyPage = () => {
         <div className="space-y-2 gap-4 flex w-full  flex-col justify-center">
           <div className="flex text-[.65rem] px-5 text-blue-100 items-center gap-2 p-2 bg-gray-800 w-fit rounded-full border border-blue-900">
             <div className="bg-blue-500 border-blue-200 size-3 rounded-full animate-pulse border-2 " />
-            <span>Stop point for winning</span>
+            <span>{t('components.stopPointForWinning')}</span>
           </div>
           <Section.Title className="text-white block lg:w-full ">
-            The Northcore Trading Mission
-          </Section.Title>
+            {t('components.theNorthcoreTradingMission')}</Section.Title>
           <Section.Description className="text-white lg:w-4/5">
-            We are a leading company in the trading industry, committed to
-            providing our clients with the best tools and resources for success.
-          </Section.Description>
+            {t('components.weAreALeadingCompany')}</Section.Description>
         </div>
         <motion.img
           src="/images/company.webp"
-          alt="Company Image"
+          alt={t('components.companyImage')}
           className="lg:w-1/2 w-full object-cover rounded-xl"
           width={600}
           height={400}
@@ -66,20 +56,14 @@ const CompanyPage = () => {
       </Section>
       <Section className="lg:pt-40 max-md:w-11/12 my-20 gap-10 flex    min-h-[70vh] rounded-2xl lg:p-10 max-md:flex-col bg-gray-50">
         <div className="space-y-2 gap-4 flex w-full flex-col    justify-center">
-          <Section.Title className="">How can you win</Section.Title>
+          <Section.Title className="">{t('components.howCanYouWin')}</Section.Title>
           <Section.Description className=" lg:w-4/5">
-            Our advanced trading algorithms analyze market trends and execute
-            trades with precision, ensuring you never miss an opportunity. We
-            provide real-time insights and analytics to help you make informed
-            decisions. With our user-friendly platform, you can easily track
-            your investments and manage your portfolio from anywhere, at any
-            time.
-          </Section.Description>
-          <Button className="w-fit">Start Trading Now</Button>
+            {t('components.ourAdvancedTradingAlgorithmsAnalyze')}</Section.Description>
+          <Button className="w-fit">{t('components.startTradingNow')}</Button>
         </div>
         <motion.img
           src="https://images.pexels.com/photos/2505026/pexels-photo-2505026.jpeg"
-          alt="Company Image"
+          alt={t('components.companyImage')}
           className="lg:w-1/2 max-md:mt-10 w-full object-cover rounded-xl"
           width={600}
           height={400}

@@ -1,3 +1,4 @@
+"use client";
 import { PlusIcon } from "lucide-react"
 import { Accordion as AccordionPrimitive } from "radix-ui"
 
@@ -6,6 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
 } from "@/components/ui/accordion"
+import { useTranslation } from "react-i18next";
 
 const items = [
   {
@@ -35,9 +37,10 @@ const items = [
 ]
 
 export default function Component() {
+    const { t } = useTranslation();
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold">W/ plus-minus</h2>
+      <h2 className="text-xl font-bold">{t('components.wPlusminus')}</h2>
       <Accordion type="single" collapsible className="w-full" defaultValue="3">
         {items.map((item) => (
           <AccordionItem value={item.id} key={item.id} className="py-2">

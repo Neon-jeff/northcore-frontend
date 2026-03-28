@@ -1,3 +1,4 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
 import { env } from "@/env";
 import { Experts } from "@/services/expert/types";
@@ -15,6 +16,7 @@ import { cn } from "@/lib/utils";
 import { useExpertTrades } from "@/hooks/experts";
 import { useUserStore } from "@/store/user";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const ExpertCard = ({
   name,
@@ -35,6 +37,7 @@ const ExpertCard = ({
   variant?: "large" | "small";
   showProfitGained?: boolean;
 }) => {
+    const { t } = useTranslation();
   const {data} = useUserStore();
   const router = useRouter();
   const createSubscription = useCreateSubscription();
@@ -42,14 +45,15 @@ const ExpertCard = ({
   const queryClient = useQueryClient();
   const { data: expertProfits } = useExpertTrades(expert_id);
   const handleSubscription = () => {
+
     if(!data?.kyc_verified){
-      toast.error("Please complete KYC verification to subscribe to an expert",{
-        action:<Button onClick={()=>{router.push('/user/account/?open=true')}}>Complete KYC</Button>
+      toast.error(t('components.pleaseCompleteKycVerificationTo'),{
+        action:<Button onClick={()=>{router.push('/user/account/?open=true')}}>{t('components.completeKyc')}</Button>
       });
       return;
     }
     if (isSubscribed) {
-      toast.error("You are already subscribed to this expert");
+      toast.error(t('components.youAreAlreadySubscribedTo'));
       return;
     }
     createSubscription.mutate(
@@ -59,13 +63,13 @@ const ExpertCard = ({
       },
       {
         onSuccess: () => {
-          toast.success("Subscription created successfully");
+          toast.success(t('components.subscriptionCreatedSuccessfully'));
           queryClient.invalidateQueries({
             queryKey: ["userSubscription"],
           });
         },
         onError: () => {
-          toast.error("Failed to create subscription");
+          toast.error(t('components.failedToCreateSubscription'));
         },
       }
     );
@@ -109,8 +113,7 @@ const ExpertCard = ({
               {name}
             </p>
             <p className=" flex items-center gap-1  text-gray-400">
-              <Users size={16} /> {followers} Followers
-            </p>
+              <Users size={16} /> {followers} {t('components.followers')}</p>
           </div>
         </div>
         {variant !== "small" && (
@@ -119,8 +122,7 @@ const ExpertCard = ({
               {formatCurrency(all_time_profit)}
             </p>
             <p className="pb-1 text-gray-500 text-[.65rem]">
-              {win_rate}% Win rate all time
-            </p>
+              {win_rate}{t('components.winRateAllTime')}</p>
 
             {/* <span className="text-xs text-gray-400">All time profit</span> */}
           </div>
@@ -128,19 +130,19 @@ const ExpertCard = ({
         {variant !== "small" && (
           <div className=" space-y-1 text-[.65rem] text-black">
             <p className="flex justify-between">
-              <span className="text-gray-400">Average follower profit: </span>
+              <span className="text-gray-400">{t('components.averageFollowerProfit')}</span>
               {formatCurrency(followers_profit_average)}
             </p>
             <p className="flex justify-between">
-              <span className="text-gray-400">Minimum Investment: </span>
+              <span className="text-gray-400">{t('components.minimumInvestment')}</span>
               {formatCurrency(minimum_investment)}
             </p>
             <p className="flex justify-between capitalize">
-              <span className="text-gray-400">Market Domain: </span>
+              <span className="text-gray-400">{t('components.marketDomain')}</span>
               {market_domain}
             </p>
             <p className="flex justify-between capitalize">
-              <span className="text-gray-400">Preferred Currency: </span>
+              <span className="text-gray-400">{t('components.preferredCurrency')}</span>
               {preferred_currency}
             </p>
           </div>
@@ -152,13 +154,12 @@ const ExpertCard = ({
               isActive && "bg-green-50 text-green-600"
             )}
           >
-            {isActive ? "Active" : "Pending confirmation"}
+            {isActive ? t('components.active') : t('components.pendingConfirmation')}
           </p>
         )}
         {(showProfitGained && isActive) && (
           <p className="text-xs text-gray-500 text-center mt-4">
-            Estimated Profit Gained:
-            <br />
+            {t('components.estimatedProfitGained')}<br />
             <span className="text-lg text-black block mt-1"> {formatCurrency(
               (expertProfits?.trades || []).reduce(
                 (acc, trade) => acc + trade.profit_loss,
@@ -174,7 +175,7 @@ const ExpertCard = ({
             onClick={handleSubscription}
             className="w-full mt-2"
           >
-            {isSubscribed ? "Already Subscribed" : "Subscribe to expert"}
+            {isSubscribed ? t('components.alreadySubscribed') : t('components.subscribeToExpert')}
           </Button>
         )}
       </div>

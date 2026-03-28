@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react"
 import {
   ChevronLeftIcon,
@@ -7,8 +8,10 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+import { useTranslation } from "react-i18next";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
+
   return (
     <nav
       role="navigation"
@@ -24,6 +27,7 @@ function PaginationContent({
   className,
   ...props
 }: React.ComponentProps<"ul">) {
+
   return (
     <ul
       data-slot="pagination-content"
@@ -34,6 +38,7 @@ function PaginationContent({
 }
 
 function PaginationItem({ ...props }: React.ComponentProps<"li">) {
+
   return <li data-slot="pagination-item" {...props} />
 }
 
@@ -49,6 +54,7 @@ function PaginationLink({
   size = "icon",
   ...props
 }: PaginationLinkProps) {
+
   return (
     <a
       aria-current={isActive ? "page" : undefined}
@@ -70,6 +76,7 @@ function PaginationPrevious({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
+    const { t } = useTranslation();
   return (
     <PaginationLink
       aria-label="Go to previous page"
@@ -78,7 +85,7 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon size={16} />
-      <span>Previous</span>
+      <span>{t('components.previous')}</span>
     </PaginationLink>
   )
 }
@@ -87,6 +94,7 @@ function PaginationNext({
   className,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
+    const { t } = useTranslation();
   return (
     <PaginationLink
       aria-label="Go to next page"
@@ -94,7 +102,7 @@ function PaginationNext({
       className={cn("gap-1 px-2.5 sm:ps-4", className)}
       {...props}
     >
-      <span>Next</span>
+      <span>{t('components.next')}</span>
       <ChevronRightIcon size={16} />
     </PaginationLink>
   )
@@ -104,6 +112,7 @@ function PaginationEllipsis({
   className,
   ...props
 }: React.ComponentProps<"span">) {
+    const { t } = useTranslation();
   return (
     <span
       aria-hidden
@@ -112,7 +121,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontalIcon size={16} />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{t('components.morePages')}</span>
     </span>
   )
 }

@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { deposit_address } from "@/data/wallet";
 import { cn } from "@/lib/utils";
 import React from "react";
@@ -20,8 +20,10 @@ import {
   WithdrawalSchemaType,
 } from "@/utils/validators/withdrawal";
 import { useUserStore } from "@/store/user";
+import { useTranslation } from "react-i18next";
 
 const WithdrawalForm = () => {
+    const { t } = useTranslation();
   const form = useForm<WithdrawalSchemaType>({
     defaultValues: {
       amount: 0,
@@ -38,19 +40,19 @@ const WithdrawalForm = () => {
     const amount = form.watch("amount");
     const currency = form.watch("currency");
     if(!form.watch("address")){
-        toast.error("Please enter a valid wallet address");
+        toast.error(t('components.pleaseEnterAValidWallet'));
         return;
     }
     if(!form.watch("currency")){
-        toast.error("Please select a currency");
+        toast.error(t('components.pleaseSelectACurrency'));
         return;
     }
     if(!amount || amount <= 0){
-        toast.error("Please enter a valid amount");
+        toast.error(t('components.pleaseEnterAValidAmount'));
         return;
     }
     if(amount > (data?.balance || 0)){
-        toast.error("Insufficient balance");
+        toast.error(t('components.insufficientBalance'));
         return;
     }
     makePayment.mutate(
@@ -69,7 +71,7 @@ const WithdrawalForm = () => {
           queryClient.invalidateQueries({ queryKey: ["transactions"] });
         },
         onError: () => {
-          toast.error("Failed to create deposit, try again or contact support");
+          toast.error(t('components.failedToCreateDepositTry'));
         },
       }
     );
@@ -104,10 +106,10 @@ const WithdrawalForm = () => {
             {step === "one" && (
               <>
                 <h1 className="pb-1 text-lg font-bold text-black mt-8">
-                  {step === "one" && "Select Withdrawal Currency"}
+                  {step === "one" && t('components.selectWithdrawalCurrency')}
                 </h1>
                 <p className="text-sm text-gray-400">
-                  {step == "one" && "Please choose a withdrawal currency."}
+                  {step == "one" && t('components.pleaseChooseAWithdrawal')}
                 </p>
               </>
             )}
@@ -137,10 +139,8 @@ const WithdrawalForm = () => {
                           <h2 className="text-sm">{item.name}</h2>
                         </div>
                         <p className="text-gray-400 text-[.65rem] ">
-                          50 USD - 100,000 USD{" "}
-                          <br className="hidden lg:block" /> Withdrawal 5 -
-                          10mins
-                        </p>
+                          {t('components.50Usd100000Usd')}{" "}
+                          <br className="hidden lg:block" /> {t('components.withdrawal510mins')}</p>
                       </div>
                     ))}
                   </div>
@@ -149,8 +149,7 @@ const WithdrawalForm = () => {
                     disabled={!form.watch("currency")}
                     onClick={() => setStep("two")}
                   >
-                    Continue
-                  </Button>
+                    {t('components.continue')}</Button>
                 </FormItem>
               )}
             />
@@ -165,12 +164,11 @@ const WithdrawalForm = () => {
                     <div className="relative">
                       <Input
                         className="placeholder:text-black placeholder:font-bold"
-                        placeholder="Wallet Balance"
+                        placeholder={t('components.walletBalance')}
                         disabled
                       />
                       <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
-                        {data?.balance}.00 USD
-                      </span>
+                        {data?.balance}{t('components.00Usd')}</span>
                     </div>
                     <div className="p-2 mx-auto border border-primary rounded-full w-fit">
                       <IconArrowDown
@@ -181,7 +179,7 @@ const WithdrawalForm = () => {
                     <div className="relative">
                       <Input
                         onChange={field.onChange}
-                        placeholder="Enter Amount to Withdraw"
+                        placeholder={t('components.enterAmountToWithdraw')}
                         inputMode="numeric"
                         type="number"
                       />
@@ -204,7 +202,7 @@ const WithdrawalForm = () => {
                   <FormItem className="w-full mt-5">
                     <Input
                       {...field}
-                      placeholder="Enter Wallet Address"
+                      placeholder={t('components.enterWalletAddress')}
                       className=""
                     />
                   </FormItem>
@@ -216,26 +214,23 @@ const WithdrawalForm = () => {
                   <div>
                     <div className="mt-5  border p-5 rounded-xl border-dashed border-green-300 bg-green-50/60 w-full space-y-2 text-sm mx-auto max-md:text-xs">
                       <div className="flex justify-between">
-                        <span>Amount</span>
+                        <span>{t('components.amount')}</span>
                         <span className="font-bold  ">
-                          {form.watch("amount")}.00USD
-                        </span>
+                          {form.watch("amount")}{t('components.00usd')}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Commission</span>
+                        <span>{t('components.commission')}</span>
                         <span className="font-bold  ">
-                          {form.watch("amount") * 0}.00USD
-                        </span>
+                          {form.watch("amount") * 0}{t('components.00usd')}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Processing Time</span>
-                        <span className="font-bold  ">5 - 10 mins </span>
+                        <span>{t('components.processingTime')}</span>
+                        <span className="font-bold  ">{t('components.510Mins')}</span>
                       </div>
                       <div className="flex font-jakarta text-green-600 justify-between mt-5 font-semibold text-sm">
-                        <span>Total Amount</span>
+                        <span>{t('components.totalAmount')}</span>
                         <span className="font-bold text-base ">
-                          {(form.watch("amount") * 1).toFixed(2)} USD
-                        </span>
+                          {(form.watch("amount") * 1).toFixed(2)} {t('components.usd')}</span>
                       </div>
                     </div>
                   </div>
@@ -244,8 +239,7 @@ const WithdrawalForm = () => {
                     type="submit"
                     disabled={makePayment.isPending}
                   >
-                   Make Withdrawal
-                  </Button>
+                   {t('components.makeWithdrawal')}</Button>
                 </div>
               )}
             </div>
@@ -258,6 +252,7 @@ const WithdrawalForm = () => {
 };
 
 function PaymentCompleted() {
+    const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -272,21 +267,16 @@ function PaymentCompleted() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        Withdrawal Request Completed
-      </h2>
+        {t('components.withdrawalRequestCompleted')}</h2>
       <p>
-        Your withdrawal request has been completed, you will receive withdrawal
-        update status from our support team via email.
-      </p>
+        {t('components.yourWithdrawalRequestHasBeen')}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
           <Button variant={"secondary"} className="bg-gray-100 text-black">
-            Go to Dashboard
-          </Button>
+            {t('components.goToDashboard')}</Button>
         </Link>
         <Button className="" onClick={handleDepositAgain}>
-          Withdrawal Again
-        </Button>
+          {t('components.withdrawalAgain')}</Button>
       </div>
     </div>
   );

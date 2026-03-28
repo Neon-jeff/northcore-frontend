@@ -8,19 +8,20 @@ import { IconX } from "@tabler/icons-react";
 import gsap from "gsap";
 import Link from "next/link";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const CashierPage = () => {
+    const { t } = useTranslation();
   const {data} = useUserStore();
   return (
     <div className="bg-white flex flex-col items-center lg:min-h-5/6 max-md:min-h-screen lg:p-10 p-5 rounded-xl max-md:mb-10 lg:w-11/12">
       <h1 className="lg:text-2xl text-2xl font-bold text-zinc-800 mb-5">
-        Cashier
-      </h1>
+        {t('components.cashier')}</h1>
       <Tabs defaultValue="deposit" className="lg:w-1/2 w-full">
         <TabsList className="w-full">
-          <TabsTrigger value="deposit">Deposit</TabsTrigger>
-          <TabsTrigger value="withdraw">Withdraw</TabsTrigger>
-          <TabsTrigger value="transfer">Transfer</TabsTrigger>
+          <TabsTrigger value="deposit">{t('components.deposit')}</TabsTrigger>
+          <TabsTrigger value="withdraw">{t('components.withdraw')}</TabsTrigger>
+          <TabsTrigger value="transfer">{t('components.transfer')}</TabsTrigger>
         </TabsList>
         <TabsContent value="deposit" className="w-full">
           <DepositForm/>
@@ -39,6 +40,7 @@ const CashierPage = () => {
 };
 
 function KYCRequired() {
+    const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -51,14 +53,12 @@ function KYCRequired() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        KYC Verification Required
-      </h2>
+        {t('components.kycVerificationRequired')}</h2>
       <p>
-        To mitigate inappropriate financial activities through our platform, withdrawal and transfers is on available on strict KYC verified accounts only. Please complete your KYC verification to enable these features.
-      </p>
+        {t('components.toMitigateInappropriateFinancialActivities')}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/account/?open=true" className="w-full">
-          <Button variant={'secondary'} className="bg-black text-white">Verify KYC</Button>
+          <Button variant={'secondary'} className="bg-black text-white">{t('components.verifyKyc')}</Button>
         </Link>
       </div>
     </div>
@@ -66,6 +66,7 @@ function KYCRequired() {
 }
 
 function NotQualified() {
+    const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -78,14 +79,12 @@ function NotQualified() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        Feature Not Available
-      </h2>
+        {t('components.featureNotAvailable')}</h2>
       <p>
-        This feature is not yet available for your account. Please check back later or contact support for more information.
-      </p>
+        {t('components.thisFeatureIsNotYet')}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard" className="w-full">
-          <Button variant={'secondary'} className="bg-black text-white">View Dashboard</Button>
+          <Button variant={'secondary'} className="bg-black text-white">{t('components.viewDashboard')}</Button>
         </Link>
       </div>
     </div>

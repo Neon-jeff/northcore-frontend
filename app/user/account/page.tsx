@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { Button } from "@/components/ui";
 import {
   Dialog,
@@ -23,14 +23,15 @@ import {
 import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const AccountsPage = () => {
+    const { t } = useTranslation();
   const { data } = useUserStore();
   return (
     <div className="bg-white  flex flex-col lg:min-h-5/6 max-md:min-h-screen lg:p-10 p-5 rounded-xl max-md:mb-10 lg:w-11/12">
       <h1 className="text-black max-md:text-center text-2xl font-bold">
-        My Account
-      </h1>
+        {t('components.myAccount')}</h1>
       <div className="flex flex-col max-md:items-center mt-10 lg:w-3/5 ">
         <img
           src={
@@ -39,29 +40,29 @@ const AccountsPage = () => {
             " " +
             data?.last_name
           }
-          alt="avatar"
+          alt={t('components.avatar')}
           className="w-20 h-20 rounded-full object-cover"
         />
         {data?.kyc_verified && (
           <div className="flex items-center gap-1 mt-2">
             <Star className="text-yellow-400 bg-yellow-100  rounded-full p-1" />
-            <h2 className="text-black font-bold text-xs">Level 1 trader</h2>
+            <h2 className="text-black font-bold text-xs">{t('components.level1Trader')}</h2>
           </div>
         )}
                 {!data?.kyc_verified && (
           <div className="flex items-center gap-1 mt-2">
             <IconAlertTriangle className="text-orange-600 bg-orange-100  rounded-full p-1" />
-            <h2 className="text-orange-600 font-bold text-xs">KYC Pending</h2>
+            <h2 className="text-orange-600 font-bold text-xs">{t('components.kycPending')}</h2>
           </div>
         )}
         <p className="text-2xl font-bold bg-gray-50 border border-gray-100   w-fit p-2 px-5 rounded-full text-black mt-2">
           {formatCurrency(data?.balance || 0)}
         </p>
         <div className="grid grid-cols-1 w-full gap-4 mt-5 lg:grid-cols-2">
-          <NameBlock value={data?.first_name || ""} label="First Name" />
-          <NameBlock value={data?.last_name || ""} label="Last Name" />
-          <NameBlock value={data?.email || ""} label="Email" />
-          <NameBlock value={data?.phone_number || ""} label="Phone Number" />
+          <NameBlock value={data?.first_name || ""} label={t('components.firstName')} />
+          <NameBlock value={data?.last_name || ""} label={t('components.lastName')} />
+          <NameBlock value={data?.email || ""} label={t('components.email')} />
+          <NameBlock value={data?.phone_number || ""} label={t('components.phoneNumber')} />
         </div>
        <Suspense fallback={null}>
          <KYCStatus />
@@ -72,6 +73,7 @@ const AccountsPage = () => {
 };
 
 function NameBlock({ value, label }: { value: string; label: string }) {
+    const { t } = useTranslation();
   return (
     <div>
       <p className="text-sm w-full pb-2 text-gray-500 font-semibold">{label}</p>
@@ -83,6 +85,7 @@ function NameBlock({ value, label }: { value: string; label: string }) {
 }
 
 function KYCStatus() {
+    const { t } = useTranslation();
   const params = useSearchParams()
   const { data: user } = useUserStore();
   const queryClient = useQueryClient();
@@ -93,28 +96,24 @@ function KYCStatus() {
   };
   return (
     <div className="flex flex-col mt-5 gap-1 p-5 border border-blue-50 w-full rounded-lg bg-blue-50/50">
-      <h2 className="text-black flex items-center gap-1 font-bold text-base"><IconStarsFilled/> KYC Level</h2>
+      <h2 className="text-black flex items-center gap-1 font-bold text-base"><IconStarsFilled/> {t('components.kycLevel')}</h2>
       {!user?.kyc_verified && (
         <p className="text-xs text-gray-600 pt-2">
-          You&apos;re currently not verified.
-        </p>
+          {t('components.youaposreCurrentlyNotVerified')}</p>
       )}
       {user?.kyc_verified && (
         <p className="text-green-600 mt-4 flex items-center gap-2 text-sm font-bold">
-          <IconStarFilled className="inline text-green-500" /> Level 1 verified
-        </p>
+          <IconStarFilled className="inline text-green-500" /> {t('components.level1Verified')}</p>
       )}
       {!user?.kyc_verified && (
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <button className="bg-primary text-white px-4 py-2 mt-5 rounded-lg w-fit text-sm">
-              Upgrade to level one
-            </button>
+              {t('components.upgradeToLevelOne')}</button>
           </DialogTrigger>
           <DialogContent>
             <DialogTitle className="text-black pb-4 font-jakarta">
-              Kyc Level One Verification
-            </DialogTitle>
+              {t('components.kycLevelOneVerification')}</DialogTitle>
             {!user?.kyc_verified && (
               <KYCLevelOneForm onSuccess={handleVerificationSuccess} />
             )}
@@ -126,6 +125,7 @@ function KYCStatus() {
 }
 
 function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
+    const { t } = useTranslation();
   const {setUser} = useUserStore()
   const [idFile, setIdFile] = React.useState<File | null>(null);
   const [addressFile, setAddressFile] = React.useState<File | null>(null);
@@ -140,7 +140,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
   function handleSubmit() {
     // Check if both files are uploaded
     if (!idFile || !addressFile) {
-      toast.error("Please upload all required documents");
+      toast.error(t('components.pleaseUploadAllRequiredDocuments'));
       return;
     }
     const formData = new FormData();
@@ -148,7 +148,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
     formData.append("addressDocument", addressFile);
     verifyKYCLevelOne.mutate(formData, {
       onSuccess: (data) => {
-        toast.success("KYC Level One verification successful");
+        toast.success(t('components.kycLevelOneVerificationSuccessful'));
         // Reset the form or perform any other actions
         setIdFile(null);
         setAddressFile(null);
@@ -156,7 +156,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
         if (onSuccess) onSuccess();
       },
       onError: () => {
-        toast.error("KYC Level One verification failed");
+        toast.error(t('components.kycLevelOneVerificationFailed'));
       },
     });
   }
@@ -166,8 +166,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
         <Label htmlFor="profileDoc" className="text-sm font-bold block">
           <p className="flex items-center gap-2 text-black text-base">
             <IdCard />
-            Valid Identification
-          </p>
+            {t('components.validIdentification')}</p>
 
           <div className="flex gap-2 mt-2">
             {["Passport", "Driver's License", "National ID Card"].map(
@@ -184,9 +183,8 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
           <div className="bg-gray-50 space-y-1 border border-dashed border-gray-300 h-32 rounded-lg mt-2 flex flex-col justify-center items-center cursor-pointer">
             <UploadIcon />
             <p className="text-xs font-semibold text-gray-600">
-              Click to upload
-            </p>
-            <p className="text-xs  text-gray-500">(PNG, JPG, PDF up to 2MB)</p>
+              {t('components.clickToUpload')}</p>
+            <p className="text-xs  text-gray-500">{t('components.pngJpgPdfUpTo')}</p>
             <p>
               {idFile && (
                 <span className="text-xs text-blue-600">{idFile.name}</span>
@@ -206,8 +204,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
         <Label htmlFor="addressDoc" className="text-sm font-bold block">
           <p className="flex items-center gap-2 text-black text-base max-md:text-sm">
             <House className="max-sm:text-xs" />
-            Proof of Address
-          </p>
+            {t('components.proofOfAddress')}</p>
 
           <div className="flex gap-2 mt-2">
             {["Utility Bill", "Bank Statement", "Lease Agreement"].map(
@@ -224,9 +221,8 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
           <div className="bg-gray-50 space-y-1 border border-dashed border-gray-300 h-32 rounded-lg mt-2 flex flex-col justify-center items-center cursor-pointer">
             <UploadIcon />
             <p className="text-xs font-semibold text-gray-600">
-              Click to upload
-            </p>
-            <p className="text-xs  text-gray-500">(PNG, JPG, PDF up to 2MB)</p>
+              {t('components.clickToUpload')}</p>
+            <p className="text-xs  text-gray-500">{t('components.pngJpgPdfUpTo')}</p>
             <p>
               {addressFile && (
                 <span className="text-xs text-blue-600">
@@ -250,8 +246,7 @@ function KYCLevelOneForm({ onSuccess }: { onSuccess?: () => void }) {
         loading={verifyKYCLevelOne.isPending}
         disabled={verifyKYCLevelOne.isPending}
       >
-        Submit for Verification
-      </Button>
+        {t('components.submitForVerification')}</Button>
     </div>
   );
 }

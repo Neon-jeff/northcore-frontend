@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   IconSeedling,
@@ -8,39 +9,41 @@ import {
   IconDevicesCog,
   IconChartCohort,
 } from "@tabler/icons-react";
+import { useTranslation } from "react-i18next";
 
 const Attributes = () => {
+    const { t } = useTranslation();
   return (
     <div className="h-full">
       <div className="grid grid-cols-2 h-full   md:grid-cols-2  lg:grid-cols-3 lg:gap-10 gap-5 ">
         <AttributeItem
-          title="Asset Growth"
-          description="Maximize your portfolio with our advanced trading strategies."
+          title={t('components.assetGrowth')}
+          description={t('components.maximizeYourPortfolioWithOur')}
           Icon={IconSeedling}
         />
         <AttributeItem
-          title="Real-Time Data"
-          description="Access up-to-date market data to stay ahead of the curve."
+          title={t('components.realtimeData')}
+          description={t('components.accessUptodateMarketDataTo')}
           Icon={IconGraph}
         />
         <AttributeItem
-          title="Community Support"
-          description="Join a community of traders for shared insights and strategies."
+          title={t('components.communitySupport')}
+          description={t('components.joinACommunityOfTraders')}
           Icon={IconUserBitcoin}
         />
         <AttributeItem
-          title="Advanced Tools"
-          description="Utilize cutting-edge tools for informed trading decisions."
+          title={t('components.advancedTools')}
+          description={t('components.utilizeCuttingedgeToolsForInformed')}
           Icon={IconDevicesCog}
         />
         <AttributeItem
-          title="Demo Trading"
-          description="Practice trading strategies with our demo accounts."
+          title={t('components.demoTrading')}
+          description={t('components.practiceTradingStrategiesWithOur')}
           Icon={IconChartCohort}
         />
         <AttributeItem
-          title="Secured Process"
-          description="Ensure your trades are secure with our robust platform."
+          title={t('components.securedProcess')}
+          description={t('components.ensureYourTradesAreSecure')}
           Icon={IconShield}
         />
       </div>
@@ -54,6 +57,7 @@ interface AttributeProps {
   Icon: Icon;
 }
 const AttributeItem = ({ title, description, Icon }: AttributeProps) => {
+    const { t } = useTranslation();
   return (
     <div className="flex max-md:flex-col gap-4  lg:items-center bg-white pb-5 ">
       <div className="bg-black/4 w-fit rounded-xl lg:p-6 p-4 h-fit">

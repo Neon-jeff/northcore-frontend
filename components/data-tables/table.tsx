@@ -16,6 +16,7 @@ import {
   } from "@/components/ui/table"
   import { Button } from "@/components/ui/button"
 import { cn } from '@/lib/utils'
+import { useTranslation } from "react-i18next";
 
 interface TableProps <TData,Tvalue>{
     columns:ColumnDef<TData,Tvalue>[];
@@ -26,6 +27,7 @@ export default function DataTable<TData, TValue>({
     columns,
     data,
   }: TableProps<TData, TValue>) {
+    const { t } = useTranslation();
     const table = useReactTable({
       data,
       columns,
@@ -40,6 +42,7 @@ export default function DataTable<TData, TValue>({
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                    const { t } = useTranslation();
                   return (
                     <TableHead key={header.id} className='max-md:text-xs b'>
                       {header.isPlaceholder
@@ -72,8 +75,7 @@ export default function DataTable<TData, TValue>({
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-xs text-center">
-                  No results.
-                </TableCell>
+                  {t('components.noResults')}</TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -87,8 +89,7 @@ export default function DataTable<TData, TValue>({
           disabled={!table.getCanPreviousPage()}
           className='bg-gray-100 border-none text-xs disabled:opacity-40 cursor-pointer'
         >
-          Previous
-        </Button>
+          {t('components.previous')}</Button>
         <Button
           variant="outline"
           size="sm"
@@ -96,8 +97,7 @@ export default function DataTable<TData, TValue>({
           disabled={!table.getCanNextPage()}
            className='bg-gray-100 border-none text-xs disabled:opacity-40 cursor-pointer'
         >
-          Next
-        </Button>
+          {t('components.next')}</Button>
       </div>
 
       </div>

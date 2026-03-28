@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { env } from "@/env";
@@ -13,7 +13,7 @@ import {
 import { Loader2Icon } from "lucide-react";
 import dynamic from "next/dynamic";
 import React from "react";
-
+import { useTranslation } from "react-i18next";
 
 const SymbolOverviewNoSSR = dynamic(
     () => import("react-ts-tradingview-widgets").then((w) => w.AdvancedRealTimeChart),
@@ -23,15 +23,16 @@ const SymbolOverviewNoSSR = dynamic(
 );
 
 const MarketDataPage = () => {
+    const { t } = useTranslation();
   const { data, isLoading } = useMarketData();
   return (
     <div className="lg:w-11/12 w-full py-10 p-2 space-y-5 lg:min-h-5/6 max-md:min-h-screen rounded-2xl bg-white lg:p-10 ">
       <Tabs defaultValue="chart" className="lg:w-2/3 w-full mx-auto    ">
         <TabsList className="w-full">
-           <TabsTrigger value="chart">Chart</TabsTrigger>
-          <TabsTrigger value="crypto">Crypto</TabsTrigger>
-          <TabsTrigger value="forex">Forex</TabsTrigger>
-          <TabsTrigger value="stocks">Stocks</TabsTrigger>
+           <TabsTrigger value="chart">{t('components.chart')}</TabsTrigger>
+          <TabsTrigger value="crypto">{t('components.crypto')}</TabsTrigger>
+          <TabsTrigger value="forex">{t('components.forex')}</TabsTrigger>
+          <TabsTrigger value="stocks">{t('components.stocks')}</TabsTrigger>
         </TabsList>
         <TabsContent value="chart" className="w-full mt-4 rounded-xl">
             <SymbolOverviewNoSSR width={'100%'}  copyrightStyles={{
@@ -74,6 +75,7 @@ const MarketDataPage = () => {
 };
 
 function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
+    const { t } = useTranslation();
   return (
     <div
       key={crypto.symbol}
@@ -104,6 +106,7 @@ function CryptoCard({ crypto }: { crypto: Cryptocurrency }) {
 }
 
 function ForexCard({ forex }: { forex: Forexpairs }) {
+    const { t } = useTranslation();
   return (
     <div
       key={forex.currency}
@@ -126,6 +129,7 @@ function ForexCard({ forex }: { forex: Forexpairs }) {
 }
 
 function StocksCard({ stock }: { stock: Stocks }) {
+    const { t } = useTranslation();
   return (
     <div
       key={stock.image}

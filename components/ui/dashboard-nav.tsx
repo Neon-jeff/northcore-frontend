@@ -30,8 +30,12 @@ import {
 import { ScrollArea } from "./scroll-area";
 import { Button } from "./button";
 import Script from "next/script";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./language-switcher";
+
 
 const DashboardNav = () => {
+    const { t } = useTranslation();
   const routes = [
     { name: "Dashboard", path: "/user/dashboard", icon: IconAppsFilled },
     {
@@ -62,18 +66,18 @@ const DashboardNav = () => {
         </button>
         <LogoSmall className="max-lg:hidden" />
         <h1 className="text-zinc-800 font-bold text-center max-lg:hidden">
-          Dashboard
-        </h1>
-        <div className="flex items-center *:size-6 lg:gap-10 gap-5   rounded-full">
+          {t('components.dashboard')}</h1>
+        <div className="flex items-center lg:gap-10 gap-5   rounded-full">
+          <LanguageSwitcher className="size-auto" />
           <DropdownMenu>
-            <DropdownMenuTrigger className="relative">
-              <IconBell className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+            <DropdownMenuTrigger className="relative flex items-center justify-center">
+              <IconBell className="size-6 text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
               <p className="absolute size-4 flex items-center justify-center rounded-full -top-1 -right-1 bg-primary text-white text-[.55rem]">
                 {notifications?.notifications.length ?? 0}
               </p>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="space-y-2 ">
-              <p className="text-base font-bold">Notifications</p>
+              <p className="text-base font-bold">{t('components.notifications')}</p>
               {notifications && notifications.notifications.length > 0 && (
                 <ScrollArea className="lg:max-h-[40vh] max-h-[60vh]">
                   {(notifications?.notifications || [])?.map((notification) => (
@@ -101,16 +105,16 @@ const DashboardNav = () => {
                 <div className="w-full h-10 bg-zinc-200 animate-pulse rounded-lg" />
               )}
               {notifications?.notifications?.length === 0 && (
-                <p className="text-center text-gray-500">No notifications</p>
+                <p className="text-center text-gray-500">{t('components.noNotifications')}</p>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
-          <button id="message-button">
-            <IconMessage className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+          <button id="message-button" className="flex items-center justify-center">
+            <IconMessage className="size-6 text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
           </button>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-2">
-              <IconUserCircle className="text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
+            <DropdownMenuTrigger className="flex items-center gap-2 outline-none">
+              <IconUserCircle className="size-6 text-zinc-600 hover:scale-110 hover:text-zinc-800 transition duration-200" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="bg-white rounded-lg shadow-md p-4 text-xs space-y-4">
               <p className="text-sm font-bold">
@@ -120,22 +124,19 @@ const DashboardNav = () => {
                 href="/user/wallet"
                 className="block text-gray-500 hover:text-gray-800"
               >
-                View Wallet
-              </Link>
+                {t('components.viewWallet')}</Link>
               <Link
                 href="/user/copy-trading"
                 className="block text-gray-500 hover:text-gray-800"
               >
-                Copy Trading
-              </Link>
+                {t('components.copyTrading')}</Link>
               <Button
                 className="flex items-center gap-2"
                 variant={"ghost"}
                 onClick={logout}
               >
                 <IconLogout />
-                Logout
-              </Button>
+                {t('components.logout')}</Button>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

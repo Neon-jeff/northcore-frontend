@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+/* eslint-disable @next/next/no-img-element */
 import { deposit_address } from "@/data/wallet";
 import { cn } from "@/lib/utils";
 import React from "react";
@@ -26,8 +26,10 @@ import gsap from "gsap";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useUserStore } from "@/store/user";
+import { useTranslation } from "react-i18next";
 
 const DepositForm = () => {
+    const { t } = useTranslation();
   const form = useForm<DepositSchemaType>({
     defaultValues: {
       amount: 0,
@@ -47,13 +49,13 @@ const DepositForm = () => {
   const handleCopyToClipBoard = () => {
     copyToClipBoard.mutate(
       deposit_address.find((item) => item.name === form.watch("currency"))
-        ?.address || "hello what are you doing",
+        ?.address || t('components.addressNotFound'),
       {
         onSuccess: () => {
-          toast.success("Address copied to clipboard");
+          toast.success(t('components.addressCopiedToClipboard'));
         },
         onError: () => {
-          toast.error("Failed to copy address");
+          toast.error(t('components.failedToCopyAddress'));
         },
         onSettled: () => {
           setTimeout(() => {
@@ -67,7 +69,7 @@ const DepositForm = () => {
     const amount = form.watch("amount");
     const currency = form.watch("currency");
     if (amount < 50) {
-      toast.error("Minimum deposit is 50 USD");
+      toast.error(t('components.minimumDepositIs50Usd'));
       return;
     }
     makePayment.mutate(
@@ -86,7 +88,7 @@ const DepositForm = () => {
           queryClient.invalidateQueries({ queryKey: ["transactions"] });
         },
         onError: () => {
-          toast.error("Failed to create deposit, try again or contact support");
+          toast.error(t('components.failedToCreateDepositTry'));
         },
       }
     );
@@ -121,11 +123,11 @@ const DepositForm = () => {
             {step === "one" && (
               <>
                 <h1 className="pb-1 text-lg text-black mt-8">
-                  {step === "one" && "Select Deposit Method"}
+                  {step === "one" && t('components.selectDepositMethod')}
                 </h1>
                 <p className="text-sm text-gray-400">
                   {step == "one" &&
-                    "Please choose a deposit method from the options below."}
+                    t('components.pleaseChooseADepositMethod')}
                 </p>
               </>
             )}
@@ -155,8 +157,8 @@ const DepositForm = () => {
                           <h2 className="text-sm">{item.name}</h2>
                         </div>
                         <p className="text-gray-400 text-[.65rem] ">
-                          50 USD - 100,000 USD{" "}
-                          <br className="hidden lg:block" /> Deposit{" "}
+                          {t('components.50Usd100000Usd')}{" "}
+                          <br className="hidden lg:block" /> {t('components.deposit')}{" "}
                         </p>
                       </div>
                     ))}
@@ -166,8 +168,7 @@ const DepositForm = () => {
                     disabled={!form.watch("currency")}
                     onClick={() => setStep("two")}
                   >
-                    Continue
-                  </Button>
+                    {t('components.continue')}</Button>
                 </FormItem>
               )}
             />
@@ -182,12 +183,11 @@ const DepositForm = () => {
                     <div className="relative">
                       <Input
                         className=""
-                        placeholder="Wallet Balance"
+                        placeholder={t('components.walletBalance')}
                         disabled
                       />
                       <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
-                        {data?.balance}.00 USD
-                      </span>
+                        {data?.balance}{t('components.00Usd')}</span>
                     </div>
                     <div className="p-2 mx-auto border border-primary rounded-full w-fit">
                       <IconArrowUp
@@ -198,7 +198,7 @@ const DepositForm = () => {
                     <div className="relative">
                       <Input
                         onChange={field.onChange}
-                        placeholder="Enter Amount - Minimum 50 USD"
+                        placeholder={t('components.enterAmountMinimum50Usd')}
                         inputMode="numeric"
                         type="number"
                       />
@@ -217,59 +217,51 @@ const DepositForm = () => {
                         <div className="bg-green-50 p-4 text-gray-600 rounded-md space-y-2">
                           <div className="flex gap-2 items-center text-green-700">
                             <IconGiftFilled className="text-green-500" />
-                            <p className="text-sm font-bold">Bonus Available</p>
+                            <p className="text-sm font-bold">{t('components.bonusAvailable')}</p>
                           </div>
                           <p>
-                            You have a 20% bonus on your first deposit, this
-                            will enable you to maximize your trading potential.
-                          </p>
+                            {t('components.youHaveA20Bonus')}</p>
                         </div>
                       )}
                       <div className="mt-5 lg:w-2/3 w-full space-y-2 text-sm mx-auto">
                         <div className="flex justify-between">
-                          <span>Amount</span>
+                          <span>{t('components.amount')}</span>
                           <span className="font-bold text-sm ">
-                            {form.watch("amount")}.00USD
-                          </span>
+                            {form.watch("amount")}{t('components.00usd')}</span>
                         </div>
                         {transactions?.transactions.length === 0 && (
                           <div className="flex justify-between">
-                            <span>Bonus</span>
+                            <span>{t('components.bonus')}</span>
                             <span className="font-bold text-sm ">
-                              {(form.watch("amount") * 0.2).toFixed(2)}USD
-                            </span>
+                              {(form.watch("amount") * 0.2).toFixed(2)}{t('components.usd')}</span>
                           </div>
                         )}
                         <div className="flex justify-between">
-                          <span>Commission</span>
+                          <span>{t('components.commission')}</span>
                           <span className="font-bold text-sm ">
-                            {form.watch("amount") * 0}.00USD
-                          </span>
+                            {form.watch("amount") * 0}{t('components.00usd')}</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>Processing Time</span>
+                          <span>{t('components.processingTime')}</span>
                           <span className="font-bold text-sm ">
-                            2 - 5 mins{" "}
+                            {t('components.25Mins')}{" "}
                           </span>
                         </div>
                         <div className="flex justify-between mt-5 text-black font-bold text-base">
-                          <span>Receiving Amount</span>
+                          <span>{t('components.receivingAmount')}</span>
                           {transactions?.transactions?.length === 0 && (
                             <span className="font-bold text-base ">
-                              {(form.watch("amount") * 1.2).toFixed(2)}USD
-                            </span>
+                              {(form.watch("amount") * 1.2).toFixed(2)}{t('components.usd')}</span>
                           )}
                           {(transactions?.transactions || []).length > 1 && (
                             <span className="font-bold text-base ">
-                              {(form.watch("amount") * 1).toFixed(2)}USD
-                            </span>
+                              {(form.watch("amount") * 1).toFixed(2)}{t('components.usd')}</span>
                           )}
                         </div>
                       </div>
                     </div>
                     <Button className="mt-10" onClick={() => setStep("three")}>
-                      Make Payment
-                    </Button>
+                      {t('components.makePayment')}</Button>
                   </FormItem>
                 )}
               />
@@ -287,8 +279,7 @@ const DepositForm = () => {
                 className="lg:w-10 lg:h-10 mb-5 mx-auto w-10 h-10 object-contain mix-blend-multiply rounded-full"
               />
               <p className="text-sm text-black font-bold text-center">
-                Make your payment to this wallet address below
-              </p>
+                {t('components.makeYourPaymentToThis')}</p>
               <div className="flex justify-between items-center p-3 border rounded-md">
                 <p className="font-mono text-sm">
                   {
@@ -311,20 +302,17 @@ const DepositForm = () => {
               <div className="text-center space-y-3 py-4">
                 <img
                   src={deposit_address[0].qr_code}
-                  alt="QR Code"
+                  alt={t('components.qrCode')}
                   className="h-40 w-40 object-contain mx-auto mt-4 rounded-md"
                 />
-                <p>Or scan this QR code </p>
+                <p>{t('components.orScanThisQrCode')}</p>
               </div>
               <div className="bg-sky-50 text-gray-700 p-4 rounded-xl">
                 <div className="space-y-2">
                   <p className="flex gap-1 text-primary font-bold items-center text-sm">
-                    <IconAlertSquareRounded size={18} /> Take Note
-                  </p>
+                    <IconAlertSquareRounded size={18} /> {t('components.takeNote')}</p>
                   <p>
-                    Verify the address on this page before each deposit to avoid
-                    losing funds. Occasionally, the address could be updated.
-                  </p>
+                    {t('components.verifyTheAddressOnThis')}</p>
                 </div>
               </div>
               <Button
@@ -332,7 +320,7 @@ const DepositForm = () => {
                 type="submit"
                 disabled={makePayment.isPending}
               >
-                {!makePayment.isPending && "I have made payment"}
+                {!makePayment.isPending && t('components.iHaveMadePayment')}
                 {makePayment.isPending && <Loader />}
               </Button>
             </div>
@@ -345,6 +333,7 @@ const DepositForm = () => {
 };
 
 function PaymentCompleted() {
+    const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -359,21 +348,16 @@ function PaymentCompleted() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        Deposit Request Completed
-      </h2>
+        {t('components.depositRequestCompleted')}</h2>
       <p>
-        Your deposit request has been completed, you will receive deposit update
-        status from our support team via email.
-      </p>
+        {t('components.yourDepositRequestHasBeen')}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
           <Button variant={"secondary"} className="bg-gray-100 text-black">
-            Go to Dashboard
-          </Button>
+            {t('components.goToDashboard')}</Button>
         </Link>
         <Button className="" onClick={handleDepositAgain}>
-          Deposit Again
-        </Button>
+          {t('components.depositAgain')}</Button>
       </div>
     </div>
   );

@@ -1,33 +1,35 @@
 import React from "react";
 import FeatherStats from "../ui/award";
+import { useTranslation } from "react-i18next";
 
 
 const Awards = () => {
+  const { t } = useTranslation();
   const awards = [
     {
-      title: "Most trusted broker",
+      title: "components.mostTrustedBroker",
       year: 2022,
-      description: "CFI Best Forex Broker Award.",
-      notes: "This award highlights our commitment to pushing boundaries."
+      description: "components.cfiBestForexBrokerAward",
+      notes: "components.thisAwardHighlightsOurCommitment"
     },
     {
-      title: "Best Customer Service - Global",
+      title: "components.bestCustomerServiceGlobal",
       year: 2021,
-      description: "Global Forex Awards 2024",
-      notes: "This award underscores our dedication to user-centric design."
+      description: "components.globalForexAwards2024",
+      notes: "components.thisAwardUnderscoresOurDedication"
     },
     {
-      title: "Best Partner Programme",
+      title: "components.bestPartnerProgramme",
       year: 2020,
-      description: "FX trust score 2024",
-      notes: "This award reflects our commitment to excellence."
+      description: "components.fxTrustScore2024",
+      notes: "components.thisAwardReflectsOurCommitment"
     },
   ];
   return (
     <div className="mx-auto flex max-md:flex-col lg:mt-20 items-center h-full lg:gap-10 gap-5">
       {awards.map((item) => (
         <div key={item.title} className="lg:w-4/5 w-full relative h-[400px] flex flex-col p-5 gap-10 justify-center items-center  bg-gray-50 rounded-xl">
-          <FeatherStats title={item.title} description={item.description} />
+          <FeatherStats title={t(item.title)} description={t(item.description)} />
         </div>
       ))}
     </div>
