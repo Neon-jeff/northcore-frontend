@@ -82,6 +82,7 @@
     }
   },
   "components": {
+    "back":"Zurück",
     "continue": "Weiter",
     "bonusAvailable": "Bonus verfügbar",
     "amount": "Betrag",

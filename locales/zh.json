@@ -82,6 +82,7 @@
     }
   },
   "components": {
+    "back": "返回",
     "continue": "继续",
     "bonusAvailable": "可用奖金",
     "amount": "金额",

@@ -82,6 +82,7 @@
     }
   },
   "components": {
+    "back": "戻る",
     "continue": "次へ",
     "bonusAvailable": "ボーナス利用可能",
     "amount": "金額",
