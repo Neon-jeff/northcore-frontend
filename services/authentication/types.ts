@@ -9,6 +9,8 @@ export interface AuthSuccessResponse {
   details: string
 }
 
+type KYC_STATUS = "unverified" | "verified" | "pending"
+
 export interface User {
   email: string
   first_name: string
@@ -17,7 +19,7 @@ export interface User {
   trading_currency: string
   country: string
   address: string
-  kyc_verified: boolean
+  kyc_verified: KYC_STATUS
   kyc_level_2_verified: boolean
   referral_code: string
   referral_count: number

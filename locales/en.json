@@ -467,6 +467,9 @@
     "selectLanguage": "Select Language",
     "changeLanguage": "Change Language",
     "chooseYourPreferredLanguageFor": "Choose your preferred language for a personalized trading experience.",
-    "learnHere": "Learn here"
+    "learnHere": "Learn here",
+    "contactSupport": "Contact Support",
+    "level1Pending": "Our admin is currently verifying your upload documents for authenticity",
+    "verificationInProgress": "Verification In Progress"
   }
 }

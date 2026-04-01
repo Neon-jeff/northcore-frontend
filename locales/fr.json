@@ -467,6 +467,9 @@
     "selectLanguage": "Choisir la langue",
     "changeLanguage": "Changer de langue",
     "chooseYourPreferredLanguageFor": "Choisissez votre langue préférée pour une expérience de trading personnalisée.",
-    "learnHere": "Apprendre ici"
+    "learnHere": "Apprendre ici",
+    "contactSupport": "Contacter le support",
+    "level1Pending": "Notre administrateur vérifie actuellement l'authenticité de vos documents téléchargés",
+    "verificationInProgress": "Vérification en cours"
   }
 }

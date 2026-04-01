@@ -467,6 +467,9 @@
     "selectLanguage": "言語を選択",
     "changeLanguage": "言語切り替え",
     "chooseYourPreferredLanguageFor": "パーソナライズされた取引体験のために、お好みの言語を選択してください。",
-    "learnHere": "こちらで学ぶ"
+    "learnHere": "こちらで学ぶ",
+    "contactSupport": "サポートに連絡する",
+    "level1Pending": "現在、管理者がアップロードされたドキュメントの信憑性を確認しています",
+    "verificationInProgress": "検証中"
   }
 }

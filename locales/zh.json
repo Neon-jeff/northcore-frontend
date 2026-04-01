@@ -467,6 +467,9 @@
     "selectLanguage": "选择语言",
     "changeLanguage": "语言切换",
     "chooseYourPreferredLanguageFor": "选择您的首选语言以获得个性化的交易体验。",
-    "learnHere": "点击此处了解"
+    "learnHere": "点击此处了解",
+    "contactSupport": "联系客服",
+    "level1Pending": "我们的管理员目前正在核实您上传文件的真实性",
+    "verificationInProgress": "验证进行中"
   }
 }
