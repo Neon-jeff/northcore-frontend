@@ -32,10 +32,12 @@ import { Button } from "./button";
 import Script from "next/script";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./language-switcher";
+import { useRouter } from "next/navigation";
 
 
 const DashboardNav = () => {
     const { t } = useTranslation();
+    const router = useRouter();
   const routes = [
     { name: "Dashboard", path: "/user/dashboard", icon: IconAppsFilled },
     {
@@ -58,6 +60,10 @@ const DashboardNav = () => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { data, logout } = useUserStore();
   const { data: notifications, isLoading } = useGetNotifications();
+  const handleLogout = () => {
+    logout();
+    router.replace("/auth/login");
+  }
   return (
     <nav className="flex fixed items-center justify-between bg-white lg:px-20 p-4 left-0 right-0   top-0 z-10">
       <div className="flex justify-between w-full items-center">
@@ -133,7 +139,7 @@ const DashboardNav = () => {
               <Button
                 className="flex items-center gap-2"
                 variant={"ghost"}
-                onClick={logout}
+                onClick={handleLogout}
               >
                 <IconLogout />
                 {t('components.logout')}</Button>
