@@ -30,6 +30,7 @@ const WithdrawalForm = () => {
       currency: "",
       address: "",
     },
+    mode: "onChange",
     resolver: zodResolver(withdrawalSchema),
   });
   const [step, setStep] = React.useState<"one" | "two" | "three">("one");
@@ -159,7 +160,7 @@ const WithdrawalForm = () => {
             <div className="flex flex-col items-center gap-2 border border-gray-100 p-5 rounded-xl">
               <FormField
                 name="amount"
-                render={({ field }) => (
+                render={({ field,fieldState }) => (
                   <FormItem className=" space-y-2">
                     <div className="relative">
                       <Input
@@ -193,6 +194,11 @@ const WithdrawalForm = () => {
                         className="w-8 h-8 object-contain mix-blend-multiply rounded-full absolute right-5 top-1/2 -translate-y-1/2"
                       />
                     </div>
+                    {
+                      fieldState.error && (
+                        <p className="text-red-500 text-xs">{fieldState.error.message}</p>
+                      )
+                    }
                   </FormItem>
                 )}
               />
