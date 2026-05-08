@@ -114,6 +114,7 @@
     "pleaseSelectACurrency": "Please select a currency",
     "pleaseEnterAValidAmount": "Please enter a valid amount",
     "insufficientBalance": "Insufficient balance",
+    "minimumBalanceRequiredToWithdrawIs80k": "Minimum balance required to withdraw is 100,000 USD",
     "wPlusminus": "W/ plus-minus",
     "noResults": "No results.",
     "tanstackTable": "TanStack Table",

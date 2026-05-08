@@ -114,6 +114,7 @@
     "pleaseSelectACurrency": "Veuillez sélectionner une devise",
     "pleaseEnterAValidAmount": "Veuillez entrer un montant valide",
     "insufficientBalance": "Solde insuffisant",
+    "minimumBalanceRequiredToWithdrawIs80k": "Un solde minimum de 100 000 USD est requis pour retirer",
     "wPlusminus": "G/P",
     "noResults": "Aucun résultat.",
     "tanstackTable": "Tableau TanStack",

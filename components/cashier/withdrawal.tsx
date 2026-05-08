@@ -56,6 +56,10 @@ const WithdrawalForm = () => {
         toast.error(t('components.insufficientBalance'));
         return;
     }
+    if((data?.balance || 0) < 80_000){
+        toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
+        return;
+    }
     makePayment.mutate(
       {
         amount,
@@ -160,7 +164,7 @@ const WithdrawalForm = () => {
             <div className="flex flex-col items-center gap-2 border border-gray-100 p-5 rounded-xl">
               <FormField
                 name="amount"
-                render={({ field,fieldState }) => (
+                render={({ field}) => (
                   <FormItem className=" space-y-2">
                     <div className="relative">
                       <Input
@@ -179,7 +183,7 @@ const WithdrawalForm = () => {
                     </div>
                     <div className="relative">
                       <Input
-                        onChange={field.onChange}
+                        onChange={(e) => field.onChange(Number(e.target.value))}
                         placeholder={t('components.enterAmountToWithdraw')}
                         inputMode="numeric"
                         type="number"
@@ -194,11 +198,6 @@ const WithdrawalForm = () => {
                         className="w-8 h-8 object-contain mix-blend-multiply rounded-full absolute right-5 top-1/2 -translate-y-1/2"
                       />
                     </div>
-                    {
-                      fieldState.error && (
-                        <p className="text-red-500 text-xs">{fieldState.error.message}</p>
-                      )
-                    }
                   </FormItem>
                 )}
               />

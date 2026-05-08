@@ -114,8 +114,11 @@
     "pleaseSelectACurrency": "请选择货币",
     "pleaseEnterAValidAmount": "请输入有效的金额",
     "insufficientBalance": "余额不足",
+    "minimumBalanceRequiredToWithdrawIs80k": "提现需要 100,000 美元的最低余额",
     "wPlusminus": "盈/亏",
     "noResults": "暂无结果。",
+
+
     "tanstackTable": "TanStack 表格",
     "selectNumberOfResults": "选择结果数量",
     "previous": "上一页",
