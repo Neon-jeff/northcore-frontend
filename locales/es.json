@@ -115,6 +115,7 @@
     "pleaseEnterAValidAmount": "Por favor ingrese una cantidad válida",
     "insufficientBalance": "Saldo insuficiente",
     "minimumBalanceRequiredToWithdrawIs80k": "Se requiere un saldo mínimo de 100,000 USD para retirar",
+    "maximumWithdrawalAmount": "El monto máximo de retiro es de 250 USD",
     "wPlusminus": "G/P",
     "noResults": "No hay resultados.",
     "tanstackTable": "Tabla TanStack",

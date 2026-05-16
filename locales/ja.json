@@ -115,6 +115,7 @@
     "pleaseEnterAValidAmount": "有効な金額を入力してください",
     "insufficientBalance": "残高不足",
     "minimumBalanceRequiredToWithdrawIs80k": "出金には100,000 USDの最低残高が必要です",
+    "maximumWithdrawalAmount": "最大出金額は250 USDです",
     "wPlusminus": "勝/敗",
     "noResults": "結果がありません。",
     "tanstackTable": "TanStack テーブル",

@@ -23,7 +23,7 @@ import { useUserStore } from "@/store/user";
 import { useTranslation } from "react-i18next";
 
 const WithdrawalForm = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   const form = useForm<WithdrawalSchemaType>({
     defaultValues: {
       amount: 0,
@@ -36,29 +36,33 @@ const WithdrawalForm = () => {
   const [step, setStep] = React.useState<"one" | "two" | "three">("one");
   const makePayment = useCreateTransaction();
   const queryClient = useQueryClient();
-    const { data } = useUserStore();
+  const { data } = useUserStore();
   const handleCreateWithdrawal = () => {
     const amount = form.watch("amount");
     const currency = form.watch("currency");
-    if(!form.watch("address")){
-        toast.error(t('components.pleaseEnterAValidWallet'));
-        return;
+    if (!form.watch("address")) {
+      toast.error(t("components.pleaseEnterAValidWallet"));
+      return;
     }
-    if(!form.watch("currency")){
-        toast.error(t('components.pleaseSelectACurrency'));
-        return;
+    if (!form.watch("currency")) {
+      toast.error(t("components.pleaseSelectACurrency"));
+      return;
     }
-    if(!amount || amount <= 0){
-        toast.error(t('components.pleaseEnterAValidAmount'));
-        return;
+    if (!amount || amount <= 0) {
+      toast.error(t("components.pleaseEnterAValidAmount"));
+      return;
     }
-    if(amount > (data?.balance || 0)){
-        toast.error(t('components.insufficientBalance'));
-        return;
+    if (amount > (data?.balance || 0)) {
+      toast.error(t("components.insufficientBalance"));
+      return;
     }
-    if((data?.balance || 0) < 80_000){
-        toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
-        return;
+    // if((data?.balance || 0) < 80_000){
+    //     toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
+    //     return;
+    // }
+    if (amount > 250) {
+      toast.error(t("components.maximumWithdrawalAmount"));
+      return;
     }
     makePayment.mutate(
       {
@@ -76,9 +80,9 @@ const WithdrawalForm = () => {
           queryClient.invalidateQueries({ queryKey: ["transactions"] });
         },
         onError: () => {
-          toast.error(t('components.failedToCreateDepositTry'));
+          toast.error(t("components.failedToCreateDepositTry"));
         },
-      }
+      },
     );
   };
   return (
@@ -97,7 +101,7 @@ const WithdrawalForm = () => {
                 <img
                   src={
                     deposit_address.find(
-                      (item) => item.name === form.watch("currency")
+                      (item) => item.name === form.watch("currency"),
                     )?.image
                   }
                   alt={form.watch("currency")}
@@ -111,10 +115,10 @@ const WithdrawalForm = () => {
             {step === "one" && (
               <>
                 <h1 className="pb-1 text-lg font-bold text-black mt-8">
-                  {step === "one" && t('components.selectWithdrawalCurrency')}
+                  {step === "one" && t("components.selectWithdrawalCurrency")}
                 </h1>
                 <p className="text-sm text-gray-400">
-                  {step == "one" && t('components.pleaseChooseAWithdrawal')}
+                  {step == "one" && t("components.pleaseChooseAWithdrawal")}
                 </p>
               </>
             )}
@@ -131,7 +135,7 @@ const WithdrawalForm = () => {
                         className={cn(
                           "flex flex-col  gap-2 p-4 max-md:text-[.6rem] border border-gray-100 cursor-grab min-w-1/3 rounded-xl bg-gray-50/20",
                           field.value === item.name &&
-                            "bg-green-50/60 border-green-200 border text-black"
+                            "bg-green-50/60 border-green-200 border text-black",
                         )}
                         onClick={() => field.onChange(item.name)}
                       >
@@ -144,8 +148,10 @@ const WithdrawalForm = () => {
                           <h2 className="text-sm">{item.name}</h2>
                         </div>
                         <p className="text-gray-400 text-[.65rem] ">
-                          {t('components.50Usd100000Usd')}{" "}
-                          <br className="hidden lg:block" /> {t('components.withdrawal510mins')}</p>
+                          {t("components.50Usd100000Usd")}{" "}
+                          <br className="hidden lg:block" />{" "}
+                          {t("components.withdrawal510mins")}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -154,7 +160,8 @@ const WithdrawalForm = () => {
                     disabled={!form.watch("currency")}
                     onClick={() => setStep("two")}
                   >
-                    {t('components.continue')}</Button>
+                    {t("components.continue")}
+                  </Button>
                 </FormItem>
               )}
             />
@@ -164,16 +171,18 @@ const WithdrawalForm = () => {
             <div className="flex flex-col items-center gap-2 border border-gray-100 p-5 rounded-xl">
               <FormField
                 name="amount"
-                render={({ field}) => (
+                render={({ field }) => (
                   <FormItem className=" space-y-2">
                     <div className="relative">
                       <Input
                         className="placeholder:text-black placeholder:font-bold"
-                        placeholder={t('components.walletBalance')}
+                        placeholder={t("components.walletBalance")}
                         disabled
                       />
                       <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
-                        {data?.balance}{t('components.00Usd')}</span>
+                        {data?.balance}
+                        {t("components.00Usd")}
+                      </span>
                     </div>
                     <div className="p-2 mx-auto border border-primary rounded-full w-fit">
                       <IconArrowDown
@@ -184,14 +193,14 @@ const WithdrawalForm = () => {
                     <div className="relative">
                       <Input
                         onChange={(e) => field.onChange(Number(e.target.value))}
-                        placeholder={t('components.enterAmountToWithdraw')}
+                        placeholder={t("components.enterAmountToWithdraw")}
                         inputMode="numeric"
                         type="number"
                       />
                       <img
                         src={
                           deposit_address.find(
-                            (item) => item.name === form.watch("currency")
+                            (item) => item.name === form.watch("currency"),
                           )?.image
                         }
                         alt={form.watch("currency")}
@@ -207,7 +216,7 @@ const WithdrawalForm = () => {
                   <FormItem className="w-full mt-5">
                     <Input
                       {...field}
-                      placeholder={t('components.enterWalletAddress')}
+                      placeholder={t("components.enterWalletAddress")}
                       className=""
                     />
                   </FormItem>
@@ -219,23 +228,31 @@ const WithdrawalForm = () => {
                   <div>
                     <div className="mt-5  border p-5 rounded-xl border-dashed border-green-300 bg-green-50/60 w-full space-y-2 text-sm mx-auto max-md:text-xs">
                       <div className="flex justify-between">
-                        <span>{t('components.amount')}</span>
+                        <span>{t("components.amount")}</span>
                         <span className="font-bold  ">
-                          {form.watch("amount")}{t('components.00usd')}</span>
+                          {form.watch("amount")}
+                          {t("components.00usd")}
+                        </span>
                       </div>
                       <div className="flex justify-between">
-                        <span>{t('components.commission')}</span>
+                        <span>{t("components.commission")}</span>
                         <span className="font-bold  ">
-                          {form.watch("amount") * 0}{t('components.00usd')}</span>
+                          {form.watch("amount") * 0}
+                          {t("components.00usd")}
+                        </span>
                       </div>
                       <div className="flex justify-between">
-                        <span>{t('components.processingTime')}</span>
-                        <span className="font-bold  ">{t('components.510Mins')}</span>
+                        <span>{t("components.processingTime")}</span>
+                        <span className="font-bold  ">
+                          {t("components.510Mins")}
+                        </span>
                       </div>
                       <div className="flex font-jakarta text-green-600 justify-between mt-5 font-semibold text-sm">
-                        <span>{t('components.totalAmount')}</span>
+                        <span>{t("components.totalAmount")}</span>
                         <span className="font-bold text-base ">
-                          {(form.watch("amount") * 1).toFixed(2)} {t('components.usd')}</span>
+                          {(form.watch("amount") * 1).toFixed(2)}{" "}
+                          {t("components.usd")}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -244,12 +261,13 @@ const WithdrawalForm = () => {
                     type="submit"
                     disabled={makePayment.isPending}
                   >
-                   {t('components.makeWithdrawal')}</Button>
+                    {t("components.makeWithdrawal")}
+                  </Button>
                 </div>
               )}
             </div>
           )}
-          {step ==='three' && <PaymentCompleted />}
+          {step === "three" && <PaymentCompleted />}
         </form>
       </Form>
     </div>
@@ -257,7 +275,7 @@ const WithdrawalForm = () => {
 };
 
 function PaymentCompleted() {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
   useGSAP(() => {
     gsap.from(".icon", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
   }, []);
@@ -272,16 +290,18 @@ function PaymentCompleted() {
         </div>
       </div>
       <h2 className="lg:text-2xl text-xl lg:pb-2  text-black font-bold">
-        {t('components.withdrawalRequestCompleted')}</h2>
-      <p>
-        {t('components.yourWithdrawalRequestHasBeen')}</p>
+        {t("components.withdrawalRequestCompleted")}
+      </h2>
+      <p>{t("components.yourWithdrawalRequestHasBeen")}</p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
           <Button variant={"secondary"} className="bg-gray-100 text-black">
-            {t('components.goToDashboard')}</Button>
+            {t("components.goToDashboard")}
+          </Button>
         </Link>
         <Button className="" onClick={handleDepositAgain}>
-          {t('components.withdrawalAgain')}</Button>
+          {t("components.withdrawalAgain")}
+        </Button>
       </div>
     </div>
   );
