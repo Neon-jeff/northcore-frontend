@@ -30,3 +30,20 @@ export function useGetNotifications(){
     refetchOnWindowFocus: true
   });
 }
+
+export function useCreateUpgradeRequest() {
+  return useMutation({
+    mutationFn: async (data: FormData) =>
+      transactionService.createUpgradeRequest(data),
+  });
+}
+
+export function useGetUpgradeRequests() {
+  return useQuery({
+    queryKey: ["upgrade-requests"],
+    queryFn: async () => transactionService.getUpgradeRequests(),
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    retry: false,
+  });
+}

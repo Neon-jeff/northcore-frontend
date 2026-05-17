@@ -1,6 +1,6 @@
 import { http } from "@/api/http";
 import { endpoints } from "@/api/endpoints";
-import { CreateTransactionBody, NotificationResponse, Transaction } from "./types";
+import { CreateTransactionBody, NotificationResponse, Transaction, UpgradeRequestResponse } from "./types";
 
 export class TransactionService {
   public async create_transaction(data: CreateTransactionBody) {
@@ -36,5 +36,27 @@ export class TransactionService {
       throw error;
     }
   }
+  public async createUpgradeRequest(data: FormData) {
+    try {
+      const response = http
+        .post(endpoints.upgrade.create, {
+          body: data,
+        })
+        .json<UpgradeRequestResponse>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 
+  public async getUpgradeRequests() {
+    try {
+      const response = http
+        .get(endpoints.upgrade.get)
+        .json<UpgradeRequestResponse>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

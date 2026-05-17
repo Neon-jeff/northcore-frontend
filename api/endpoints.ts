@@ -36,5 +36,9 @@ export const endpoints = {
     },
     subscription:{
         create: 'api/accounts/subscriptions',
+    },
+    upgrade:{
+        create: 'api/accounts/upgrade-requests',
+        get: 'api/accounts/upgrade-requests',
     }
 }
