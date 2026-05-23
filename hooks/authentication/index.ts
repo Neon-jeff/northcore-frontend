@@ -42,6 +42,8 @@ export function useGetUser(){
         refetchInterval: 1000 * 60 * 60,
         retryOnMount:false,
         retry: false,
+        refetchOnWindowFocus:true,
+        refetchOnMount:true
     })
 }
 

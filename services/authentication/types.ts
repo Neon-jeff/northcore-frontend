@@ -26,6 +26,7 @@ export interface User {
   referral_bonus: number
   email_verified:boolean
   balance: number
+  request_upgrade?:boolean
 }
 
 export interface RegisterRequestBody {

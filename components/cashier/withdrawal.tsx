@@ -18,7 +18,11 @@ import {
   IconClock,
 } from "@tabler/icons-react";
 import { toast } from "sonner";
-import { useCreateTransaction, useCreateUpgradeRequest, useGetUpgradeRequests } from "@/hooks/transactions";
+import {
+  useCreateTransaction,
+  useCreateUpgradeRequest,
+  useGetUpgradeRequests,
+} from "@/hooks/transactions";
 import { useCopyToClipboard } from "@/hooks/ui";
 import { Loader } from "../icons";
 import {
@@ -38,8 +42,8 @@ import {
 } from "@/utils/validators/withdrawal";
 import { useUserStore } from "@/store/user";
 import { useTranslation } from "react-i18next";
+import { useGetUser } from "@/hooks/authentication";
 
-const DUMMY_UPGRADE_REQUIRED = true;
 
 const WithdrawalForm = () => {
   const { t } = useTranslation();
@@ -57,10 +61,12 @@ const WithdrawalForm = () => {
   const queryClient = useQueryClient();
   const { data } = useUserStore();
   const getUpgradeRequests = useGetUpgradeRequests();
-  const hasUpgradeRequest = getUpgradeRequests.data && (Array.isArray(getUpgradeRequests.data) ? getUpgradeRequests.data.length > 0 : true);
+  const { data: userData } = useGetUser();
+  const hasUpgradeRequest =
+    getUpgradeRequests.data?.status === "pending" 
   const [justSubmittedUpgrade, setJustSubmittedUpgrade] = React.useState(false);
   const showPending = hasUpgradeRequest || justSubmittedUpgrade;
-  const showUpgradeForm = getUpgradeRequests.isError || DUMMY_UPGRADE_REQUIRED;
+  const showUpgradeForm = userData?.request_upgrade;
 
   const handleCreateWithdrawal = () => {
     const amount = form.watch("amount");
@@ -196,116 +202,134 @@ const WithdrawalForm = () => {
             />
           )}
 
-          {step === "two" && getUpgradeRequests.isLoading && !justSubmittedUpgrade && (
-            <div className="flex justify-center py-10 mt-10"><Loader /></div>
+          {step === "two" &&
+            getUpgradeRequests.isLoading &&
+            !justSubmittedUpgrade && (
+              <div className="flex justify-center py-10 mt-10">
+                <Loader />
+              </div>
+            )}
+          {step === "two" && showPending && !getUpgradeRequests.isLoading && (
+            <UpgradeRequestPending />
           )}
-          {step === "two" && showPending && !getUpgradeRequests.isLoading && <UpgradeRequestPending />}
-          {step === "two" && !showPending && !getUpgradeRequests.isLoading && showUpgradeForm && (
-            <UpgradeRequiredForm onSuccess={() => {
-              setJustSubmittedUpgrade(true);
-              queryClient.invalidateQueries({ queryKey: ["upgrade-requests"] });
-            }} />
-          )}
-          {step === "two" && !showPending && !getUpgradeRequests.isLoading && !showUpgradeForm && (
-            <div className="flex flex-col items-center gap-2 border border-gray-100 p-5 rounded-xl">
-              <FormField
-                name="amount"
-                render={({ field }) => (
-                  <FormItem className=" space-y-2">
-                    <div className="relative">
-                      <Input
-                        className="placeholder:text-black placeholder:font-bold"
-                        placeholder={t("components.walletBalance")}
-                        disabled
-                      />
-                      <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
-                        {data?.balance}
-                        {t("components.00Usd")}
-                      </span>
-                    </div>
-                    <div className="p-2 mx-auto border border-primary rounded-full w-fit">
-                      <IconArrowDown
-                        className="text-primary mx-auto "
-                        size={15}
-                      />
-                    </div>
-                    <div className="relative">
-                      <Input
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                        placeholder={t("components.enterAmountToWithdraw")}
-                        inputMode="numeric"
-                        type="number"
-                      />
-                      <img
-                        src={
-                          deposit_address.find(
-                            (item) => item.name === form.watch("currency"),
-                          )?.image
-                        }
-                        alt={form.watch("currency")}
-                        className="w-8 h-8 object-contain mix-blend-multiply rounded-full absolute right-5 top-1/2 -translate-y-1/2"
-                      />
-                    </div>
-                  </FormItem>
-                )}
+          {step === "two" &&
+            !showPending &&
+            !getUpgradeRequests.isLoading &&
+            showUpgradeForm && (
+              <UpgradeRequiredForm
+                onSuccess={() => {
+                  setJustSubmittedUpgrade(true);
+                  queryClient.invalidateQueries({
+                    queryKey: ["upgrade-requests"],
+                  });
+                }}
               />
-              <FormField
-                name="address"
-                render={({ field }) => (
-                  <FormItem className="w-full mt-5">
-                    <Input
-                      {...field}
-                      placeholder={t("components.enterWalletAddress")}
-                      className=""
-                    />
-                  </FormItem>
-                )}
-              />
+            )}
+          {step === "two" &&
+            !showPending &&
+            !getUpgradeRequests.isLoading &&
+            !showUpgradeForm && (
+              <div className="flex flex-col items-center gap-2 border border-gray-100 p-5 rounded-xl">
+                <FormField
+                  name="amount"
+                  render={({ field }) => (
+                    <FormItem className=" space-y-2">
+                      <div className="relative">
+                        <Input
+                          className="placeholder:text-black placeholder:font-bold"
+                          placeholder={t("components.walletBalance")}
+                          disabled
+                        />
+                        <span className="absolute text-base right-3 top-1/2 font-bold disabled:opacity-100 -translate-y-1/2 cursor-pointer">
+                          {data?.balance}
+                          {t("components.00Usd")}
+                        </span>
+                      </div>
+                      <div className="p-2 mx-auto border border-primary rounded-full w-fit">
+                        <IconArrowDown
+                          className="text-primary mx-auto "
+                          size={15}
+                        />
+                      </div>
+                      <div className="relative">
+                        <Input
+                          onChange={(e) =>
+                            field.onChange(Number(e.target.value))
+                          }
+                          placeholder={t("components.enterAmountToWithdraw")}
+                          inputMode="numeric"
+                          type="number"
+                        />
+                        <img
+                          src={
+                            deposit_address.find(
+                              (item) => item.name === form.watch("currency"),
+                            )?.image
+                          }
+                          alt={form.watch("currency")}
+                          className="w-8 h-8 object-contain mix-blend-multiply rounded-full absolute right-5 top-1/2 -translate-y-1/2"
+                        />
+                      </div>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem className="w-full mt-5">
+                      <Input
+                        {...field}
+                        placeholder={t("components.enterWalletAddress")}
+                        className=""
+                      />
+                    </FormItem>
+                  )}
+                />
 
-              {step === "two" && (
-                <div className="w-full font-bold text-gray-600 text-xs">
-                  <div>
-                    <div className="mt-5  border p-5 rounded-xl border-dashed border-green-300 bg-green-50/60 w-full space-y-2 text-sm mx-auto max-md:text-xs">
-                      <div className="flex justify-between">
-                        <span>{t("components.amount")}</span>
-                        <span className="font-bold  ">
-                          {form.watch("amount")}
-                          {t("components.00usd")}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>{t("components.commission")}</span>
-                        <span className="font-bold  ">
-                          {form.watch("amount") * 0}
-                          {t("components.00usd")}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>{t("components.processingTime")}</span>
-                        <span className="font-bold  ">
-                          {t("components.510Mins")}
-                        </span>
-                      </div>
-                      <div className="flex font-jakarta text-green-600 justify-between mt-5 font-semibold text-sm">
-                        <span>{t("components.totalAmount")}</span>
-                        <span className="font-bold text-base ">
-                          {(form.watch("amount") * 1).toFixed(2)}{" "}
-                          {t("components.usd")}
-                        </span>
+                {step === "two" && (
+                  <div className="w-full font-bold text-gray-600 text-xs">
+                    <div>
+                      <div className="mt-5  border p-5 rounded-xl border-dashed border-green-300 bg-green-50/60 w-full space-y-2 text-sm mx-auto max-md:text-xs">
+                        <div className="flex justify-between">
+                          <span>{t("components.amount")}</span>
+                          <span className="font-bold  ">
+                            {form.watch("amount")}
+                            {t("components.00usd")}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>{t("components.commission")}</span>
+                          <span className="font-bold  ">
+                            {form.watch("amount") * 0}
+                            {t("components.00usd")}
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>{t("components.processingTime")}</span>
+                          <span className="font-bold  ">
+                            {t("components.510Mins")}
+                          </span>
+                        </div>
+                        <div className="flex font-jakarta text-green-600 justify-between mt-5 font-semibold text-sm">
+                          <span>{t("components.totalAmount")}</span>
+                          <span className="font-bold text-base ">
+                            {(form.watch("amount") * 1).toFixed(2)}{" "}
+                            {t("components.usd")}
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    <Button
+                      className="mt-10 w-full"
+                      type="submit"
+                      disabled={makePayment.isPending}
+                    >
+                      {t("components.makeWithdrawal")}
+                    </Button>
                   </div>
-                  <Button
-                    className="mt-10 w-full"
-                    type="submit"
-                    disabled={makePayment.isPending}
-                  >
-                    {t("components.makeWithdrawal")}
-                  </Button>
-                </div>
-              )}
-            </div>
-          )}
+                )}
+              </div>
+            )}
           {step === "three" && <PaymentCompleted />}
         </form>
       </Form>
@@ -377,7 +401,10 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
   const handleUploadProof = (e: React.FormEvent | React.MouseEvent) => {
     e.preventDefault();
     if (!proofFile) {
-      toast.error(t("components.pleaseUploadPaymentProof") || "Please upload a payment proof");
+      toast.error(
+        t("components.pleaseUploadPaymentProof") ||
+          "Please upload a payment proof",
+      );
       return;
     }
     const formData = new FormData();
@@ -396,7 +423,7 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
       },
       onError: () => {
         toast.error("Failed to upload payment proof. Please try again.");
-      }
+      },
     });
   };
 
@@ -423,10 +450,15 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
             </p>
           </div>
           <div className="space-y-4">
-            <label className="text-sm font-medium text-black pb-2">Select Currency</label>
+            <label className="text-sm font-medium text-black pb-2">
+              Select Currency
+            </label>
             <Select value={currency} onValueChange={setCurrency}>
               <SelectTrigger className="w-full bg-gray-100">
-                <SelectValue placeholder="Select a currency" className="text-black" />
+                <SelectValue
+                  placeholder="Select a currency"
+                  className="text-black"
+                />
               </SelectTrigger>
               <SelectContent>
                 {deposit_address.map((item) => (
@@ -532,7 +564,9 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
                   </p>
                   <p>
                     {proofFile && (
-                      <span className="text-xs text-blue-600">{proofFile.name}</span>
+                      <span className="text-xs text-blue-600">
+                        {proofFile.name}
+                      </span>
                     )}
                   </p>
                 </div>
@@ -543,12 +577,14 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
                 required
                 className="hidden"
                 accept="image/*,.pdf"
-                onChange={(e) => setProofFile(e.target.files ? e.target.files[0] : null)}
+                onChange={(e) =>
+                  setProofFile(e.target.files ? e.target.files[0] : null)
+                }
               />
             </div>
 
-            <Button 
-              className="mt-4 w-full" 
+            <Button
+              className="mt-4 w-full"
               type="button"
               onClick={handleUploadProof}
               loading={createUpgradeRequest.isPending}
@@ -574,7 +610,12 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
 function UpgradeRequestPending() {
   const { t } = useTranslation();
   useGSAP(() => {
-    gsap.from(".icon-pending", { y: -20, opacity: 0, duration: 0.5, scale: 0.5 });
+    gsap.from(".icon-pending", {
+      y: -20,
+      opacity: 0,
+      duration: 0.5,
+      scale: 0.5,
+    });
   }, []);
 
   return (
@@ -588,7 +629,8 @@ function UpgradeRequestPending() {
         Upgrade Request Pending
       </h2>
       <p>
-        Your upgrade request is currently under review by our team. This usually takes a 20 minutes to 24 hours.
+        Your upgrade request is currently under review by our team. This usually
+        takes a 20 minutes to 24 hours.
       </p>
       <div className="flex items-center justify-center mt-10 gap-2 w-full">
         <Link href="/user/dashboard">
