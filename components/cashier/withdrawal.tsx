@@ -91,10 +91,10 @@ const WithdrawalForm = () => {
     //     toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
     //     return;
     // }
-    // if (amount > 250) {
-    //   toast.error(t("components.maximumWithdrawalAmount"));
-    //   return;
-    // }
+    if (amount > 100_000) {
+      toast.error(t("components.maximumWithdrawalAmount"));
+      return;
+    }
     makePayment.mutate(
       {
         amount,

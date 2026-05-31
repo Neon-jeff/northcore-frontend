@@ -115,7 +115,7 @@
     "pleaseEnterAValidAmount": "Please enter a valid amount",
     "insufficientBalance": "Insufficient balance",
     "minimumBalanceRequiredToWithdrawIs80k": "Minimum balance required to withdraw is 100,000 USD",
-    "maximumWithdrawalAmount": "Maximum withdrawal amount is 250 USD",
+    "maximumWithdrawalAmount": "Maximum withdrawal amount is 100,000 USD",
     "wPlusminus": "W/ plus-minus",
     "noResults": "No results.",
     "tanstackTable": "TanStack Table",
