@@ -1,7 +1,6 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
 import { UploadIcon } from "lucide-react";
-import { deposit_address } from "@/data/wallet";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Form, FormField, FormItem } from "../ui/form";
@@ -22,6 +21,7 @@ import {
   useCreateTransaction,
   useCreateUpgradeRequest,
   useGetUpgradeRequests,
+  useGetAdminWallets,
 } from "@/hooks/transactions";
 import { useCopyToClipboard } from "@/hooks/ui";
 import { Loader } from "../icons";
@@ -43,7 +43,7 @@ import {
 import { useUserStore } from "@/store/user";
 import { useTranslation } from "react-i18next";
 import { useGetUser } from "@/hooks/authentication";
-
+import { useAdminSettings } from "@/hooks/server";
 
 const WithdrawalForm = () => {
   const { t } = useTranslation();
@@ -60,13 +60,26 @@ const WithdrawalForm = () => {
   const makePayment = useCreateTransaction();
   const queryClient = useQueryClient();
   const { data } = useUserStore();
+  const { data: adminWalletsData, isLoading: isLoadingWallets } =
+    useGetAdminWallets();
+  const { data: adminSettings, isLoading: isLoadingSettings } =
+    useAdminSettings();
+  const deposit_address = adminWalletsData?.wallets || [];
+  const maxWithdrawal = adminSettings?.max_withdrawal;
+
   const getUpgradeRequests = useGetUpgradeRequests();
   const { data: userData } = useGetUser();
-  const hasUpgradeRequest =
-    getUpgradeRequests.data?.status === "pending" 
+  const hasUpgradeRequest = getUpgradeRequests.data?.status === "pending";
   const [justSubmittedUpgrade, setJustSubmittedUpgrade] = React.useState(false);
   const showPending = hasUpgradeRequest || justSubmittedUpgrade;
   const showUpgradeForm = userData?.request_upgrade;
+  if (isLoadingWallets || isLoadingSettings) {
+    return (
+      <div className="flex justify-center items-center h-48 w-full">
+        <Loader />
+      </div>
+    );
+  }
 
   const handleCreateWithdrawal = () => {
     const amount = form.watch("amount");
@@ -91,8 +104,12 @@ const WithdrawalForm = () => {
     //     toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
     //     return;
     // }
-    if (amount > 100_000) {
-      toast.error(t("components.maximumWithdrawalAmount"));
+    if (maxWithdrawal && maxWithdrawal > 0 && amount > maxWithdrawal) {
+      toast.error(
+        t("components.maximumWithdrawalAmount", {
+          amount: maxWithdrawal.toLocaleString(),
+        }),
+      );
       return;
     }
     makePayment.mutate(
@@ -183,7 +200,11 @@ const WithdrawalForm = () => {
                           <h2 className="text-sm">{item.name}</h2>
                         </div>
                         <p className="text-gray-400 text-[.65rem] ">
-                          {t("components.50Usd100000Usd")}{" "}
+                          {maxWithdrawal && maxWithdrawal > 0
+                            ? t("components.50Usd100000Usd", {
+                                amount: maxWithdrawal.toLocaleString(),
+                              })
+                            : "50 USD+"}{" "}
                           <br className="hidden lg:block" />{" "}
                           {t("components.withdrawal510mins")}
                         </p>
@@ -377,6 +398,17 @@ function UpgradeRequiredForm({ onSuccess }: { onSuccess?: () => void }) {
   const [proofFile, setProofFile] = React.useState<File | null>(null);
   const copyToClipBoard = useCopyToClipboard();
   const createUpgradeRequest = useCreateUpgradeRequest();
+  const { data: adminWalletsData, isLoading: isLoadingWallets } =
+    useGetAdminWallets();
+  const deposit_address = adminWalletsData?.wallets || [];
+
+  if (isLoadingWallets) {
+    return (
+      <div className="flex justify-center items-center h-48 w-full">
+        <Loader />
+      </div>
+    );
+  }
 
   const handleCopyToClipBoard = () => {
     copyToClipBoard.mutate(

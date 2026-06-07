@@ -1,6 +1,5 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import { deposit_address } from "@/data/wallet";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { Form, FormField, FormItem } from "../ui/form";
@@ -20,7 +19,7 @@ import {
 import { useCopyToClipboard } from "@/hooks/ui";
 import { toast } from "sonner";
 import { Loader } from "../icons";
-import { useCreateTransaction, useGetTransactions } from "@/hooks/transactions";
+import { useCreateTransaction, useGetTransactions, useGetAdminWallets } from "@/hooks/transactions";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useQueryClient } from "@tanstack/react-query";
@@ -45,6 +44,16 @@ const DepositForm = () => {
   const queryClient = useQueryClient();
   const { data: transactions } = useGetTransactions();
   const { data } = useUserStore();
+  const { data: adminWalletsData, isLoading: isLoadingWallets } = useGetAdminWallets();
+  const deposit_address = adminWalletsData?.wallets || [];
+
+  if (isLoadingWallets) {
+    return (
+      <div className="flex justify-center items-center h-48 w-full">
+        <Loader />
+      </div>
+    );
+  }
 
   const handleCopyToClipBoard = () => {
     copyToClipBoard.mutate(
@@ -333,7 +342,11 @@ const DepositForm = () => {
               </div>
               <div className="text-center space-y-3 py-4">
                 <img
-                  src={deposit_address[0].qr_code}
+                  src={
+                    deposit_address.find(
+                      (item) => item.name === form.watch("currency")
+                    )?.qr_code || deposit_address[0]?.qr_code
+                  }
                   alt={t("components.qrCode")}
                   className="h-40 w-40 object-contain mx-auto mt-4 rounded-md"
                 />

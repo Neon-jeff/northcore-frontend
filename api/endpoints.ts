@@ -1,6 +1,7 @@
 
 
 export const endpoints = {
+    adminSettings: 'api/admin-settings',
     auth:{
         login: 'api/auth/login',
         register: 'api/auth/register',
@@ -27,7 +28,8 @@ export const endpoints = {
     },
     accounts: {
         transactions: 'api/accounts/transactions',
-        notification:'api/accounts/notifications'
+        notification:'api/accounts/notifications',
+        adminWallets: 'api/accounts/admin-wallets'
     },
     experts : {
         getAll: 'api/experts',

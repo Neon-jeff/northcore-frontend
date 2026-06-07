@@ -47,3 +47,13 @@ export function useGetUpgradeRequests() {
     retry: false,
   });
 }
+
+export function useGetAdminWallets() {
+  return useQuery({
+    queryKey: ["admin-wallets"],
+    queryFn: async () => transactionService.get_admin_wallets(),
+    staleTime: 1000 * 60 * 30,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+  });
+}

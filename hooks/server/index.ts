@@ -9,3 +9,11 @@ export function useServerStatus(){
         queryFn: ()=>serverInstance().startServer()
     })
 }
+
+export function useAdminSettings(){
+    return useQuery({
+        queryKey: ['adminSettings'],
+        queryFn: ()=>serverInstance().getAdminSettings(),
+        staleTime: 1000 * 60 * 30,
+    })
+}

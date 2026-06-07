@@ -40,3 +40,15 @@ export interface UpgradeRequestResponse {
   created_at: string;
   updated_at: string;
 }
+
+export interface AdminWallet {
+  id: number;
+  name: string;
+  address: string;
+  image: string;
+  qr_code: string;
+}
+
+export interface AdminWalletListResponse {
+  wallets: AdminWallet[];
+}

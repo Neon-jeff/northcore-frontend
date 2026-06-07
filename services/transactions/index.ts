@@ -1,6 +1,6 @@
 import { http } from "@/api/http";
 import { endpoints } from "@/api/endpoints";
-import { CreateTransactionBody, NotificationResponse, Transaction, UpgradeRequestResponse } from "./types";
+import { CreateTransactionBody, NotificationResponse, Transaction, UpgradeRequestResponse, AdminWalletListResponse } from "./types";
 
 export class TransactionService {
   public async create_transaction(data: CreateTransactionBody) {
@@ -54,6 +54,17 @@ export class TransactionService {
       const response = http
         .get(endpoints.upgrade.get)
         .json<UpgradeRequestResponse>();
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  public async get_admin_wallets() {
+    try {
+      const response = http
+        .get(endpoints.accounts.adminWallets)
+        .json<AdminWalletListResponse>();
       return response;
     } catch (error) {
       throw error;

@@ -2,6 +2,10 @@ import { endpoints } from "@/api/endpoints";
 import { http } from "@/api/http";
 import { HTTPError } from "ky";
 
+export interface AdminSettings {
+    max_withdrawal: number | null;
+}
+
 export class ServerService {
     private static instance: ServerService;
     public async startServer() {
@@ -17,5 +21,16 @@ export class ServerService {
         }
     }
 
- 
+    public async getAdminSettings(): Promise<AdminSettings> {
+        try {
+            const response = await http.get(endpoints.adminSettings).json<AdminSettings>();
+            return response;
+        } catch (error) {
+            if (error instanceof HTTPError) {
+                const response = await error.response.json();
+                throw new Error(`Server error: ${response.message}`);
+            }
+            throw error;
+        }
+    }
 }

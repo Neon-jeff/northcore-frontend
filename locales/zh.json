@@ -115,7 +115,7 @@
     "pleaseEnterAValidAmount": "请输入有效的金额",
     "insufficientBalance": "余额不足",
     "minimumBalanceRequiredToWithdrawIs80k": "提现需要 100,000 美元的最低余额",
-    "maximumWithdrawalAmount": "最高提款金额为100,000美元",
+    "maximumWithdrawalAmount": "最高提款金额为{{amount}}美元",
     "wPlusminus": "盈/亏",
     "noResults": "暂无结果。",
 
@@ -184,7 +184,7 @@
     "youHaveA20Bonus": "您的首次充值可获得 20% 的奖金，这将助力您实现交易潜力最大化。",
     "00Usd": ".00 USD",
     "deposit": "充值",
-    "50Usd100000Usd": "50 USD - 100,000 USD",
+    "50Usd100000Usd": "50 USD - {{amount}} USD",
     "qrCode": "二维码",
     "yourWithdrawalRequestHasBeen": "您的提现申请已完成，您将通过电子邮件收到客服团队关于提现状态的更新。",
     "withdrawal510mins": "提现 5 - 10 分钟",
