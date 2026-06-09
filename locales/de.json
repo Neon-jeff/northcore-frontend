@@ -114,7 +114,7 @@
     "pleaseSelectACurrency": "Bitte wählen Sie eine Währung aus",
     "pleaseEnterAValidAmount": "Bitte geben Sie einen gültigen Betrag ein",
     "insufficientBalance": "Unzureichendes Guthaben",
-    "minimumBalanceRequiredToWithdrawIs80k": "Für eine Auszahlung ist ein Mindestguthaben von 100.000 USD erforderlich",
+    "minimumBalanceRequiredToWithdrawIs100k": "Für eine Auszahlung ist ein Mindestguthaben von 100.000 USD erforderlich",
     "maximumWithdrawalAmount": "Der maximale Auszahlungsbetrag beträgt {{amount}} USD",
     "wPlusminus": "G/V",
     "noResults": "Keine Ergebnisse.",

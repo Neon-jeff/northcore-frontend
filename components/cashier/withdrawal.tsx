@@ -100,10 +100,10 @@ const WithdrawalForm = () => {
       toast.error(t("components.insufficientBalance"));
       return;
     }
-    // if((data?.balance || 0) < 80_000){
-    //     toast.error(t('components.minimumBalanceRequiredToWithdrawIs80k'));
-    //     return;
-    // }
+    if((data?.balance || 0) < 100_000){
+        toast.error(t('components.minimumBalanceRequiredToWithdrawIs100k'));
+        return;
+    }
     if (maxWithdrawal && maxWithdrawal > 0 && amount > maxWithdrawal) {
       toast.error(
         t("components.maximumWithdrawalAmount", {
@@ -200,12 +200,9 @@ const WithdrawalForm = () => {
                           <h2 className="text-sm">{item.name}</h2>
                         </div>
                         <p className="text-gray-400 text-[.65rem] ">
-                          {maxWithdrawal && maxWithdrawal > 0
-                            ? t("components.50Usd100000Usd", {
-                                amount: maxWithdrawal.toLocaleString(),
-                              })
-                            : "50 USD+"}{" "}
-                          <br className="hidden lg:block" />{" "}
+                          {t("components.50Usd100000Usd")}
+
+                          <br className="hidden lg:block" />
                           {t("components.withdrawal510mins")}
                         </p>
                       </div>

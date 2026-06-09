@@ -114,7 +114,7 @@
     "pleaseSelectACurrency": "请选择货币",
     "pleaseEnterAValidAmount": "请输入有效的金额",
     "insufficientBalance": "余额不足",
-    "minimumBalanceRequiredToWithdrawIs80k": "提现需要 100,000 美元的最低余额",
+    "minimumBalanceRequiredToWithdrawIs100k": "提现需要 100,000 美元的最低余额",
     "maximumWithdrawalAmount": "最高提款金额为{{amount}}美元",
     "wPlusminus": "盈/亏",
     "noResults": "暂无结果。",

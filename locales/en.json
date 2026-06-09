@@ -114,7 +114,7 @@
     "pleaseSelectACurrency": "Please select a currency",
     "pleaseEnterAValidAmount": "Please enter a valid amount",
     "insufficientBalance": "Insufficient balance",
-    "minimumBalanceRequiredToWithdrawIs80k": "Minimum balance required to withdraw is 100,000 USD",
+    "minimumBalanceRequiredToWithdrawIs100k": "Minimum balance required to withdraw is 100,000 USD",
     "maximumWithdrawalAmount": "Maximum withdrawal amount is {{amount}} USD",
     "wPlusminus": "W/ plus-minus",
     "noResults": "No results.",
