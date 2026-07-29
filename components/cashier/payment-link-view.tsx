@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { X, Info, Check, ShieldCheck, Mail, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 interface PaymentLinkViewProps {
