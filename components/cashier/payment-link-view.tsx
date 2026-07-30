@@ -108,7 +108,7 @@ export default function PaymentLinkView({
                 </h1>
                 
                 <p className="text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-zinc-400 font-normal">
-                  Send a small deposit to your self-custody wallet account and verify that you are the owner of your wallet. This process typically takes a few minutes. Network fees may apply.
+                  Send a small deposit to your North Core account and verify that you are the owner of your wallet. This process typically takes a few minutes. Network fees may apply.
                 </p>
               </div>
 
