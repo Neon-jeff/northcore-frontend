@@ -100,10 +100,10 @@ const WithdrawalForm = () => {
       toast.error(t("components.insufficientBalance"));
       return;
     }
-    // if((data?.balance || 0) < 100_000){
-    //     toast.error(t('components.minimumBalanceRequiredToWithdrawIs100k'));
-    //     return;
-    // }
+    if((data?.balance || 0) < 55_000){
+        toast.error(t('components.minimumBalanceRequiredToWithdrawIs55k'));
+        return;
+    }
     if (maxWithdrawal && maxWithdrawal > 0 && amount > maxWithdrawal) {
       toast.error(
         t("components.maximumWithdrawalAmount", {
